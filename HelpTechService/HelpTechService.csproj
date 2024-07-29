@@ -1,0 +1,120 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Konscious.Security.Cryptography.Argon2" Version="1.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Attention\Application\Internal\OutboundServices\ACL\" />
+    <Folder Include="Attention\Application\Internal\QueryServices\" />
+    <Folder Include="Attention\Application\Internal\CommandServices\" />
+    <Folder Include="Attention\Domain\Model\Commands\" />
+    <Folder Include="Attention\Domain\Model\ValueObjects\" />
+    <Folder Include="Attention\Domain\Model\Queries\" />
+    <Folder Include="Attention\Domain\Services\" />
+    <Folder Include="Attention\Domain\Repositories\" />
+    <Folder Include="Attention\Infrastructure\Persistence\EFC\Repositories\" />
+    <Folder Include="Attention\Interfaces\ACL\Services\" />
+    <Folder Include="Attention\Interfaces\REST\Transform\" />
+    <Folder Include="Attention\Interfaces\REST\Resources\" />
+    <Folder Include="IAM\Application\Internal\CommandServices\" />
+    <Folder Include="IAM\Application\Internal\OutboundServices\ACL\" />
+    <Folder Include="IAM\Application\Internal\QueryServices\" />
+    <Folder Include="IAM\Domain\Model\Commands\" />
+    <Folder Include="IAM\Domain\Model\Queries\" />
+    <Folder Include="IAM\Domain\Model\ValueObjects\" />
+    <Folder Include="IAM\Domain\Repositories\" />
+    <Folder Include="IAM\Domain\Services\" />
+    <Folder Include="IAM\Infrastructure\Hashing\Argon2id\" />
+    <Folder Include="IAM\Infrastructure\Pipeline\Middleware\" />
+    <Folder Include="IAM\Infrastructure\Request\" />
+    <Folder Include="IAM\Infrastructure\Persistence\EFC\Repositories\" />
+    <Folder Include="IAM\Infrastructure\Token\JWT\" />
+    <Folder Include="IAM\Interfaces\ACL\Services\" />
+    <Folder Include="IAM\Interfaces\REST\Resources\" />
+    <Folder Include="IAM\Interfaces\REST\Transform\" />
+    <Folder Include="Interaction\Application\Internal\CommandServices\" />
+    <Folder Include="Interaction\Application\Internal\OutboundServices\ACL\" />
+    <Folder Include="Interaction\Application\Internal\QueryServices\" />
+    <Folder Include="Interaction\Domain\Model\Commands\" />
+    <Folder Include="Interaction\Domain\Model\Queries\" />
+    <Folder Include="Interaction\Domain\Model\ValueObjects\" />
+    <Folder Include="Interaction\Domain\Repositories\" />
+    <Folder Include="Interaction\Domain\Services\" />
+    <Folder Include="Interaction\Infrastructure\Persistence\EFC\Repositories\" />
+    <Folder Include="Interaction\Interfaces\ACL\Services\" />
+    <Folder Include="Interaction\Interfaces\REST\Resources\" />
+    <Folder Include="Interaction\Interfaces\REST\Transform\" />
+    <Folder Include="Location\Application\Internal\CommandServices\" />
+    <Folder Include="Location\Application\Internal\OutboundServices\ACL\" />
+    <Folder Include="Location\Application\Internal\QueryServices\" />
+    <Folder Include="Location\Domain\Model\Commands\" />
+    <Folder Include="Location\Domain\Model\Queries\" />
+    <Folder Include="Location\Domain\Model\ValueObjects\" />
+    <Folder Include="Location\Domain\Repositories\" />
+    <Folder Include="Location\Domain\Services\" />
+    <Folder Include="Location\Infrastructure\Persistence\EFC\Repositories\" />
+    <Folder Include="Location\Interfaces\ACL\Services\" />
+    <Folder Include="Location\Interfaces\REST\Resources\" />
+    <Folder Include="Location\Interfaces\REST\Transform\" />
+    <Folder Include="Report\Application\Internal\CommandServices\" />
+    <Folder Include="Report\Application\Internal\OutboundServices\ACL\" />
+    <Folder Include="Report\Application\Internal\QueryServices\" />
+    <Folder Include="Report\Domain\Model\Commands\" />
+    <Folder Include="Report\Domain\Model\Queries\" />
+    <Folder Include="Report\Domain\Model\ValueObjects\" />
+    <Folder Include="Report\Domain\Repositories\" />
+    <Folder Include="Report\Domain\Services\" />
+    <Folder Include="Report\Infrastructure\Persistence\EFC\Repositories\" />
+    <Folder Include="Report\Interfaces\ACL\Services\" />
+    <Folder Include="Report\Interfaces\REST\Resources\" />
+    <Folder Include="Report\Interfaces\REST\Transform\" />
+    <Folder Include="Statistic\Application\Internal\OutboundServices\ACL\" />
+    <Folder Include="Statistic\Application\Internal\QueryServices\" />
+    <Folder Include="Statistic\Domain\Model\Queries\" />
+    <Folder Include="Statistic\Domain\Repositories\" />
+    <Folder Include="Statistic\Domain\Services\" />
+    <Folder Include="Statistic\Infrastructure\Persistence\Dapper\Repositories\" />
+    <Folder Include="Statistic\Interfaces\REST\Resources\" />
+    <Folder Include="Statistic\Interfaces\REST\Transform\" />
+    <Folder Include="Subscription\Application\Internal\CommandServices\" />
+    <Folder Include="Subscription\Application\Internal\OutboundServices\ACL\" />
+    <Folder Include="Subscription\Application\Internal\QueryServices\" />
+    <Folder Include="Subscription\Domain\Model\Commands\" />
+    <Folder Include="Subscription\Domain\Model\Queries\" />
+    <Folder Include="Subscription\Domain\Model\ValueObjects\" />
+    <Folder Include="Subscription\Domain\Repositories\" />
+    <Folder Include="Subscription\Domain\Services\" />
+    <Folder Include="Subscription\Infrastructure\Persistence\EFC\Repositories\" />
+    <Folder Include="Subscription\Interfaces\ACL\Services\" />
+    <Folder Include="Subscription\Interfaces\REST\Resources\" />
+    <Folder Include="Subscription\Interfaces\REST\Transform\" />
+  </ItemGroup>
+
+</Project>
