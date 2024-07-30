@@ -71,10 +71,6 @@
     <Folder Include="Interaction\Interfaces\ACL\Services\" />
     <Folder Include="Interaction\Interfaces\REST\Resources\" />
     <Folder Include="Interaction\Interfaces\REST\Transform\" />
-    <Folder Include="Location\Application\Internal\CommandServices\" />
-    <Folder Include="Location\Application\Internal\OutboundServices\ACL\" />
-    <Folder Include="Location\Application\Internal\QueryServices\" />
-    <Folder Include="Location\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Location\Interfaces\ACL\Services\" />
     <Folder Include="Location\Interfaces\REST\Resources\" />
     <Folder Include="Location\Interfaces\REST\Transform\" />
