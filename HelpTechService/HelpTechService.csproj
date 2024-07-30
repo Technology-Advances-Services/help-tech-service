@@ -74,7 +74,6 @@
     <Folder Include="Location\Application\Internal\CommandServices\" />
     <Folder Include="Location\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Location\Application\Internal\QueryServices\" />
-    <Folder Include="Location\Domain\Repositories\" />
     <Folder Include="Location\Domain\Services\" />
     <Folder Include="Location\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Location\Interfaces\ACL\Services\" />
