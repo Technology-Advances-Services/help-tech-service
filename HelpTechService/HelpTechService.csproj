@@ -47,7 +47,6 @@
     <Folder Include="IAM\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="IAM\Application\Internal\QueryServices\" />
     <Folder Include="IAM\Domain\Model\Queries\CriminalRecord\" />
-    <Folder Include="IAM\Domain\Model\Queries\Specialty\" />
     <Folder Include="IAM\Domain\Model\ValueObjects\Credential\" />
     <Folder Include="IAM\Domain\Repositories\" />
     <Folder Include="IAM\Domain\Services\" />
