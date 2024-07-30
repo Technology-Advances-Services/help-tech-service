@@ -31,10 +31,27 @@ namespace HelpTechService.Location.Interfaces.REST
             return Ok(deparmentsResource);
         }
 
+        [Route("department-by-id")]
+        [HttpGet]
+        public async Task<IActionResult> GetDepartmentById
+            ([FromQuery] int id)
+        {
+            var department = await departmentQueryService
+                .Handle(new GetDepartmentByIdQuery(id));
+
+            if (department is null)
+                return BadRequest();
+
+            var departmentResource = DepartmentResourceFromEntityAssembler
+                .ToResourceFromEntity(department);
+
+            return Ok(departmentResource);
+        }
+
         [Route("districts-by-department")]
         [HttpGet]
-        public async Task<IActionResult> GetDistrictsByDepartmentsId
-            (int departmentId)
+        public async Task<IActionResult> GetDistrictsByDepartmentId
+            ([FromQuery] int departmentId)
         {
             var districts = await districtQueryService
                 .Handle(new GetDistrictsByDepartmentIdQuery
