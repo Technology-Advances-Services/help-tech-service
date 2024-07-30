@@ -2,6 +2,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Data;
+
 using HelpTechService.Shared.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
