@@ -58,7 +58,8 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
             this.Genre = genre;
             this.Phone = phone;
             this.Email = email;
-            this.State = consumerState.ToString();
+            this.State = consumerState
+                .ToString();
         }
         public Consumer
             (RegisterConsumerCommand command)
@@ -72,7 +73,8 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
             this.Genre = command.Genre;
             this.Phone = command.Phone;
             this.Email = command.Email;
-            this.State = command.ConsumerState.ToString();
+            this.State = command.ConsumerState
+                .ToString();
         }
     }
 }
