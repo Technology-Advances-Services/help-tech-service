@@ -3,6 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Data;
 
+using HelpTechService.Location.Application.Internal.QueryServices;
+using HelpTechService.Location.Domain.Repositories;
+using HelpTechService.Location.Domain.Services.Department;
+using HelpTechService.Location.Domain.Services.District;
+using HelpTechService.Location.Interfaces.ACL;
+using HelpTechService.Location.Interfaces.ACL.Services;
+using HelpTechService.Location.Infrastructure.Persistence.EFC.Repositories;
+
 using HelpTechService.Shared.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
@@ -15,12 +23,12 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "RoadCareService",
+        Title = "HelpTechService",
         Version = "v1",
         Contact = new OpenApiContact
         {
-            Name = "RoadCare",
-            Email = "roadcare@hotmail.com"
+            Name = "HelpTech",
+            Email = "helptech@hotmail.com"
         }
     });
     c.EnableAnnotations();
@@ -66,6 +74,18 @@ builder.Services.AddDbContext<HelpTechContext>(options =>
 #endregion
 
 #region Dependencies Injections
+
+#region Location Context
+
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
+
+builder.Services.AddScoped<IDepartmentQueryService, DepartmentQueryService>();
+builder.Services.AddScoped<IDistrictQueryService, DistrictQueryService>();
+
+builder.Services.AddScoped<ILocationContextFacade, LocationContextFacade>();
+
+#endregion
 
 #region Shared Context
 
