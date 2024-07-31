@@ -47,7 +47,6 @@
     <Folder Include="IAM\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="IAM\Application\Internal\QueryServices\" />
     <Folder Include="IAM\Domain\Services\CriminalRecord\" />
-    <Folder Include="IAM\Domain\Services\Specialty\" />
     <Folder Include="IAM\Infrastructure\Hashing\Argon2id\" />
     <Folder Include="IAM\Infrastructure\Pipeline\Middleware\" />
     <Folder Include="IAM\Infrastructure\Request\" />
