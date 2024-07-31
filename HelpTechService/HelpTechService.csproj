@@ -44,7 +44,6 @@
     <Folder Include="Attention\Interfaces\REST\Transform\" />
     <Folder Include="Attention\Interfaces\REST\Resources\" />
     <Folder Include="IAM\Application\Internal\OutboundServices\ACL\" />
-    <Folder Include="IAM\Application\Internal\QueryServices\" />
     <Folder Include="IAM\Infrastructure\Hashing\Argon2id\" />
     <Folder Include="IAM\Infrastructure\Pipeline\Middleware\" />
     <Folder Include="IAM\Infrastructure\Request\" />

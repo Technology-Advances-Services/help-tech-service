@@ -7,7 +7,7 @@ namespace HelpTechService.IAM.Domain.Services.Specialty
         Task<IEnumerable<Model.Entities.Specialty>> Handle
             (GetAllSpecialtiesQuery query);
 
-        Task<Model.Entities.Specialty> Handle
+        Task<Model.Entities.Specialty?> Handle
             (GetSpecialtyByIdQuery query);
     }
 }
