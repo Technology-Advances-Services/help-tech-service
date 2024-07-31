@@ -5,7 +5,7 @@ using HelpTechService.Location.Domain.Services.Department;
 
 namespace HelpTechService.Location.Application.Internal.QueryServices
 {
-    public class DepartmentQueryService
+    internal class DepartmentQueryService
         (IDepartmentRepository departmentRepository) :
         IDepartmentQueryService
     {

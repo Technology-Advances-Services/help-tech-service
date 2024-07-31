@@ -5,7 +5,7 @@ using HelpTechService.Location.Domain.Services.District;
 
 namespace HelpTechService.Location.Application.Internal.QueryServices
 {
-    public class DistrictQueryService
+    internal class DistrictQueryService
         (IDistrictRepository districtRepository) :
         IDistrictQueryService
     {

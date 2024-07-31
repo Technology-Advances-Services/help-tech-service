@@ -5,7 +5,7 @@ using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace HelpTechService.Location.Infrastructure.Persistence.EFC.Repositories
 {
-    public class DepartmentRepository
+    internal class DepartmentRepository
         (HelpTechContext context) :
         BaseRepository<Department>(context),
         IDepartmentRepository
