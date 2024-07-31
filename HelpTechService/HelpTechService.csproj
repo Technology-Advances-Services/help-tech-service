@@ -46,7 +46,6 @@
     <Folder Include="IAM\Infrastructure\Hashing\Argon2id\" />
     <Folder Include="IAM\Infrastructure\Pipeline\Middleware\" />
     <Folder Include="IAM\Infrastructure\Request\" />
-    <Folder Include="IAM\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="IAM\Infrastructure\Token\JWT\" />
     <Folder Include="IAM\Interfaces\ACL\Services\" />
     <Folder Include="IAM\Interfaces\REST\Resources\" />
