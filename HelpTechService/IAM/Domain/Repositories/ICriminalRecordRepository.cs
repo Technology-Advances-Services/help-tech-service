@@ -6,7 +6,7 @@ namespace HelpTechService.IAM.Domain.Repositories
     public interface ICriminalRecordRepository :
         IBaseRepository<CriminalRecord>
     {
-        Task<IEnumerable<CriminalRecord>> FindByTechnicalIdAsync
+        Task<CriminalRecord?> FindByTechnicalIdAsync
             (int technicalId);
     }
 }

@@ -9,8 +9,8 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
         (ICriminalRecordRepository criminalRecordRepository) :
         ICriminalRecordQueryService
     {
-        public async Task<IEnumerable<CriminalRecord>> Handle
-            (GetCriminalsRecordsByTechnicalIdQuery query) =>
+        public async Task<CriminalRecord?> Handle
+            (GetCriminalRecordByTechnicalIdQuery query) =>
             await criminalRecordRepository
             .FindByTechnicalIdAsync
             (query.TechnicalId);
