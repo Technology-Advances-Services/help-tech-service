@@ -4,7 +4,7 @@ namespace HelpTechService.IAM.Domain.Services.ConsumerCredential
 {
     public interface IConsumerCredentialQueryService
     {
-        Task<string?> Handle
+        Task<dynamic?> Handle
             (GetConsumerCredentialByConsumerIdAndCodeQuery query);
     }
 }

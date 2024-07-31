@@ -48,8 +48,6 @@
     <Folder Include="IAM\Application\Internal\QueryServices\" />
     <Folder Include="IAM\Domain\Services\CriminalRecord\" />
     <Folder Include="IAM\Domain\Services\Specialty\" />
-    <Folder Include="IAM\Domain\Services\Technical\" />
-    <Folder Include="IAM\Domain\Services\TechnicalCredential\" />
     <Folder Include="IAM\Infrastructure\Hashing\Argon2id\" />
     <Folder Include="IAM\Infrastructure\Pipeline\Middleware\" />
     <Folder Include="IAM\Infrastructure\Request\" />
