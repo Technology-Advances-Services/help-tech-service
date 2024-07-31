@@ -2,7 +2,7 @@
 
 namespace HelpTechService.IAM.Application.Internal.OutboundServices.ACL
 {
-    internal class ExternaLocationService
+    internal class ExternalLocationService
         (ILocationContextFacade locationContextFacade)
     {
         public async Task<bool> ExistsDistrictById

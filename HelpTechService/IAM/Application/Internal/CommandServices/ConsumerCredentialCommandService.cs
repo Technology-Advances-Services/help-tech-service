@@ -1,4 +1,5 @@
-﻿using HelpTechService.IAM.Domain.Model.Commands.ConsumerCredential;
+﻿using HelpTechService.IAM.Application.Internal.OutboundServices;
+using HelpTechService.IAM.Domain.Model.Commands.ConsumerCredential;
 using HelpTechService.IAM.Domain.Repositories;
 using HelpTechService.IAM.Domain.Services.ConsumerCredential;
 using HelpTechService.Shared.Domain.Repositories;
@@ -7,7 +8,8 @@ namespace HelpTechService.IAM.Application.Internal.CommandServices
 {
     internal class ConsumerCredentialCommandService
         (IConsumerCredentialRepository consumerCredentialRepository,
-        IUnitOfWork unitOfWork) :
+        IUnitOfWork unitOfWork,
+        IEncryptionService encryptionService) :
         IConsumerCredentialCommandService
     {
         public async Task<bool> Handle
@@ -15,8 +17,16 @@ namespace HelpTechService.IAM.Application.Internal.CommandServices
         {
             try
             {
+                var salt = encryptionService
+                    .CreateSalt();
+
+                var code = encryptionService
+                    .HashCode(command.Code, salt);
+
                 await consumerCredentialRepository
-                    .AddAsync(new(command));
+                    .AddAsync(new(command
+                    .ConsumerId, string.Concat
+                    (salt, code)));
 
                 await unitOfWork.CompleteAsync();
 
