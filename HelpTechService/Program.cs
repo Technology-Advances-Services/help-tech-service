@@ -3,7 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Data;
 
+using HelpTechService.IAM.Application.Internal.CommandServices;
+using HelpTechService.IAM.Application.Internal.OutboundServices;
+using HelpTechService.IAM.Application.Internal.QueryServices;
+using HelpTechService.IAM.Domain.Services.Consumer;
+using HelpTechService.IAM.Domain.Services.CriminalRecord;
+using HelpTechService.IAM.Domain.Repositories;
+using HelpTechService.IAM.Domain.Services.Specialty;
+using HelpTechService.IAM.Domain.Services.Technical;
+using HelpTechService.IAM.Domain.Services.TechnicalCredential;
+using HelpTechService.IAM.Interfaces.ACL.Services;
+using HelpTechService.IAM.Interfaces.ACL;
+using HelpTechService.IAM.Infrastructure.Hashing.Argon2id;
+using HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories;
 using HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Extensions;
+using HelpTechService.IAM.Infrastructure.Request;
 
 using HelpTechService.Location.Application.Internal.QueryServices;
 using HelpTechService.Location.Domain.Repositories;
@@ -76,6 +90,35 @@ builder.Services.AddDbContext<HelpTechContext>(options =>
 #endregion
 
 #region Dependencies Injections
+
+#region IAM Context
+
+builder.Services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
+builder.Services.AddScoped<ISpecialtyQueryService, SpecialtyQueryService>();
+
+builder.Services.AddScoped<ITechnicalRepository, TechnicalRepository>();
+builder.Services.AddScoped<ITechnicalCommandService, TechnicalCommandService>();
+builder.Services.AddScoped<ITechnicalQueryService, TechnicalQueryService>();
+
+builder.Services.AddScoped<IConsumerRepository, ConsumerRepository>();
+builder.Services.AddScoped<IConsumerCommandService, ConsumerCommandService>();
+builder.Services.AddScoped<IConsumerQueryService, ConsumerQueryService>();
+
+builder.Services.AddScoped<ITechnicalCredentialRepository, TechnicalCredentialRepository>();
+builder.Services.AddScoped<ITechnicalCredentialCommandService, TechnicalCredentialCommandService>();
+builder.Services.AddScoped<ITechnicalCredentialQueryService, TechnicalCredentialQueryService>();
+
+builder.Services.AddScoped<ICriminalRecordRepository, CriminalRecordRepository>();
+builder.Services.AddScoped<ICriminalRecordCommandService, CriminalRecordCommandService>();
+builder.Services.AddScoped<ICriminalRecordQueryService, CriminalRecordQueryService>();
+
+builder.Services.AddScoped<IEncryptionService, EncryptionService>();
+builder.Services.AddScoped<IReniecService, ReniecService>();
+builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
+
+builder.Services.AddTransient<HelpTechService.IAM.Application.Internal.OutboundServices.ACL.ExternalLocationService>();
+
+#endregion
 
 #region Location Context
 
