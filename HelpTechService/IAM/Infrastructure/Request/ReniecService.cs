@@ -4,7 +4,7 @@ using HelpTechService.IAM.Application.Internal.OutboundServices;
 
 namespace HelpTechService.IAM.Infrastructure.Request
 {
-    public class ReniecService
+    internal class ReniecService
         (IConfiguration configuration) :
         IReniecService
     {

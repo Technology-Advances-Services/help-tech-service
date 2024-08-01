@@ -1,6 +1,6 @@
 ﻿namespace HelpTechService.IAM.Infrastructure.Token.JWT.Configuration
 {
-    public class JwtSettings
+    internal class JwtSettings
     {
         public string JWT_SECRET_KEY { get; set; }
         public string JWT_AUDIENCE_TOKEN { get; set; }

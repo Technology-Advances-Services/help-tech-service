@@ -1,23 +1,29 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Data;
+using System.Text;
 
 using HelpTechService.IAM.Application.Internal.CommandServices;
 using HelpTechService.IAM.Application.Internal.OutboundServices;
 using HelpTechService.IAM.Application.Internal.QueryServices;
-using HelpTechService.IAM.Domain.Services.Consumer;
-using HelpTechService.IAM.Domain.Services.CriminalRecord;
 using HelpTechService.IAM.Domain.Repositories;
+using HelpTechService.IAM.Domain.Services.Consumer;
+using HelpTechService.IAM.Domain.Services.ConsumerCredential;
+using HelpTechService.IAM.Domain.Services.CriminalRecord;
 using HelpTechService.IAM.Domain.Services.Specialty;
 using HelpTechService.IAM.Domain.Services.Technical;
 using HelpTechService.IAM.Domain.Services.TechnicalCredential;
-using HelpTechService.IAM.Interfaces.ACL.Services;
 using HelpTechService.IAM.Interfaces.ACL;
+using HelpTechService.IAM.Interfaces.ACL.Services;
 using HelpTechService.IAM.Infrastructure.Hashing.Argon2id;
 using HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories;
 using HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Extensions;
 using HelpTechService.IAM.Infrastructure.Request;
+using HelpTechService.IAM.Infrastructure.Token.JWT.Configuration;
+using HelpTechService.IAM.Infrastructure.Token.JWT.Services;
 
 using HelpTechService.Location.Application.Internal.QueryServices;
 using HelpTechService.Location.Domain.Repositories;
@@ -74,6 +80,47 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddHttpContextAccessor();
 
+#region JWT Configuration
+
+var jwtSettings = builder.Configuration.GetSection("JWT_SETTINGS");
+builder.Services.Configure<JwtSettings>(jwtSettings);
+
+var secretKey = jwtSettings["JWT_SECRET_KEY"];
+var audience = jwtSettings["JWT_AUDIENCE_TOKEN"];
+var issuer = jwtSettings["JWT_ISSUER_TOKEN"];
+var securityKey = !string.IsNullOrEmpty(secretKey) ?
+    new SymmetricSecurityKey
+    (Encoding.Default.GetBytes(secretKey)) :
+    throw new ArgumentNullException
+    (nameof(secretKey), "Secret key is null or empty!");
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = issuer,
+        ValidAudience = audience,
+        IssuerSigningKey = securityKey,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddTransient<TokenValidationHandler>();
+
+builder.Services.AddAuthorization();
+
+#endregion
+
 #region DataBase Configuration
 
 builder.Services.AddTransient<IDbConnection>(db =>
@@ -107,6 +154,10 @@ builder.Services.AddScoped<IConsumerQueryService, ConsumerQueryService>();
 builder.Services.AddScoped<ITechnicalCredentialRepository, TechnicalCredentialRepository>();
 builder.Services.AddScoped<ITechnicalCredentialCommandService, TechnicalCredentialCommandService>();
 builder.Services.AddScoped<ITechnicalCredentialQueryService, TechnicalCredentialQueryService>();
+
+builder.Services.AddScoped<IConsumerCredentialRepository, ConsumerCredentialRepository>();
+builder.Services.AddScoped<IConsumerCredentialCommandService, ConsumerCredentialCommandService>();
+builder.Services.AddScoped<IConsumerCredentialQueryService, ConsumerCredentialQueryService>();
 
 builder.Services.AddScoped<ICriminalRecordRepository, CriminalRecordRepository>();
 builder.Services.AddScoped<ICriminalRecordCommandService, CriminalRecordCommandService>();
