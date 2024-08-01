@@ -44,7 +44,7 @@ namespace HelpTechService.IAM.Interfaces.REST
         ControllerBase
     {
         [Route("all-specialties")]
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetAllSpecialties()
         {
