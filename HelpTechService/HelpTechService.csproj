@@ -44,7 +44,6 @@
     <Folder Include="Attention\Interfaces\REST\Transform\" />
     <Folder Include="Attention\Interfaces\REST\Resources\" />
     <Folder Include="IAM\Interfaces\REST\Transform\CriminalRecord\" />
-    <Folder Include="IAM\Interfaces\REST\Transform\Specialty\" />
     <Folder Include="IAM\Interfaces\REST\Transform\TechnicalCredential\" />
     <Folder Include="IAM\Interfaces\REST\Transform\Technical\" />
     <Folder Include="Interaction\Application\Internal\CommandServices\" />
