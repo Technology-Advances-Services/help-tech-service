@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Data;
 
+using HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Extensions;
+
 using HelpTechService.Location.Application.Internal.QueryServices;
 using HelpTechService.Location.Domain.Repositories;
 using HelpTechService.Location.Domain.Services.Department;
@@ -106,6 +108,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseRequestAuthorization();
 
 app.UseHttpsRedirection();
 
