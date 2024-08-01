@@ -44,7 +44,6 @@
     <Folder Include="Attention\Interfaces\REST\Transform\" />
     <Folder Include="Attention\Interfaces\REST\Resources\" />
     <Folder Include="IAM\Infrastructure\Pipeline\Middleware\" />
-    <Folder Include="IAM\Infrastructure\Request\" />
     <Folder Include="IAM\Infrastructure\Token\JWT\" />
     <Folder Include="IAM\Interfaces\ACL\Services\" />
     <Folder Include="IAM\Interfaces\REST\Resources\" />
