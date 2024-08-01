@@ -5,7 +5,7 @@ using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
 {
-    public class ConsumerRepository
+    internal class ConsumerRepository
         (HelpTechContext context) :
         BaseRepository<Consumer>(context),
         IConsumerRepository

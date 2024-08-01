@@ -6,33 +6,28 @@ using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
 {
-    internal class TechnicalCredentialRepository
+    internal class CriminalRecordRepository
         (HelpTechContext context) :
-        BaseRepository<TechnicalCredential>(context),
-        ITechnicalCredentialRepository
+        BaseRepository<CriminalRecord>(context),
+        ICriminalRecordRepository
     {
-        public async Task<string?> FindByTechnicalIdAsync
+        public async Task<CriminalRecord?> FindByTechnicalIdAsync
             (int technicalId)
         {
-            Task<TechnicalCredential?> queryAsync = new(() =>
+            Task<CriminalRecord?> queryAsync = new(() =>
             {
                 return
-                (from tc in Context.Set<TechnicalCredential>().ToList()
+                (from cr in Context.Set<CriminalRecord>().ToList()
                  join te in Context.Set<Technical>().ToList()
-                 on tc.TechnicalsId equals te.Id
+                 on cr.TechnicalsId equals te.Id
                  where te.Id == technicalId &&
                  te.State == "ACTIVO"
-                 select tc).FirstOrDefault();
+                 select cr).FirstOrDefault();
             });
 
             queryAsync.Start();
 
-            var result = await queryAsync;
-
-            if (result is null)
-                return null;
-
-            return result.Code;
+            return await queryAsync;
         }
     }
 }

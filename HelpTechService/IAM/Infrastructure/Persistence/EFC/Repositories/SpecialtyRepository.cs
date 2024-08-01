@@ -5,7 +5,7 @@ using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
 {
-    public class SpecialtyRepository
+    internal class SpecialtyRepository
         (HelpTechContext context) :
         BaseRepository<Specialty>(context),
         ISpecialtyRepository
