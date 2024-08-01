@@ -4,7 +4,8 @@ using HelpTechService.IAM.Application.Internal.OutboundServices;
 
 namespace HelpTechService.IAM.Infrastructure.Hashing.Argon2id
 {
-    public class EncryptionService : IEncryptionService
+    public class EncryptionService :
+        IEncryptionService
     {
         public string CreateSalt()
         {

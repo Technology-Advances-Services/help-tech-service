@@ -5,8 +5,8 @@ using HelpTechService.IAM.Application.Internal.OutboundServices;
 namespace HelpTechService.IAM.Infrastructure.Request
 {
     public class ReniecService
-            (IConfiguration configuration) :
-            IReniecService
+        (IConfiguration configuration) :
+        IReniecService
     {
         public async Task<bool> ValidateDni
             (int dni)
