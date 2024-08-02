@@ -75,7 +75,6 @@
     <Folder Include="Statistic\Infrastructure\Persistence\Dapper\Repositories\" />
     <Folder Include="Statistic\Interfaces\REST\Resources\" />
     <Folder Include="Statistic\Interfaces\REST\Transform\" />
-    <Folder Include="Subscription\Application\Internal\CommandServices\" />
     <Folder Include="Subscription\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Subscription\Application\Internal\QueryServices\" />
     <Folder Include="Subscription\Infrastructure\Persistence\EFC\Repositories\" />
