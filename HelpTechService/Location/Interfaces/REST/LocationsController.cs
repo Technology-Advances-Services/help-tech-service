@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using HelpTechService.Location.Domain.Model.Queries.Department;
 using HelpTechService.Location.Domain.Model.Queries.District;
 using HelpTechService.Location.Domain.Services.Department;
@@ -12,6 +13,7 @@ namespace HelpTechService.Location.Interfaces.REST
     [Route("api/locations/")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
+    [Authorize]
     public class LocationsController
             (IDepartmentQueryService departmentQueryService,
             IDistrictQueryService districtQueryService) :
@@ -19,6 +21,7 @@ namespace HelpTechService.Location.Interfaces.REST
     {
         [Route("all-departments")]
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllDepartments()
         {
             var deparments = await departmentQueryService
@@ -33,6 +36,7 @@ namespace HelpTechService.Location.Interfaces.REST
 
         [Route("department-by-id")]
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetDepartmentById
             ([FromQuery] int id)
         {
@@ -50,6 +54,7 @@ namespace HelpTechService.Location.Interfaces.REST
 
         [Route("districts-by-department")]
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetDistrictsByDepartmentId
             ([FromQuery] int departmentId)
         {
