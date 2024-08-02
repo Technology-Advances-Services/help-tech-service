@@ -76,7 +76,6 @@
     <Folder Include="Statistic\Interfaces\REST\Resources\" />
     <Folder Include="Statistic\Interfaces\REST\Transform\" />
     <Folder Include="Subscription\Application\Internal\OutboundServices\ACL\" />
-    <Folder Include="Subscription\Application\Internal\QueryServices\" />
     <Folder Include="Subscription\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Subscription\Interfaces\ACL\Services\" />
     <Folder Include="Subscription\Interfaces\REST\Resources\" />
