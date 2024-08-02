@@ -78,7 +78,6 @@
     <Folder Include="Subscription\Application\Internal\CommandServices\" />
     <Folder Include="Subscription\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Subscription\Application\Internal\QueryServices\" />
-    <Folder Include="Subscription\Domain\Repositories\" />
     <Folder Include="Subscription\Domain\Services\" />
     <Folder Include="Subscription\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Subscription\Interfaces\ACL\Services\" />
