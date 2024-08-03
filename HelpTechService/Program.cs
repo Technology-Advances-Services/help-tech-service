@@ -36,6 +36,12 @@ using HelpTechService.Location.Infrastructure.Persistence.EFC.Repositories;
 using HelpTechService.Shared.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
+using HelpTechService.Subscription.Domain.Repositories;
+using HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories;
+using HelpTechService.Subscription.Domain.Services.Membership;
+using HelpTechService.Subscription.Application.Internal.QueryServices;
+using HelpTechService.Subscription.Domain.Services.Contract;
+using HelpTechService.Subscription.Application.Internal.CommandServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -191,7 +197,12 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 #region Subscription Context
 
+builder.Services.AddScoped<IMembershipRepository, MembershipRepository>();
+builder.Services.AddScoped<IMembershipQueryService, MembershipQueryService>();
 
+builder.Services.AddScoped<IContractRepository, ContractRepository>();
+builder.Services.AddScoped<IContractCommandService, ContractCommandService>();
+builder.Services.AddScoped<IContractQueryService, ContractQueryService>();
 
 #endregion
 
