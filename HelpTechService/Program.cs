@@ -183,9 +183,9 @@ builder.Services.AddTransient<HelpTechService.IAM.Application.Internal.OutboundS
 #region Location Context
 
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
-
 builder.Services.AddScoped<IDepartmentQueryService, DepartmentQueryService>();
+
+builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 builder.Services.AddScoped<IDistrictQueryService, DistrictQueryService>();
 
 builder.Services.AddScoped<ILocationContextFacade, LocationContextFacade>();
