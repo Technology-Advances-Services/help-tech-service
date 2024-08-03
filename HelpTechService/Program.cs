@@ -42,6 +42,8 @@ using HelpTechService.Subscription.Domain.Services.Membership;
 using HelpTechService.Subscription.Application.Internal.QueryServices;
 using HelpTechService.Subscription.Domain.Services.Contract;
 using HelpTechService.Subscription.Application.Internal.CommandServices;
+using HelpTechService.Subscription.Interfaces.ACL;
+using HelpTechService.Subscription.Interfaces.ACL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -203,6 +205,8 @@ builder.Services.AddScoped<IMembershipQueryService, MembershipQueryService>();
 builder.Services.AddScoped<IContractRepository, ContractRepository>();
 builder.Services.AddScoped<IContractCommandService, ContractCommandService>();
 builder.Services.AddScoped<IContractQueryService, ContractQueryService>();
+
+builder.Services.AddScoped<ISubscriptionContextFacade, SubscriptionContextFacade>();
 
 builder.Services.AddTransient<HelpTechService.Subscription.Application.Internal.OutboundServices.ACL.ExternalIamService>();
 
