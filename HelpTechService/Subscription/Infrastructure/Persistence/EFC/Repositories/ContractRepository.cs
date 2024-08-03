@@ -8,7 +8,7 @@ using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories
 {
-    public class ContractRepository
+    internal class ContractRepository
         (HelpTechContext context) :
         BaseRepository<Contract>(context),
         IContractRepository

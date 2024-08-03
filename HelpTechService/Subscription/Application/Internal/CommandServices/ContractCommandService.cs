@@ -6,7 +6,7 @@ using HelpTechService.Shared.Domain.Repositories;
 
 namespace HelpTechService.Subscription.Application.Internal.CommandServices
 {
-    public class ContractCommandService
+    internal class ContractCommandService
         (IContractRepository contractRepository,
         IUnitOfWork unitOfWork,
         ExternalIamService externalIamService) :

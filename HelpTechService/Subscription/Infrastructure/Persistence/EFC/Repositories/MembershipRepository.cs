@@ -5,7 +5,7 @@ using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories
 {
-    public class MembershipRepository
+    internal class MembershipRepository
         (HelpTechContext context) :
         BaseRepository<Membership>(context),
         IMembershipRepository

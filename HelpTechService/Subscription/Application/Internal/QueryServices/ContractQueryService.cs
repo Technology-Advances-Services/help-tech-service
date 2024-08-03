@@ -5,7 +5,7 @@ using HelpTechService.Subscription.Domain.Services.Contract;
 
 namespace HelpTechService.Subscription.Application.Internal.QueryServices
 {
-    public class ContractQueryService
+    internal class ContractQueryService
         (IContractRepository contractRepository) :
         IContractQueryService
     {

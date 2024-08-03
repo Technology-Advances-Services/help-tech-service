@@ -5,7 +5,7 @@ using HelpTechService.Subscription.Domain.Services.Membership;
 
 namespace HelpTechService.Subscription.Application.Internal.QueryServices
 {
-    public class MembershipQueryService
+    internal class MembershipQueryService
         (IMembershipRepository membershipRepository) :
         IMembershipQueryService
     {
