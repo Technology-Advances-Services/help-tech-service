@@ -204,6 +204,8 @@ builder.Services.AddScoped<IContractRepository, ContractRepository>();
 builder.Services.AddScoped<IContractCommandService, ContractCommandService>();
 builder.Services.AddScoped<IContractQueryService, ContractQueryService>();
 
+builder.Services.AddTransient<HelpTechService.Subscription.Application.Internal.OutboundServices.ACL.ExternalIamService>();
+
 #endregion
 
 var app = builder.Build();
