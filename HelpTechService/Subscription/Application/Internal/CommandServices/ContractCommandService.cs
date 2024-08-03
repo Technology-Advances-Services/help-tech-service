@@ -15,7 +15,7 @@ namespace HelpTechService.Subscription.Application.Internal.CommandServices
         public async Task<bool> Handle
             (CreateContractCommand command)
         {
-            bool result;
+            bool result = false;
 
             if (int.TryParse(command
                 .TechnicalId.ToString(),
@@ -31,8 +31,6 @@ namespace HelpTechService.Subscription.Application.Internal.CommandServices
                     .ExistsConsumerById
                     (consumerId);
 
-            else return false;
-
             if (result is false)
                 return false;
 
@@ -43,5 +41,11 @@ namespace HelpTechService.Subscription.Application.Internal.CommandServices
 
             return true;
         }
+
+        public async Task<bool> Handle
+            (UpdateContractStateCommand command) =>
+            await contractRepository
+            .UpdateContractStateAsync
+            (command.Id, command.ContractState);
     }
 }

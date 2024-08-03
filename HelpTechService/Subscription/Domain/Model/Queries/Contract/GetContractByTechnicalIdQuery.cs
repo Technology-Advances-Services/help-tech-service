@@ -1,5 +1,5 @@
 ﻿namespace HelpTechService.Subscription.Domain.Model.Queries.Contract
 {
-    public record GetContractsByTechnicalIdQuery
+    public record GetContractByTechnicalIdQuery
         (int TechnicalId);
 }

@@ -6,5 +6,8 @@ namespace HelpTechService.Subscription.Domain.Services.Contract
     {
         Task<bool> Handle
             (CreateContractCommand command);
+
+        Task<bool> Handle
+            (UpdateContractStateCommand command);
     }
 }

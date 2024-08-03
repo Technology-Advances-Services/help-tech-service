@@ -9,10 +9,16 @@ namespace HelpTechService.Subscription.Application.Internal.QueryServices
         (IContractRepository contractRepository) :
         IContractQueryService
     {
-        public async Task<IEnumerable<Contract>> Handle
-            (GetContractsByTechnicalIdQuery query) =>
+        public async Task<Contract?> Handle
+            (GetContractByTechnicalIdQuery query) =>
             await contractRepository
             .FindByTechnicalIdAsync
             (query.TechnicalId);
+
+        public async Task<Contract?> Handle
+            (GetContractByConsumerIdQuery query) =>
+            await contractRepository
+            .FindByConsumerIdAsync
+            (query.ConsumerId);
     }
 }

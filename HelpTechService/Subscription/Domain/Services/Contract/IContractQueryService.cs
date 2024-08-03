@@ -4,7 +4,10 @@ namespace HelpTechService.Subscription.Domain.Services.Contract
 {
     public interface IContractQueryService
     {
-        Task<IEnumerable<Model.Aggregates.Contract>> Handle
-            (GetContractsByTechnicalIdQuery query);
+        Task<Model.Aggregates.Contract?> Handle
+            (GetContractByTechnicalIdQuery query);
+
+        Task<Model.Aggregates.Contract?> Handle
+            (GetContractByConsumerIdQuery query);
     }
 }
