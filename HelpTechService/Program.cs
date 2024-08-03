@@ -36,14 +36,15 @@ using HelpTechService.Location.Infrastructure.Persistence.EFC.Repositories;
 using HelpTechService.Shared.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
-using HelpTechService.Subscription.Domain.Repositories;
-using HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories;
-using HelpTechService.Subscription.Domain.Services.Membership;
-using HelpTechService.Subscription.Application.Internal.QueryServices;
-using HelpTechService.Subscription.Domain.Services.Contract;
+
 using HelpTechService.Subscription.Application.Internal.CommandServices;
+using HelpTechService.Subscription.Application.Internal.QueryServices;
+using HelpTechService.Subscription.Domain.Repositories;
+using HelpTechService.Subscription.Domain.Services.Contract;
+using HelpTechService.Subscription.Domain.Services.Membership;
 using HelpTechService.Subscription.Interfaces.ACL;
 using HelpTechService.Subscription.Interfaces.ACL.Services;
+using HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -209,6 +210,8 @@ builder.Services.AddScoped<IContractQueryService, ContractQueryService>();
 builder.Services.AddScoped<ISubscriptionContextFacade, SubscriptionContextFacade>();
 
 builder.Services.AddTransient<HelpTechService.Subscription.Application.Internal.OutboundServices.ACL.ExternalIamService>();
+
+#endregion
 
 #endregion
 
