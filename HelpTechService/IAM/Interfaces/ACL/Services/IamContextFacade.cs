@@ -5,7 +5,7 @@ using HelpTechService.IAM.Domain.Services.Technical;
 
 namespace HelpTechService.IAM.Interfaces.ACL.Services
 {
-    public class IamContextFacade
+    internal class IamContextFacade
         (ITechnicalQueryService technicalQueryService,
         IConsumerQueryService consumerQueryService) :
         IIamContextFacade

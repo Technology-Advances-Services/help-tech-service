@@ -3,7 +3,7 @@ using HelpTechService.Location.Domain.Services.District;
 
 namespace HelpTechService.Location.Interfaces.ACL.Services
 {
-    public class LocationContextFacade
+    internal class LocationContextFacade
         (IDistrictQueryService districtQueryService) :
         ILocationContextFacade
     {

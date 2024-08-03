@@ -189,6 +189,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 #endregion
 
+#region Subscription Context
+
+
+
 #endregion
 
 var app = builder.Build();

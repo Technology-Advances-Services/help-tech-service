@@ -13,7 +13,7 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
         BaseRepository<Contract>(context),
         IContractRepository
     {
-        private async Task<bool> UpdateAutomaticContractStateAsync
+        private async Task UpdateAutomaticContractStateAsync
             (int personId)
         {
             var result = await Context.Set<Contract>()
@@ -23,8 +23,6 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
                 c.State == "VIGENTE")
                 .ExecuteUpdateAsync(c => c
                 .SetProperty(u => u.State, EContractState.VENCIDO.ToString()));
-
-            return result > 0;
         }
 
         public async Task<bool> UpdateContractStateAsync
@@ -41,11 +39,8 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
         public async Task<Contract?> FindByTechnicalIdAsync
             (int technicalId)
         {
-            var result = await UpdateAutomaticContractStateAsync
+            await UpdateAutomaticContractStateAsync
                 (technicalId);
-
-            if (result is false)
-                return null;
 
             Task<Contract?> queryAsync = new(() =>
             {
@@ -68,11 +63,8 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
         public async Task<Contract?> FindByConsumerIdAsync
             (int consumerId)
         {
-            var result = await UpdateAutomaticContractStateAsync
+            await UpdateAutomaticContractStateAsync
                 (consumerId);
-
-            if (result is false)
-                return null;
 
             Task<Contract?> queryAsync = new(() =>
             {
