@@ -60,8 +60,8 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
             this.SpecialtiesId = specialtyId;
             this.DistrictsId = districtId;
             this.ProfileUrl = profileUrl;
-            this.Firstname = firstname;
-            this.Lastname = lastname;
+            this.Firstname = firstname.ToUpper();
+            this.Lastname = lastname.ToUpper();
             this.Age = age;
             this.Genre = genre;
             this.Phone = phone;
@@ -78,8 +78,8 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
             this.SpecialtiesId = command.SpecialtyId;
             this.DistrictsId = command.DistrictId;
             this.ProfileUrl = command.ProfileUrl;
-            this.Firstname = command.Firstname;
-            this.Lastname = command.Lastname;
+            this.Firstname = command.Firstname.ToUpper();
+            this.Lastname = command.Lastname.ToUpper();
             this.Age = command.Age;
             this.Genre = command.Genre;
             this.Phone = command.Phone;
