@@ -1,4 +1,5 @@
-﻿using HelpTechService.IAM.Domain.Model.Queries.Technical;
+﻿using HelpTechService.IAM.Domain.Model.Aggregates;
+using HelpTechService.IAM.Domain.Model.Queries.Technical;
 using HelpTechService.IAM.Domain.Repositories;
 using HelpTechService.IAM.Domain.Services.Technical;
 
@@ -8,10 +9,9 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
         (ITechnicalRepository technicalRepository) :
         ITechnicalQueryService
     {
-        public async Task<bool> Handle
+        public async Task<Technical?> Handle
             (GetTechnicalByIdQuery query) =>
             await technicalRepository
-            .FindByIdAsync(query.Id) !=
-            null;
+            .FindByIdAsync(query.Id);
     }
 }

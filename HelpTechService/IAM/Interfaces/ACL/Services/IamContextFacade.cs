@@ -13,11 +13,11 @@ namespace HelpTechService.IAM.Interfaces.ACL.Services
         public async Task<bool> ExistsTechnicalById
             (int id) =>
             await technicalQueryService.Handle
-            (new GetTechnicalByIdQuery(id));
+            (new GetTechnicalByIdQuery(id)) != null;
 
         public async Task<bool> ExistsConsumerById
             (int id) =>
             await consumerQueryService.Handle
-            (new GetConsumerByIdQuery(id));
+            (new GetConsumerByIdQuery(id)) != null;
     }
 }

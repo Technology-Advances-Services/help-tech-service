@@ -4,7 +4,7 @@ namespace HelpTechService.IAM.Domain.Services.Consumer
 {
     public interface IConsumerQueryService
     {
-        Task<bool> Handle
+        Task<Model.Aggregates.Consumer?> Handle
             (GetConsumerByIdQuery query);
     }
 }

@@ -4,7 +4,7 @@ namespace HelpTechService.IAM.Domain.Services.Technical
 {
     public interface ITechnicalQueryService
     {
-        Task<bool> Handle
+        Task<Model.Aggregates.Technical?> Handle
             (GetTechnicalByIdQuery query);
     }
 }
