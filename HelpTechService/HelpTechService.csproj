@@ -75,7 +75,6 @@
     <Folder Include="Statistic\Infrastructure\Persistence\Dapper\Repositories\" />
     <Folder Include="Statistic\Interfaces\REST\Resources\" />
     <Folder Include="Statistic\Interfaces\REST\Transform\" />
-    <Folder Include="Subscription\Domain\Model\ValueObjects\Membership\" />
   </ItemGroup>
 
 </Project>
