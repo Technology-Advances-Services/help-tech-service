@@ -119,7 +119,7 @@ namespace HelpTechService.IAM.Interfaces.REST
                 .Handle(new GetTechnicalByIdQuery
                 (resource.TechnicalId));
 
-            if (validation is false)
+            if (validation is null)
                 return BadRequest();
 
             var result = await criminalRecordCommandService
