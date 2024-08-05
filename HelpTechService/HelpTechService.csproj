@@ -59,7 +59,6 @@
     <Folder Include="Report\Domain\Model\Aggregates\" />
     <Folder Include="Report\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Report\Interfaces\ACL\Services\" />
-    <Folder Include="Report\Interfaces\REST\Resources\TypeComplaint\" />
     <Folder Include="Report\Interfaces\REST\Transform\" />
     <Folder Include="Statistic\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Statistic\Application\Internal\QueryServices\" />
