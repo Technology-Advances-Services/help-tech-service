@@ -177,6 +177,7 @@ builder.Services.AddScoped<IReniecService, ReniecService>();
 builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
 
 builder.Services.AddTransient<HelpTechService.IAM.Application.Internal.OutboundServices.ACL.ExternalLocationService>();
+builder.Services.AddTransient<HelpTechService.IAM.Application.Internal.OutboundServices.ACL.ExternalSubscriptionService>();
 
 #endregion
 
