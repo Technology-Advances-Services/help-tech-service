@@ -59,7 +59,7 @@
     <Folder Include="Report\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Report\Application\Internal\QueryServices\" />
     <Folder Include="Report\Domain\Model\Aggregates\" />
-    <Folder Include="Report\Domain\Services\" />
+    <Folder Include="Report\Domain\Services\TypeComplaint\" />
     <Folder Include="Report\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Report\Interfaces\ACL\Services\" />
     <Folder Include="Report\Interfaces\REST\Resources\" />

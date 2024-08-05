@@ -7,11 +7,11 @@ namespace HelpTechService.Report.Domain.Repositories
     public interface IComplaintRepository :
         IBaseRepository<Complaint>
     {
+        Task<Complaint?> FindByJobIdAndSender
+            (int jobId, EComplaintSender complaintSender);
+
         Task<Complaint?> FindByJobIdAndSenderAndState
             (int jobId, EComplaintSender complaintSender,
             EComplaintState complaintState);
-
-        Task<Complaint?> FindByJobIdAndSender
-            (int jobId, EComplaintSender complaintSender);
     }
 }
