@@ -1,4 +1,5 @@
 ﻿using HelpTechService.IAM.Application.Internal.OutboundServices;
+using HelpTechService.IAM.Application.Internal.OutboundServices.ACL;
 using HelpTechService.IAM.Domain.Model.Queries.ConsumerCredential;
 using HelpTechService.IAM.Domain.Model.ValueObjects.Credential;
 using HelpTechService.IAM.Domain.Repositories;
@@ -9,7 +10,8 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
     internal class ConsumerCredentialQueryService
         (IConsumerCredentialRepository consumerCredentialRepository,
         IEncryptionService encryptionService,
-        ITokenService tokenService) :
+        ITokenService tokenService,
+        ExternalSubscriptionService externalSubscriptionService) :
         IConsumerCredentialQueryService
     {
         public async Task<dynamic?> Handle
@@ -18,7 +20,10 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
             var result = await consumerCredentialRepository
                 .FindByConsumerIdAsync(query.ConsumerId);
 
-            if (string.IsNullOrEmpty(result))
+            if (string.IsNullOrEmpty(result) ||
+                await externalSubscriptionService
+                .CurrentContractByConsumerId
+                (query.ConsumerId) is false)
                 return null;
 
             if (!encryptionService.VerifyHash
