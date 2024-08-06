@@ -59,7 +59,6 @@
     <Folder Include="Report\Domain\Model\Aggregates\" />
     <Folder Include="Statistic\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Statistic\Application\Internal\QueryServices\" />
-    <Folder Include="Statistic\Domain\Model\Queries\" />
     <Folder Include="Statistic\Domain\Repositories\" />
     <Folder Include="Statistic\Domain\Services\" />
     <Folder Include="Statistic\Infrastructure\Persistence\Dapper\Repositories\" />
