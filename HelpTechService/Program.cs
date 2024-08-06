@@ -33,6 +33,13 @@ using HelpTechService.Location.Interfaces.ACL;
 using HelpTechService.Location.Interfaces.ACL.Services;
 using HelpTechService.Location.Infrastructure.Persistence.EFC.Repositories;
 
+using HelpTechService.Report.Application.Internal.CommandServices;
+using HelpTechService.Report.Application.Internal.QueryServices;
+using HelpTechService.Report.Domain.Repositories;
+using HelpTechService.Report.Domain.Services.Complaint;
+using HelpTechService.Report.Domain.Services.TypeComplaint;
+using HelpTechService.Report.Infrastructure.Persistence.EFC.Repositories;
+
 using HelpTechService.Shared.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
@@ -190,6 +197,17 @@ builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 builder.Services.AddScoped<IDistrictQueryService, DistrictQueryService>();
 
 builder.Services.AddScoped<ILocationContextFacade, LocationContextFacade>();
+
+#endregion
+
+#region Report Context
+
+builder.Services.AddScoped<ITypeComplaintRepository, TypeComplaintRepository>();
+builder.Services.AddScoped<ITypeComplaintQueryService, TypeComplaintQueryService>();
+
+builder.Services.AddScoped<IComplaintRepository, ComplaintRepository>();
+builder.Services.AddScoped<IComplaintCommandService, ComplaintCommandService>();
+builder.Services.AddScoped<IComplaintQueryService, ComplaintQueryService>();
 
 #endregion
 
