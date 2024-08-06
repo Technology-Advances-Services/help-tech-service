@@ -58,7 +58,6 @@
     <Folder Include="Report\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Report\Domain\Model\Aggregates\" />
     <Folder Include="Statistic\Application\Internal\OutboundServices\ACL\" />
-    <Folder Include="Statistic\Infrastructure\Persistence\Dapper\Repositories\" />
     <Folder Include="Statistic\Interfaces\REST\Resources\" />
     <Folder Include="Statistic\Interfaces\REST\Transform\" />
   </ItemGroup>
