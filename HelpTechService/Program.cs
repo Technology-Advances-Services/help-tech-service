@@ -44,6 +44,11 @@ using HelpTechService.Shared.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
+using HelpTechService.Statistic.Application.Internal.QueryServices;
+using HelpTechService.Statistic.Domain.Repositories;
+using HelpTechService.Statistic.Domain.Services;
+using HelpTechService.Statistic.Infrastructure.Persistence.Dapper.Repositories;
+
 using HelpTechService.Subscription.Application.Internal.CommandServices;
 using HelpTechService.Subscription.Application.Internal.QueryServices;
 using HelpTechService.Subscription.Domain.Repositories;
@@ -214,6 +219,13 @@ builder.Services.AddScoped<IComplaintQueryService, ComplaintQueryService>();
 #region Shared Context
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+#endregion
+
+#region Statistic Context
+
+builder.Services.AddScoped<IStatisticRepository, StatisticRepository>();
+builder.Services.AddScoped<IStatisticQueryService, StatisticQueryService>();
 
 #endregion
 
