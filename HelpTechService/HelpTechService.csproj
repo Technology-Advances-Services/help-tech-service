@@ -46,7 +46,6 @@
     <Folder Include="Interaction\Application\Internal\CommandServices\" />
     <Folder Include="Interaction\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Interaction\Application\Internal\QueryServices\" />
-    <Folder Include="Interaction\Domain\Repositories\" />
     <Folder Include="Interaction\Domain\Services\" />
     <Folder Include="Interaction\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Interaction\Interfaces\ACL\Services\" />
