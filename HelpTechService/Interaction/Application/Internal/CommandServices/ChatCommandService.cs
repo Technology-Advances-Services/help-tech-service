@@ -19,10 +19,14 @@ namespace HelpTechService.Interaction.Application.Internal.CommandServices
             {
                 if (await externalIamService
                     .ExistsTechnicalById
-                    (command.TechnicalId) is false &&
+                    (Convert.ToInt32(command
+                    .TechnicalId.ToString()))
+                    is false &&
                     await externalIamService
                     .ExistsConsumerById
-                    (command.ConsumerId) is false)
+                    (Convert.ToInt32(command
+                    .ConsumerId.ToString()))
+                    is false)
                     return false;
 
                 await chatRepository
