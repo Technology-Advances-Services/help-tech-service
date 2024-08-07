@@ -2,7 +2,7 @@
 
 namespace HelpTechService.IAM.Application.Internal.OutboundServices.ACL
 {
-    public class ExternalSubscriptionService
+    internal class ExternalSubscriptionService
         (ISubscriptionContextFacade subscriptionContextFacade)
     {
         public async Task<bool> CurrentContractByTechnicalId
