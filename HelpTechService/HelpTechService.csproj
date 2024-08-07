@@ -43,7 +43,6 @@
     <Folder Include="Attention\Interfaces\ACL\Services\" />
     <Folder Include="Attention\Interfaces\REST\Transform\" />
     <Folder Include="Attention\Interfaces\REST\Resources\" />
-    <Folder Include="Interaction\Interfaces\REST\Transform\Chat\" />
     <Folder Include="Report\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Report\Domain\Model\Aggregates\" />
   </ItemGroup>
