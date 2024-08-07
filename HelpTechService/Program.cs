@@ -25,6 +25,8 @@ using HelpTechService.IAM.Infrastructure.Request;
 using HelpTechService.IAM.Infrastructure.Token.JWT.Configuration;
 using HelpTechService.IAM.Infrastructure.Token.JWT.Services;
 
+using HelpTechService.Interaction.Infrastructure.Socket;
+
 using HelpTechService.Location.Application.Internal.QueryServices;
 using HelpTechService.Location.Domain.Repositories;
 using HelpTechService.Location.Domain.Services.Department;
@@ -257,6 +259,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+#region WebSocket Configuration
+
+var webSocketOptions = new WebSocketOptions()
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2),
+};
+
+app.UseWebSockets(webSocketOptions);
+
+var webSocketHandler = new WebSocketHandler();
+
+app.Map("/chat", webSocketHandler.HandleWebSocketAsync);
+
+#endregion
 
 app.UseRequestAuthorization();
 
