@@ -59,6 +59,12 @@ using HelpTechService.Subscription.Domain.Services.Membership;
 using HelpTechService.Subscription.Interfaces.ACL;
 using HelpTechService.Subscription.Interfaces.ACL.Services;
 using HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories;
+using HelpTechService.Interaction.Domain.Repositories;
+using HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositories;
+using HelpTechService.Interaction.Domain.Services.ChatMember;
+using HelpTechService.Interaction.Application.Internal.QueryServices;
+using HelpTechService.Interaction.Domain.Services.Chat;
+using HelpTechService.Interaction.Application.Internal.CommandServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -192,6 +198,19 @@ builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
 
 builder.Services.AddTransient<HelpTechService.IAM.Application.Internal.OutboundServices.ACL.ExternalLocationService>();
 builder.Services.AddTransient<HelpTechService.IAM.Application.Internal.OutboundServices.ACL.ExternalSubscriptionService>();
+
+#endregion
+
+#region Interaction Context
+
+builder.Services.AddScoped<IChatMemberRepository, ChatMemberRepository>();
+builder.Services.AddScoped<IChatMemberQueryService, ChatMemberQueryService>();
+
+builder.Services.AddScoped<IChatRepository, ChatRepository>();
+builder.Services.AddScoped<IChatCommandService, ChatCommandService>();
+builder.Services.AddScoped<IChatQueryService, ChatQueryService>();
+
+builder.Services.AddTransient<HelpTechService.Interaction.Application.Internal.OutboundServices.ACL.ExternalIamService>();
 
 #endregion
 
