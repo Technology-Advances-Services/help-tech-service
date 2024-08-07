@@ -1,4 +1,5 @@
-﻿using HelpTechService.Interaction.Domain.Model.Commands.Chat;
+﻿using HelpTechService.Interaction.Application.Internal.OutboundServices.ACL;
+using HelpTechService.Interaction.Domain.Model.Commands.Chat;
 using HelpTechService.Interaction.Domain.Repositories;
 using HelpTechService.Interaction.Domain.Services.Chat;
 using HelpTechService.Shared.Domain.Repositories;
@@ -7,7 +8,8 @@ namespace HelpTechService.Interaction.Application.Internal.CommandServices
 {
     internal class ChatCommandService
         (IChatRepository chatRepository,
-        IUnitOfWork unitOfWork) :
+        IUnitOfWork unitOfWork,
+        ExternalIamService externalIamService) :
         IChatCommandService
     {
         public async Task<bool> Handle
@@ -15,6 +17,14 @@ namespace HelpTechService.Interaction.Application.Internal.CommandServices
         {
             try
             {
+                if (await externalIamService
+                    .ExistsTechnicalById
+                    (command.TechnicalId) is false &&
+                    await externalIamService
+                    .ExistsConsumerById
+                    (command.ConsumerId) is false)
+                    return false;
+
                 await chatRepository
                     .AddAsync(new(command));
 
