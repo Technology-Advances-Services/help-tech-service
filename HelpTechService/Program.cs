@@ -25,6 +25,12 @@ using HelpTechService.IAM.Infrastructure.Request;
 using HelpTechService.IAM.Infrastructure.Token.JWT.Configuration;
 using HelpTechService.IAM.Infrastructure.Token.JWT.Services;
 
+using HelpTechService.Interaction.Application.Internal.CommandServices;
+using HelpTechService.Interaction.Application.Internal.QueryServices;
+using HelpTechService.Interaction.Domain.Repositories;
+using HelpTechService.Interaction.Domain.Services.Chat;
+using HelpTechService.Interaction.Domain.Services.ChatMember;
+using HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositories;
 using HelpTechService.Interaction.Infrastructure.Socket;
 
 using HelpTechService.Location.Application.Internal.QueryServices;
@@ -59,12 +65,6 @@ using HelpTechService.Subscription.Domain.Services.Membership;
 using HelpTechService.Subscription.Interfaces.ACL;
 using HelpTechService.Subscription.Interfaces.ACL.Services;
 using HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories;
-using HelpTechService.Interaction.Domain.Repositories;
-using HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositories;
-using HelpTechService.Interaction.Domain.Services.ChatMember;
-using HelpTechService.Interaction.Application.Internal.QueryServices;
-using HelpTechService.Interaction.Domain.Services.Chat;
-using HelpTechService.Interaction.Application.Internal.CommandServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
