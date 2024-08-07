@@ -49,7 +49,6 @@
     <Folder Include="Interaction\Interfaces\REST\Transform\" />
     <Folder Include="Report\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Report\Domain\Model\Aggregates\" />
-    <Folder Include="Statistic\Application\Internal\OutboundServices\ACL\" />
   </ItemGroup>
 
 </Project>
