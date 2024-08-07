@@ -43,7 +43,6 @@
     <Folder Include="Attention\Interfaces\ACL\Services\" />
     <Folder Include="Attention\Interfaces\REST\Transform\" />
     <Folder Include="Attention\Interfaces\REST\Resources\" />
-    <Folder Include="Interaction\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Interaction\Interfaces\ACL\Services\" />
     <Folder Include="Interaction\Interfaces\REST\Resources\" />
     <Folder Include="Interaction\Interfaces\REST\Transform\" />
