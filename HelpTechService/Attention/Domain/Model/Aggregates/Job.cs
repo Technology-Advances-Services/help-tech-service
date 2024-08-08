@@ -1,4 +1,7 @@
-﻿using HelpTechService.Attention.Domain.Model.Entities;
+﻿using System.Text.RegularExpressions;
+using HelpTechService.Attention.Domain.Model.Commands.Job;
+using HelpTechService.Attention.Domain.Model.Entities;
+using HelpTechService.Attention.Domain.Model.ValueObjects.Job;
 using HelpTechService.IAM.Domain.Model.Aggregates;
 using HelpTechService.Report.Domain.Model.Aggregates;
 
@@ -24,5 +27,78 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
         public virtual Consumer Consumer { get; } = null!;
 
         public virtual ICollection<Complaint> Complaints { get; } = [];
+
+        public Job()
+        {
+            this.AgendasId = 0;
+            this.ConsumersId = 0;
+            this.RegistrationDate = DateTime.Now;
+            this.AnswerDate = null;
+            this.WorkDate = null;
+            this.Address = string.Empty;
+            this.Description = string.Empty;
+            this.Time = 0;
+            this.LaborBudget = 0;
+            this.MaterialBudget = 0;
+            this.AmountFinal = 0;
+            this.State = string.Empty;
+        }
+        public Job
+            (int agendasId, int consumersId,
+            DateTime? answerDate, DateTime? workDate,
+            string address, string description,
+            decimal? time, double? laborBudget,
+            double? materialBudget,
+            EJobState jobState)
+        {
+            this.AgendasId = agendasId;
+            this.ConsumersId = consumersId;
+            this.RegistrationDate = DateTime.Now;
+            this.AnswerDate = answerDate;
+            this.WorkDate = workDate;
+            this.Address = address;
+            this.Description = description;
+            this.Time = time;
+            this.LaborBudget = laborBudget;
+            this.MaterialBudget = materialBudget;
+            this.AmountFinal = laborBudget +
+                materialBudget;
+            this.State = Regex.Replace(jobState
+                .ToString(), "([A-Z])", " $1")
+                .Trim();
+        }
+        public Job
+            (RegisterRequestJobCommand command)
+        {
+            this.AgendasId = command.AgendaId;
+            this.ConsumersId = command.ConsumerId;
+            this.RegistrationDate = DateTime.Now;
+            this.Address = command.Address;
+            this.Description = command.Description;
+            this.State = Regex.Replace
+                (command.JobState
+                .ToString(), "([A-Z])", " $1")
+                .Trim();
+        }
+        public Job
+            (AssignJobDetailCommand command)
+        {
+            this.Id = command.Id;
+            this.WorkDate = command.WorkDate;
+            this.Time = command.Time;
+            this.LaborBudget = command.LaborBudget;
+            this.MaterialBudget = command.MaterialBudget;
+            this.AmountFinal = command.LaborBudget +
+                command.MaterialBudget;
+        }
+        public Job
+            (UpdateJobStateCommand command)
+        {
+            this.Id = command.Id;
+            this.State = Regex.Replace
+                (command.JobState
+                .ToString(), "([A-Z])", " $1")
+                .Trim();
+        }
     }
 }

@@ -34,9 +34,10 @@
     <Folder Include="Attention\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Attention\Application\Internal\QueryServices\" />
     <Folder Include="Attention\Application\Internal\CommandServices\" />
-    <Folder Include="Attention\Domain\Model\Commands\" />
-    <Folder Include="Attention\Domain\Model\ValueObjects\" />
-    <Folder Include="Attention\Domain\Model\Queries\" />
+    <Folder Include="Attention\Domain\Model\Commands\Review\" />
+    <Folder Include="Attention\Domain\Model\Queries\Job\" />
+    <Folder Include="Attention\Domain\Model\Queries\Review\" />
+    <Folder Include="Attention\Domain\Model\ValueObjects\Review\" />
     <Folder Include="Attention\Domain\Services\" />
     <Folder Include="Attention\Domain\Repositories\" />
     <Folder Include="Attention\Infrastructure\Persistence\EFC\Repositories\" />
