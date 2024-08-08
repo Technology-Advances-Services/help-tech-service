@@ -35,7 +35,6 @@
     <Folder Include="Attention\Application\Internal\QueryServices\" />
     <Folder Include="Attention\Application\Internal\CommandServices\" />
     <Folder Include="Attention\Domain\Repositories\" />
-    <Folder Include="Attention\Domain\Services\Review\" />
     <Folder Include="Attention\Infrastructure\Persistence\EFC\Repositories\" />
     <Folder Include="Attention\Interfaces\ACL\Services\" />
     <Folder Include="Attention\Interfaces\REST\Transform\" />
