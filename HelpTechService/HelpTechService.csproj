@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Attention\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Attention\Application\Internal\QueryServices\" />
     <Folder Include="Attention\Application\Internal\CommandServices\" />
     <Folder Include="Attention\Infrastructure\Persistence\EFC\Repositories\" />
