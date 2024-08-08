@@ -37,7 +37,6 @@
     <Folder Include="Attention\Domain\Model\Commands\Review\" />
     <Folder Include="Attention\Domain\Model\Queries\Job\" />
     <Folder Include="Attention\Domain\Model\Queries\Review\" />
-    <Folder Include="Attention\Domain\Model\ValueObjects\Review\" />
     <Folder Include="Attention\Domain\Services\" />
     <Folder Include="Attention\Domain\Repositories\" />
     <Folder Include="Attention\Infrastructure\Persistence\EFC\Repositories\" />
