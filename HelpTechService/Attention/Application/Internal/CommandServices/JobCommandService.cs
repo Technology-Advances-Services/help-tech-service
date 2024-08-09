@@ -19,8 +19,8 @@ namespace HelpTechService.Attention.Application.Internal.CommandServices
             {
                 if (await externalIamService
                     .ExistsConsumerById
-                    (command.ConsumerId) is false)
-                    return false;
+                    (command.ConsumerId)
+                    is false) return false;
 
                 await jobRepository
                     .AddAsync(new(command));
