@@ -7,7 +7,7 @@ namespace HelpTechService.Attention.Interfaces.ACL.Services
         (IJobQueryService jobQueryService) :
         IAttentionContextFacade
     {
-        public async Task<bool> ExistsAttentionById(int id) =>
+        public async Task<bool> ExistsJobById(int id) =>
             await jobQueryService.Handle
             (new GetJobByIdQuery(id)) != null;
     }

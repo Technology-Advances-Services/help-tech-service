@@ -7,6 +7,6 @@ namespace HelpTechService.Report.Application.Internal.OutboundServices.ACL
     {
         public async Task<bool> ExistsAttentionById
             (int id) => await attentionContextFacade
-            .ExistsAttentionById(id);
+            .ExistsJobById(id);
     }
 }

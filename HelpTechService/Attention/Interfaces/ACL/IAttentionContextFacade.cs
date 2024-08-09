@@ -2,6 +2,6 @@
 {
     public interface IAttentionContextFacade
     {
-        Task<bool> ExistsAttentionById(int id);
+        Task<bool> ExistsJobById(int id);
     }
 }
