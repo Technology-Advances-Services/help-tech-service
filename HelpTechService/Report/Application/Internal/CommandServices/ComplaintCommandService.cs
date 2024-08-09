@@ -1,4 +1,5 @@
-﻿using HelpTechService.Report.Domain.Model.Commands.Complaint;
+﻿using HelpTechService.Report.Application.Internal.OutboundServices.ACL;
+using HelpTechService.Report.Domain.Model.Commands.Complaint;
 using HelpTechService.Report.Domain.Repositories;
 using HelpTechService.Report.Domain.Services.Complaint;
 using HelpTechService.Shared.Domain.Repositories;
@@ -7,7 +8,8 @@ namespace HelpTechService.Report.Application.Internal.CommandServices
 {
     internal class ComplaintCommandService
         (IComplaintRepository complaintRepository,
-        IUnitOfWork unitOfWork) :
+        IUnitOfWork unitOfWork,
+        ExternalAttentionService externalAttentionService) :
         IComplaintCommandService
     {
         public async Task<bool> Handle
@@ -15,6 +17,12 @@ namespace HelpTechService.Report.Application.Internal.CommandServices
         {
             try
             {
+                var result = await externalAttentionService
+                    .ExistsAttentionById(command.JobId);
+
+                if (result is false)
+                    return false;
+
                 await complaintRepository
                     .AddAsync(new(command));
 

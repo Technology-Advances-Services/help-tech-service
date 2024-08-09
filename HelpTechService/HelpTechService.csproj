@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Report\Application\Internal\OutboundServices\ACL\" />
     <Folder Include="Report\Domain\Model\Aggregates\" />
   </ItemGroup>
 
