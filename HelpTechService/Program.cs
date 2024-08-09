@@ -235,6 +235,8 @@ builder.Services.AddScoped<IComplaintRepository, ComplaintRepository>();
 builder.Services.AddScoped<IComplaintCommandService, ComplaintCommandService>();
 builder.Services.AddScoped<IComplaintQueryService, ComplaintQueryService>();
 
+builder.Services.AddTransient<HelpTechService.Report.Application.Internal.OutboundServices.ACL.ExternalAttentionService>();
+
 #endregion
 
 #region Shared Context
