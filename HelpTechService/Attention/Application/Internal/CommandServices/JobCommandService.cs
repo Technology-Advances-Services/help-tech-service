@@ -1,4 +1,5 @@
-﻿using HelpTechService.Attention.Domain.Model.Commands.Job;
+﻿using HelpTechService.Attention.Application.Internal.OutboundServices.ACL;
+using HelpTechService.Attention.Domain.Model.Commands.Job;
 using HelpTechService.Attention.Domain.Repositories;
 using HelpTechService.Attention.Domain.Services.Job;
 using HelpTechService.Shared.Domain.Repositories;
@@ -7,7 +8,8 @@ namespace HelpTechService.Attention.Application.Internal.CommandServices
 {
     internal class JobCommandService
         (IJobRepository jobRepository,
-        IUnitOfWork unitOfWork) :
+        IUnitOfWork unitOfWork,
+        ExternalIamService externalIamService) :
         IJobCommandService
     {
         public async Task<bool> Handle
@@ -15,6 +17,11 @@ namespace HelpTechService.Attention.Application.Internal.CommandServices
         {
             try
             {
+                if (await externalIamService
+                    .ExistsConsumerById
+                    (command.ConsumerId) is false)
+                    return false;
+
                 await jobRepository
                     .AddAsync(new(command));
 
