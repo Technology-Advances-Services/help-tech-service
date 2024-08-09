@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Attention\Interfaces\REST\Resources\Review\" />
     <Folder Include="Attention\Interfaces\REST\Transform\Job\" />
     <Folder Include="Attention\Interfaces\REST\Transform\Review\" />
     <Folder Include="Report\Application\Internal\OutboundServices\ACL\" />
