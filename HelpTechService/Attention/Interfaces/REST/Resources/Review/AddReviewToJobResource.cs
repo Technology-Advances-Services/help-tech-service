@@ -2,6 +2,5 @@
 {
     public record AddReviewToJobResource
         (int TechnicalId, int ConsumerId,
-        int Score, string Opinion,
-        string ReviewState);
+        int Score, string Opinion);
 }
