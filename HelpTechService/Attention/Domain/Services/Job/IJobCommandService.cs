@@ -11,6 +11,6 @@ namespace HelpTechService.Attention.Domain.Services.Job
             (AssignJobDetailCommand command);
 
         Task<bool> Handle
-            (UpdateJobStateCommand command)
+            (UpdateJobStateCommand command);
     }
 }

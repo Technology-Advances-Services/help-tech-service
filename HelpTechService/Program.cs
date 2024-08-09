@@ -6,6 +6,15 @@ using Microsoft.OpenApi.Models;
 using System.Data;
 using System.Text;
 
+using HelpTechService.Attention.Application.Internal.CommandServices;
+using HelpTechService.Attention.Application.Internal.QueryServices;
+using HelpTechService.Attention.Domain.Repositories;
+using HelpTechService.Attention.Domain.Services.Job;
+using HelpTechService.Attention.Domain.Services.Review;
+using HelpTechService.Attention.Interfaces.ACL;
+using HelpTechService.Attention.Interfaces.ACL.Services;
+using HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories;
+
 using HelpTechService.IAM.Application.Internal.CommandServices;
 using HelpTechService.IAM.Application.Internal.OutboundServices;
 using HelpTechService.IAM.Application.Internal.QueryServices;
@@ -166,6 +175,22 @@ builder.Services.AddDbContext<HelpTechContext>(options =>
 #endregion
 
 #region Dependencies Injections
+
+#region Attention Context
+
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<IJobCommandService, JobCommandService>();
+builder.Services.AddScoped<IJobQueryService, JobQueryService>();
+
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IReviewCommandService, ReviewCommandService>();
+builder.Services.AddScoped<IReviewQueryService, ReviewQueryService>();
+
+builder.Services.AddScoped<IAttentionContextFacade, AttentionContextFacade>();
+
+builder.Services.AddTransient<HelpTechService.Attention.Application.Internal.OutboundServices.ACL.ExternalIamService>();
+
+#endregion
 
 #region IAM Context
 
