@@ -6,7 +6,7 @@ using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
 {
-    public class ReviewRepository
+    internal class ReviewRepository
         (HelpTechContext context) :
         BaseRepository<Review>(context),
         IReviewRepository
