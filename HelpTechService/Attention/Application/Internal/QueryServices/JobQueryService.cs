@@ -5,7 +5,7 @@ using HelpTechService.Attention.Domain.Services.Job;
 
 namespace HelpTechService.Attention.Application.Internal.QueryServices
 {
-    public class JobQueryService
+    internal class JobQueryService
         (IJobRepository jobRepository) :
         IJobQueryService
     {

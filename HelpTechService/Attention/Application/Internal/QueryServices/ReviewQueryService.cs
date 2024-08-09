@@ -5,7 +5,7 @@ using HelpTechService.Attention.Domain.Services.Review;
 
 namespace HelpTechService.Attention.Application.Internal.QueryServices
 {
-    public class ReviewQueryService
+    internal class ReviewQueryService
         (IReviewRepository reviewRepository) :
         IReviewQueryService
     {
