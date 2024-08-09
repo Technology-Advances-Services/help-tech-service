@@ -18,7 +18,7 @@ namespace HelpTechService.Report.Application.Internal.CommandServices
             try
             {
                 var result = await externalAttentionService
-                    .ExistsAttentionById(command.JobId);
+                    .ExistsJobById(command.JobId);
 
                 if (result is false)
                     return false;
