@@ -7,6 +7,14 @@ namespace HelpTechService.Attention.Domain.Repositories
     public interface IJobRepository :
         IBaseRepository<Job>
     {
+        Task<bool> AssignJobDetailAsync
+            (int id, DateTime workDate,
+            decimal time, double laborBudget,
+            double materialBudget);
+
+        Task<bool> UpdateJobStateAsync
+            (int id, EJobState jobState);
+
         Task<IEnumerable<Job>> FindByTechnicalIdAsync
             (int technicalId);
 
