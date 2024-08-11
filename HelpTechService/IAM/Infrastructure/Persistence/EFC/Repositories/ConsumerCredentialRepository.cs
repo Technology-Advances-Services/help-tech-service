@@ -17,11 +17,10 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
             Task<ConsumerCredential?> queryAsync = new(() =>
             {
                 return
-                (from cc in Context.Set<ConsumerCredential>().ToList()
-                 join co in Context.Set<Consumer>().ToList()
-                 on cc.ConsumersId equals co.Id
-                 where co.Id == consumerId &&
-                 co.State == "ACTIVO"
+                (from cc in Context.Set<ConsumerCredential>()
+                 join co in Context.Set<Consumer>()
+                 on cc.ConsumersId equals consumerId
+                 where co.State == "ACTIVO"
                  select cc).FirstOrDefault();
             });
 

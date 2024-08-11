@@ -17,11 +17,10 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
             Task<CriminalRecord?> queryAsync = new(() =>
             {
                 return
-                (from cr in Context.Set<CriminalRecord>().ToList()
-                 join te in Context.Set<Technical>().ToList()
-                 on cr.TechnicalsId equals te.Id
-                 where te.Id == technicalId &&
-                 te.State == "ACTIVO"
+                (from cr in Context.Set<CriminalRecord>()
+                 join te in Context.Set<Technical>()
+                 on cr.TechnicalsId equals technicalId
+                 where te.State == "ACTIVO"
                  select cr).FirstOrDefault();
             });
 

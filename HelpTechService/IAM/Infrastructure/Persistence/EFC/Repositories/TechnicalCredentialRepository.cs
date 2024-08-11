@@ -17,11 +17,10 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
             Task<TechnicalCredential?> queryAsync = new(() =>
             {
                 return
-                (from tc in Context.Set<TechnicalCredential>().ToList()
-                 join te in Context.Set<Technical>().ToList()
-                 on tc.TechnicalsId equals te.Id
-                 where te.Id == technicalId &&
-                 te.State == "ACTIVO"
+                (from tc in Context.Set<TechnicalCredential>()
+                 join te in Context.Set<Technical>()
+                 on tc.TechnicalsId equals technicalId
+                 where te.State == "ACTIVO"
                  select tc).FirstOrDefault();
             });
 
