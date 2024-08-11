@@ -17,7 +17,7 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
     {
         public async Task<bool> AssignJobDetailAsync
             (int id, DateTime workDate, decimal time,
-            double laborBudget, double materialBudget) =>
+            decimal laborBudget, decimal materialBudget) =>
             await Context.Set<Job>().Where(j => j.Id == id)
             .ExecuteUpdateAsync(j => j
             .SetProperty(u => u.WorkDate, workDate)

@@ -9,8 +9,8 @@ namespace HelpTechService.Attention.Domain.Repositories
     {
         Task<bool> AssignJobDetailAsync
             (int id, DateTime workDate,
-            decimal time, double laborBudget,
-            double materialBudget);
+            decimal time, decimal laborBudget,
+            decimal materialBudget);
 
         Task<bool> UpdateJobStateAsync
             (int id, EJobState jobState);

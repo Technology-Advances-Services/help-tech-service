@@ -18,9 +18,9 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
         public string Address { get; private set; } = null!;
         public string Description { get; private set; } = null!;
         public decimal? Time { get; private set; }
-        public double? LaborBudget { get; private set; }
-        public double? MaterialBudget { get; private set; }
-        public double? AmountFinal { get; private set; }
+        public decimal? LaborBudget { get; private set; }
+        public decimal? MaterialBudget { get; private set; }
+        public decimal? AmountFinal { get; private set; }
         public string State { get; private set; } = null!;
 
         public virtual Agenda Agenda { get; } = null!;
@@ -47,8 +47,8 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             (int agendasId, int consumersId,
             DateTime? answerDate, DateTime? workDate,
             string address, string description,
-            decimal? time, double? laborBudget,
-            double? materialBudget,
+            decimal? time, decimal? laborBudget,
+            decimal? materialBudget,
             EJobState jobState)
         {
             this.AgendasId = agendasId;

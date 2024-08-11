@@ -2,6 +2,6 @@
 {
     public record AssignJobDetailCommand
         (int Id, DateTime WorkDate,
-        decimal Time, double LaborBudget,
-        double MaterialBudget);
+        decimal Time, decimal LaborBudget,
+        decimal MaterialBudget);
 }
