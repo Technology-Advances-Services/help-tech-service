@@ -26,15 +26,12 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
         }
 
         public async Task<bool> UpdateContractStateAsync
-            (int id, EContractState contractState)
-        {
-            var result = await Context.Set<Contract>()
-                .Where(c => c.Id == id)
-                .ExecuteUpdateAsync(c => c
-                .SetProperty(u => u.State, contractState.ToString()));
-
-            return result > 0;
-        }
+            (int id, EContractState contractState) =>
+            await Context.Set<Contract>()
+            .Where(c => c.Id == id)
+            .ExecuteUpdateAsync(c => c
+            .SetProperty(u => u.State, contractState.ToString()))
+            > 0;
 
         public async Task<Contract?> FindByTechnicalIdAsync
             (int technicalId)
@@ -47,9 +44,8 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
                 return
                 (from co in Context.Set<Contract>().ToList()
                  join te in Context.Set<Technical>().ToList()
-                 on co.TechnicalsId equals te.Id
+                 on co.TechnicalsId equals technicalId
                  where co.State == "VIGENTE" &&
-                 te.Id == technicalId &&
                  te.State == "ACTIVO"
                  select co)
                  .FirstOrDefault();
@@ -71,9 +67,8 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
                 return
                 (from co in Context.Set<Contract>().ToList()
                  join cs in Context.Set<Consumer>().ToList()
-                 on co.ConsumersId equals cs.Id
+                 on co.ConsumersId equals consumerId
                  where co.State == "VIGENTE" &&
-                 cs.Id == consumerId &&
                  cs.State == "ACTIVO"
                  select co)
                  .FirstOrDefault();
