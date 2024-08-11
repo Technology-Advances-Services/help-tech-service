@@ -17,11 +17,11 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
             Task<IEnumerable<Chat>> queryAsync = new(() =>
             {
                 return
-                [.. (from ct in Context.Set<Chat>()
+                [.. (from ch in Context.Set<Chat>()
                  join cr in Context.Set<ChatRoom>()
-                 on ct.ChatsRoomsId equals chatRoomId
+                 on ch.ChatsRoomsId equals chatRoomId
                  where cr.State == "ACTIVO"
-                 select ct)];
+                 select ch)];
             });
 
             queryAsync.Start();

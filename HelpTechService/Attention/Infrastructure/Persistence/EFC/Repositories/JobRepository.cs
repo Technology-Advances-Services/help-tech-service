@@ -63,14 +63,14 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             Task<IEnumerable<Job>> queryAsync = new(() =>
             {
                 return
-                [.. (from jb in Context.Set<Job>()
+                [.. (from jo in Context.Set<Job>()
                  join ag in Context.Set<Agenda>()
-                 on jb.AgendasId equals ag.Id
+                 on jo.AgendasId equals ag.Id
                  join te in Context.Set<Technical>()
                  on ag.TechnicalsId equals technicalId
                  where te.State == Regex.Replace(jobState
                  .ToString(), "([A-Z])", " $1").Trim()
-                 select jb)];
+                 select jo)];
             });
 
             queryAsync.Start();

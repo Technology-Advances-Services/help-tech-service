@@ -14,15 +14,23 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
         IContractRepository
     {
         private async Task UpdateAutomaticContractStateAsync
-            (int personId)
+            (int personId, string role)
         {
-            await Context.Set<Contract>()
-                .Where(c => c.TechnicalsId == personId ||
-                c.ConsumersId == personId &&
-                c.FinalDate >= DateTime.Now &&
-                c.State == "VIGENTE")
-                .ExecuteUpdateAsync(c => c
-                .SetProperty(u => u.State, EContractState.VENCIDO.ToString()));
+            if (role == "TECNICO")
+                await Context.Set<Contract>()
+                    .Where(c => c.TechnicalsId == personId &&
+                    c.FinalDate <= DateTime.Now &&
+                    c.State == "VIGENTE")
+                    .ExecuteUpdateAsync(c => c
+                    .SetProperty(u => u.State, EContractState.VENCIDO.ToString()));
+
+            else if (role == "CONSUMIDOR")
+                await Context.Set<Contract>()
+                    .Where(c => c.ConsumersId == personId &&
+                    c.FinalDate <= DateTime.Now &&
+                    c.State == "VIGENTE")
+                    .ExecuteUpdateAsync(c => c
+                    .SetProperty(u => u.State, EContractState.VENCIDO.ToString()));
         }
 
         public async Task<bool> UpdateContractStateAsync
@@ -37,7 +45,7 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
             (int technicalId)
         {
             await UpdateAutomaticContractStateAsync
-                (technicalId);
+                (technicalId, "TECNICO");
 
             Task<Contract?> queryAsync = new(() =>
             {
@@ -60,7 +68,7 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
             (int consumerId)
         {
             await UpdateAutomaticContractStateAsync
-                (consumerId);
+                (consumerId, "CONSUMIDOR");
 
             Task<Contract?> queryAsync = new(() =>
             {
