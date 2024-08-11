@@ -31,7 +31,7 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             await Context.Set<Job>().Where(j => j.Id == id)
             .ExecuteUpdateAsync(j => j
             .SetProperty(u => u.State, Regex.Replace(jobState
-                .ToString(), "([A-Z])", " $1").Trim())) > 1;
+                .ToString(), "([A-Z])", " $1").Trim())) > 0;
 
         public async Task<IEnumerable<Job>> FindByTechnicalIdAsync
             (int technicalId)
