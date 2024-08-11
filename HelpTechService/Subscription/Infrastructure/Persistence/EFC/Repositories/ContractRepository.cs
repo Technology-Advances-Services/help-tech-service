@@ -16,7 +16,7 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
         private async Task UpdateAutomaticContractStateAsync
             (int personId)
         {
-            var result = await Context.Set<Contract>()
+            await Context.Set<Contract>()
                 .Where(c => c.TechnicalsId == personId ||
                 c.ConsumersId == personId &&
                 c.FinalDate >= DateTime.Now &&
@@ -42,8 +42,8 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
             Task<Contract?> queryAsync = new(() =>
             {
                 return
-                (from co in Context.Set<Contract>().ToList()
-                 join te in Context.Set<Technical>().ToList()
+                (from co in Context.Set<Contract>()
+                 join te in Context.Set<Technical>()
                  on co.TechnicalsId equals technicalId
                  where co.State == "VIGENTE" &&
                  te.State == "ACTIVO"
@@ -65,8 +65,8 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
             Task<Contract?> queryAsync = new(() =>
             {
                 return
-                (from co in Context.Set<Contract>().ToList()
-                 join cs in Context.Set<Consumer>().ToList()
+                (from co in Context.Set<Contract>()
+                 join cs in Context.Set<Consumer>()
                  on co.ConsumersId equals consumerId
                  where co.State == "VIGENTE" &&
                  cs.State == "ACTIVO"
