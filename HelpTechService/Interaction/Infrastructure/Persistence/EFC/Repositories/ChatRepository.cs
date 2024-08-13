@@ -18,10 +18,11 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
             {
                 return
                 [.. (from ch in Context.Set<Chat>()
-                 join cr in Context.Set<ChatRoom>()
-                 on ch.ChatsRoomsId equals chatRoomId
-                 where cr.State == "ACTIVO"
-                 select ch)];
+                join cr in Context.Set<ChatRoom>()
+                on ch.ChatsRoomsId equals cr.Id
+                where cr.Id == chatRoomId &&
+                cr.State == "ACTIVO"
+                select ch)];
             });
 
             queryAsync.Start();

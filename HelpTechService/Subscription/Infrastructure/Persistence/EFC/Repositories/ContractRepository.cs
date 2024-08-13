@@ -16,21 +16,16 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
         private async Task UpdateAutomaticContractStateAsync
             (int personId, string role)
         {
-            if (role == "TECNICO")
-                await Context.Set<Contract>()
-                    .Where(c => c.TechnicalsId == personId &&
-                    c.FinalDate <= DateTime.Now &&
-                    c.State == "VIGENTE")
-                    .ExecuteUpdateAsync(c => c
-                    .SetProperty(u => u.State, EContractState.VENCIDO.ToString()));
+            string filterField = role == "TECNICO" ?
+                nameof(Contract.TechnicalsId) :
+                nameof(Contract.ConsumersId);
 
-            else if (role == "CONSUMIDOR")
-                await Context.Set<Contract>()
-                    .Where(c => c.ConsumersId == personId &&
-                    c.FinalDate <= DateTime.Now &&
-                    c.State == "VIGENTE")
-                    .ExecuteUpdateAsync(c => c
-                    .SetProperty(u => u.State, EContractState.VENCIDO.ToString()));
+            await Context.Set<Contract>()
+                .Where(c => EF.Property<int>(c, filterField) == personId &&
+                c.FinalDate <= DateTime.Now &&
+                c.State == "VIGENTE")
+                .ExecuteUpdateAsync(c => c
+                .SetProperty(u => u.State, EContractState.VENCIDO.ToString()));
         }
 
         public async Task<bool> UpdateContractStateAsync
@@ -52,11 +47,11 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
                 return
                 (from co in Context.Set<Contract>()
                  join te in Context.Set<Technical>()
-                 on co.TechnicalsId equals technicalId
-                 where co.State == "VIGENTE" &&
+                 on co.TechnicalsId equals te.Id
+                 where co.State == EContractState.VIGENTE.ToString() &&
+                 te.Id == technicalId &&
                  te.State == "ACTIVO"
-                 select co)
-                 .FirstOrDefault();
+                 select co).FirstOrDefault();
             });
 
             queryAsync.Start();
@@ -73,13 +68,13 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
             Task<Contract?> queryAsync = new(() =>
             {
                 return
-                (from co in Context.Set<Contract>()
-                 join cs in Context.Set<Consumer>()
-                 on co.ConsumersId equals consumerId
-                 where co.State == "VIGENTE" &&
-                 cs.State == "ACTIVO"
-                 select co)
-                 .FirstOrDefault();
+                (from ct in Context.Set<Contract>()
+                 join cr in Context.Set<Consumer>()
+                 on ct.ConsumersId equals cr.Id
+                 where ct.State == EContractState.VIGENTE.ToString() &&
+                 cr.Id == consumerId &&
+                 cr.State == "ACTIVO"
+                 select ct).FirstOrDefault();
             });
 
             queryAsync.Start();

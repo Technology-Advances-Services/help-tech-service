@@ -4,7 +4,6 @@ using HelpTechService.Attention.Domain.Model.Aggregates;
 using HelpTechService.Attention.Domain.Model.Entities;
 using HelpTechService.Attention.Domain.Model.ValueObjects.Job;
 using HelpTechService.Attention.Domain.Repositories;
-using HelpTechService.IAM.Domain.Model.Aggregates;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
@@ -39,12 +38,11 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             Task<IEnumerable<Job>> queryAsync = new(() =>
             {
                 return
-                [.. (from jb in Context.Set<Job>()
-                 join ag in Context.Set<Agenda>()
-                 on jb.AgendasId equals ag.Id
-                 join te in Context.Set<Technical>()
-                 on ag.TechnicalsId equals technicalId
-                 select jb)];
+                [.. (from jo in Context.Set<Job>()
+                join ag in Context.Set<Agenda>()
+                on jo.AgendasId equals ag.Id
+                where ag.TechnicalsId == technicalId
+                select jo)];
             });
 
             queryAsync.Start();
@@ -64,13 +62,12 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             {
                 return
                 [.. (from jo in Context.Set<Job>()
-                 join ag in Context.Set<Agenda>()
-                 on jo.AgendasId equals ag.Id
-                 join te in Context.Set<Technical>()
-                 on ag.TechnicalsId equals technicalId
-                 where te.State == Regex.Replace(jobState
-                 .ToString(), "([A-Z])", " $1").Trim()
-                 select jo)];
+                join ag in Context.Set<Agenda>()
+                on jo.AgendasId equals ag.Id
+                where jo.State == Regex.Replace(jobState
+                .ToString(), "([A-Z])", " $1").Trim() &&
+                ag.TechnicalsId == technicalId
+                select jo)];
             });
 
             queryAsync.Start();

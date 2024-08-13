@@ -18,11 +18,11 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
             {
                 return
                 [.. (from cm in Context.Set<ChatMember>()
-                 join cr in Context.Set<ChatRoom>()
-                 on cm.ChatsRoomsId equals cr.Id
-                 where cm.TechnicalsId == technicalId &&
-                 cr.State == "ACTIVO"
-                 select cm)];
+                join cr in Context.Set<ChatRoom>()
+                on cm.ChatsRoomsId equals cr.Id
+                where cm.TechnicalsId == technicalId &&
+                cr.State == "ACTIVO"
+                select cm)];
             });
 
             queryAsync.Start();
@@ -37,11 +37,11 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
             {
                 return
                 [.. (from cm in Context.Set<ChatMember>()
-                 join cr in Context.Set<ChatRoom>()
-                 on cm.ChatsRoomsId equals cr.Id
-                 where cm.ConsumersId == consumerId &&
-                 cr.State == "ACTIVO"
-                 select cm)];
+                join cr in Context.Set<ChatRoom>()
+                on cm.ChatsRoomsId equals cr.Id
+                where cm.ConsumersId == consumerId &&
+                cr.State == "ACTIVO"
+                select cm)];
             });
 
             queryAsync.Start();
