@@ -1,5 +1,6 @@
 ﻿using HelpTechService.Interaction.Domain.Model.Aggregates;
 using HelpTechService.Interaction.Domain.Model.Entities;
+using HelpTechService.Interaction.Domain.Model.ValueObjects;
 using HelpTechService.Interaction.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
@@ -21,7 +22,7 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
                 join cr in Context.Set<ChatRoom>()
                 on ch.ChatsRoomsId equals cr.Id
                 where cr.Id == chatRoomId &&
-                cr.State == "ACTIVO"
+                cr.State == EChatRoomState.ACTIVO.ToString()
                 select ch)];
             });
 
