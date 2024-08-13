@@ -15,31 +15,35 @@ namespace HelpTechService.Subscription.Application.Internal.CommandServices
         public async Task<bool> Handle
             (CreateContractCommand command)
         {
-            bool result = false;
+            try
+            {
+                bool result = false;
 
-            if (int.TryParse(command
-                .TechnicalId.ToString(),
-                out int technicalId))
-                result = await externalIamService
-                    .ExistsTechnicalById
-                    (technicalId);
+                if (int.TryParse(command
+                    .TechnicalId.ToString(),
+                    out int technicalId))
+                    result = await externalIamService
+                        .ExistsTechnicalById
+                        (technicalId);
 
-            else if (int.TryParse(command
-                .ConsumerId.ToString(),
-                out int consumerId))
-                result = await externalIamService
-                    .ExistsConsumerById
-                    (consumerId);
+                else if (int.TryParse(command
+                    .ConsumerId.ToString(),
+                    out int consumerId))
+                    result = await externalIamService
+                        .ExistsConsumerById
+                        (consumerId);
 
-            if (result is false)
-                return false;
+                if (result is false)
+                    return false;
 
-            await contractRepository
-                .AddAsync(new(command));
+                await contractRepository
+                    .AddAsync(new(command));
 
-            await unitOfWork.CompleteAsync();
+                await unitOfWork.CompleteAsync();
 
-            return true;
+                return true;
+            }
+            catch (Exception) { return false;}
         }
 
         public async Task<bool> Handle

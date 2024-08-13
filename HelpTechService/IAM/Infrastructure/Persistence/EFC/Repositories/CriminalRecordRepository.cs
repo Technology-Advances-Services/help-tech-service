@@ -18,10 +18,10 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
             {
                 return
                 (from cr in Context.Set<CriminalRecord>()
-                 join te in Context.Set<Technical>()
-                 on cr.TechnicalsId equals technicalId
-                 where te.State == "ACTIVO"
-                 select cr).FirstOrDefault();
+                join te in Context.Set<Technical>()
+                on cr.TechnicalsId equals technicalId
+                where te.State == "ACTIVO"
+                select cr).FirstOrDefault();
             });
 
             queryAsync.Start();
