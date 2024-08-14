@@ -18,7 +18,7 @@ namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
         {
             SymmetricSecurityKey securityKey = new
                 (Encoding.ASCII.GetBytes
-                (TokenConfiguration.JWT_SECRET_KEY));
+                (TokenConfiguration.SecretKey));
 
             SigningCredentials credentials = new
                 (securityKey, SecurityAlgorithms.HmacSha256);
@@ -31,11 +31,11 @@ namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
                 ];
 
             JwtSecurityToken token = new(
-                issuer: TokenConfiguration.JWT_ISSUER_TOKEN,
-                audience: TokenConfiguration.JWT_AUDIENCE_TOKEN,
+                issuer: TokenConfiguration.Issuer,
+                audience: TokenConfiguration.Audience,
                 claims: claims,
                 expires: DateTime.UtcNow
-                .AddMinutes(TokenConfiguration.JWT_EXPIRE_MINUTES),
+                .AddMinutes(TokenConfiguration.Expire),
                 signingCredentials: credentials
             );
 
@@ -51,7 +51,7 @@ namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
             {
                 var securityKey = new SymmetricSecurityKey
                     (Encoding.Default.GetBytes
-                    (TokenConfiguration.JWT_SECRET_KEY));
+                    (TokenConfiguration.SecretKey));
 
                 JwtSecurityTokenHandler tokenHandler = new();
 
@@ -61,8 +61,8 @@ namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = TokenConfiguration.JWT_ISSUER_TOKEN,
-                    ValidAudience = TokenConfiguration.JWT_AUDIENCE_TOKEN,
+                    ValidIssuer = TokenConfiguration.Issuer,
+                    ValidAudience = TokenConfiguration.Audience,
                     IssuerSigningKey = securityKey,
                     LifetimeValidator = LifetimeValidator,
                     ClockSkew = TimeSpan.Zero

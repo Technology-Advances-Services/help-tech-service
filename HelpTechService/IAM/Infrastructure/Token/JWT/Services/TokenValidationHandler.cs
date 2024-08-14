@@ -1,9 +1,9 @@
-﻿using HelpTechService.IAM.Infrastructure.Token.JWT.Configuration;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Text;
+using HelpTechService.IAM.Infrastructure.Token.JWT.Configuration;
 
 namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
 {
@@ -39,9 +39,7 @@ namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
         {
             HttpStatusCode statusCode;
 
-            string token;
-
-            if (!TryRetrieveToken(request, out token))
+            if (!TryRetrieveToken(request, out string token))
             {
                 statusCode = HttpStatusCode.Unauthorized;
 
@@ -52,7 +50,7 @@ namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
             {
                 var securityKey = new SymmetricSecurityKey
                     (Encoding.Default.GetBytes
-                    (TokenConfiguration.JWT_SECRET_KEY));
+                    (TokenConfiguration.SecretKey));
 
                 SecurityToken securityToken;
 
@@ -64,8 +62,8 @@ namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = TokenConfiguration.JWT_ISSUER_TOKEN,
-                    ValidAudience = TokenConfiguration.JWT_AUDIENCE_TOKEN,
+                    ValidIssuer = TokenConfiguration.Issuer,
+                    ValidAudience = TokenConfiguration.Audience,
                     IssuerSigningKey = securityKey,
                     LifetimeValidator = LifetimeValidator,
                     ClockSkew = TimeSpan.Zero
