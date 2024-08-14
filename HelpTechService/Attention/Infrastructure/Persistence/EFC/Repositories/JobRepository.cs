@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 using HelpTechService.Attention.Domain.Model.Aggregates;
 using HelpTechService.Attention.Domain.Model.Entities;
 using HelpTechService.Attention.Domain.Model.ValueObjects.Job;
@@ -26,11 +25,16 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             > 0;
 
         public async Task<bool> UpdateJobStateAsync
-            (int id, EJobState jobState) =>
-            await Context.Set<Job>().Where(j => j.Id == id)
-            .ExecuteUpdateAsync(j => j
-            .SetProperty(u => u.State, Regex.Replace(jobState
-                .ToString(), "([A-Z])", " $1").Trim())) > 0;
+            (int id, EJobState jobState)
+        {
+            var newState = jobState.ToString() ==
+                "ENPROCESO" ? "EN PROCESO" :
+                jobState.ToString();
+
+            return await Context.Set<Job>().Where(j => j.Id == id)
+                .ExecuteUpdateAsync(j => j
+                .SetProperty(u => u.State, newState)) > 0;
+        }
 
         public async Task<IEnumerable<Job>> FindByTechnicalIdAsync
             (int technicalId)
@@ -58,14 +62,17 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
         public async Task<IEnumerable<Job>> FindByTechnicalIdAndStateAsync
             (int technicalId, EJobState jobState)
         {
+            var newState = jobState.ToString() ==
+                "ENPROCESO" ? "EN PROCESO" :
+                jobState.ToString();
+
             Task<IEnumerable<Job>> queryAsync = new(() =>
             {
                 return
                 [.. (from jo in Context.Set<Job>()
                 join ag in Context.Set<Agenda>()
                 on jo.AgendasId equals ag.Id
-                where jo.State == Regex.Replace(jobState
-                .ToString(), "([A-Z])", " $1").Trim() &&
+                where jo.State == newState &&
                 ag.TechnicalsId == technicalId
                 select jo)];
             });
@@ -76,12 +83,15 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
         }
 
         public async Task<IEnumerable<Job>> FindByConsumerIdAndStateAsync
-            (int consumerId, EJobState jobState) =>
-            await Context.Set<Job>()
-            .Where(j => j.ConsumersId == consumerId &&
-            j.State == Regex.Replace(jobState
-                .ToString(), "([A-Z])", " $1")
-                .Trim())
-            .ToListAsync();
+            (int consumerId, EJobState jobState)
+        {
+            var newState = jobState.ToString() ==
+                "ENPROCESO" ? "EN PROCESO" :
+                jobState.ToString();
+
+            return await Context.Set<Job>()
+                .Where(j => j.ConsumersId == consumerId &&
+                j.State == newState).ToListAsync();
+        }
     }
 }
