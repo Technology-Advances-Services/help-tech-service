@@ -17,13 +17,20 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
         public async Task<dynamic?> Handle
             (GetTechnicalCredentialByTechnicalIdAndCodeQuery query)
         {
+            if (query.TechnicalId.Length < 8 ||
+                query.TechnicalId.Length > 8)
+                return null;
+
+            var technicalId = int.Parse(query
+                .TechnicalId.TrimStart('0'));
+
             var result = await technicalCredentialRepository
-                .FindByTechnicalIdAsync(query.TechnicalId);
+                .FindByTechnicalIdAsync(technicalId);
 
             if (string.IsNullOrEmpty(result) ||
                 await externalSubscriptionService
                 .CurrentContractByTechnicalId
-                (query.TechnicalId) is false)
+                (technicalId) is false)
                 return null;
 
             if (!encryptionService.VerifyHash

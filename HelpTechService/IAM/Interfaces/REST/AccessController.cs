@@ -45,10 +45,6 @@ namespace HelpTechService.IAM.Interfaces.REST
         public async Task<IActionResult> Login
             ([FromBody] UserResource resource)
         {
-            if (!int.TryParse(resource.Username
-                .Trim('0'), out int id))
-                return BadRequest();
-
             if (!Enum.TryParse<ECredentialRole>
                 (resource.Role, out var role))
                 return Unauthorized();
@@ -58,12 +54,12 @@ namespace HelpTechService.IAM.Interfaces.REST
             if (role == ECredentialRole.TECNICO)
                 result = await technicalCredentialQueryService
                     .Handle(new GetTechnicalCredentialByTechnicalIdAndCodeQuery
-                    (id, resource.Password));
+                    (resource.Username, resource.Password));
 
             else if (role == ECredentialRole.CONSUMIDOR)
                 result = await consumerCredentialQueryService
                     .Handle(new GetConsumerCredentialByConsumerIdAndCodeQuery
-                    (id, resource.Password));
+                    (resource.Username, resource.Password));
 
             else return Unauthorized();
 
@@ -134,6 +130,9 @@ namespace HelpTechService.IAM.Interfaces.REST
                 .Handle(AddConsumerCredentialCommandFromResourceAssembler
                 .ToCommandFromResource(new AddConsumerCredentialResource
                 (resource.Id, resource.Code)));
+
+            if (result is false)
+                return BadRequest();
 
             return Ok(result);
         }

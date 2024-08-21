@@ -12,6 +12,7 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
         public async Task<Technical?> Handle
             (GetTechnicalByIdQuery query) =>
             await technicalRepository
-            .FindByIdAsync(query.Id);
+            .FindByIdAsync(int.Parse(query
+                .Id.TrimStart('0')));
     }
 }

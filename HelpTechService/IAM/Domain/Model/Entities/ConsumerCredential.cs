@@ -16,15 +16,17 @@ namespace HelpTechService.IAM.Domain.Model.Entities
             this.Code = string.Empty;
         }
         public ConsumerCredential
-            (int consumerId, string code)
+            (string consumerId, string code)
         {
-            this.ConsumersId = consumerId;
+            this.ConsumersId = int.Parse
+                (consumerId.TrimStart('0'));
             this.Code = code;
         }
         public ConsumerCredential
             (AddConsumerCredentialCommand command)
         {
-            this.ConsumersId = command.ConsumerId;
+            this.ConsumersId = int.Parse
+                (command.ConsumerId.TrimStart('0'));
             this.Code = command.Code;
         }
     }

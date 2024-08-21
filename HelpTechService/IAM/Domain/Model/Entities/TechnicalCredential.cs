@@ -16,15 +16,17 @@ namespace HelpTechService.IAM.Domain.Model.Entities
             this.Code = string.Empty;
         }
         public TechnicalCredential
-            (int technicalId, string code)
+            (string technicalId, string code)
         {
-            this.TechnicalsId = technicalId;
+            this.TechnicalsId = int.Parse
+                (technicalId.TrimStart('0'));
             this.Code = code;
         }
         public TechnicalCredential
             (AddTechnicalCredentialCommand command)
         {
-            this.TechnicalsId = command.TechnicalId;
+            this.TechnicalsId = int.Parse
+                (command.TechnicalId.TrimStart('0'));
             this.Code = command.Code;
         }
     }

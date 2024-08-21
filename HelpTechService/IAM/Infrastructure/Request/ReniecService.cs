@@ -9,7 +9,7 @@ namespace HelpTechService.IAM.Infrastructure.Request
         IReniecService
     {
         public async Task<bool> ValidateDni
-            (int dni)
+            (string dni)
         {
             var httpClient = new HttpClient();
 

@@ -49,14 +49,15 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
             this.State = string.Empty;
         }
         public Technical
-            (int id, int specialtyId, int districtId,
+            (string id, int specialtyId, int districtId,
             string profileUrl, string firstname,
             string lastname, int age, string genre,
             int phone, string email,
             ETechnicalAvailability technicalAvailability,
             ETechnicalState technicalState)
         {
-            this.Id = id;
+            this.Id = int.Parse
+                (id.TrimStart('0'));
             this.SpecialtiesId = specialtyId;
             this.DistrictsId = districtId;
             this.ProfileUrl = profileUrl;
@@ -74,14 +75,15 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
         public Technical
             (RegisterTechnicalCommand command)
         {
-            this.Id = command.Id;
+            this.Id = int.Parse
+                (command.Id.TrimStart('0'));
             this.SpecialtiesId = command.SpecialtyId;
             this.DistrictsId = command.DistrictId;
             this.ProfileUrl = command.ProfileUrl;
             this.Firstname = command.Firstname.ToUpper();
             this.Lastname = command.Lastname.ToUpper();
             this.Age = command.Age;
-            this.Genre = command.Genre;
+            this.Genre = command.Genre.ToUpper();
             this.Phone = command.Phone;
             this.Email = command.Email;
             this.Availability = command

@@ -1,5 +1,5 @@
 ﻿namespace HelpTechService.IAM.Domain.Model.Queries.ConsumerCredential
 {
     public record GetConsumerCredentialByConsumerIdAndCodeQuery
-        (int ConsumerId, string Code);
+        (string ConsumerId, string Code);
 }

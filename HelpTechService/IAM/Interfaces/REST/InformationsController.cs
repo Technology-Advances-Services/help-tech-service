@@ -23,7 +23,7 @@ namespace HelpTechService.IAM.Interfaces.REST
         [HttpGet]
         [Authorize("TECNICO", "CONSUMIDOR")]
         public async Task<IActionResult> GetTechnicalById
-            ([FromQuery] int id)
+            ([FromQuery] string id)
         {
             var technical = await technicalQueryService
                 .Handle(new GetTechnicalByIdQuery(id));
@@ -41,7 +41,7 @@ namespace HelpTechService.IAM.Interfaces.REST
         [HttpGet]
         [Authorize("CONSUMIDOR")]
         public async Task<IActionResult> GetConsumerById
-            ([FromQuery] int id)
+            ([FromQuery] string id)
         {
             var consumer = await consumerQueryService
                 .Handle(new GetConsumerByIdQuery(id));

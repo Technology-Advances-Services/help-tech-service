@@ -30,8 +30,8 @@ namespace HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Components
                 return;
             }
 
-            var token = context.Request.Headers["Authorization"]
-                .FirstOrDefault()?.Split(" ").Last();
+            var token = context.Request.Headers
+                .Authorization.FirstOrDefault()?.Split(" ").Last();
 
             var tokenResult = tokenService.ValidateToken(token) ??
                 throw new Exception("Invalid token!");

@@ -79,7 +79,7 @@ namespace HelpTechService.IAM.Infrastructure.Token.JWT.Services
 
                 var result = (JwtSecurityToken)securityToken;
 
-                var id = Convert.ToInt32(result.Claims.First
+                var id = Convert.ToString(result.Claims.First
                     (claim => claim.Type == ClaimTypes.Sid).Value);
 
                 var code = Convert.ToString(result.Claims.First

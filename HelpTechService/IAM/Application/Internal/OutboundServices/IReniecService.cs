@@ -2,6 +2,6 @@
 {
     public interface IReniecService
     {
-        Task<bool> ValidateDni(int dni);
+        Task<bool> ValidateDni(string dni);
     }
 }

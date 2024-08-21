@@ -3,7 +3,7 @@
 namespace HelpTechService.IAM.Domain.Model.Commands.Technical
 {
     public record RegisterTechnicalCommand
-        (int Id, int SpecialtyId, int DistrictId,
+        (string Id, int SpecialtyId, int DistrictId,
         string ProfileUrl, string Firstname,
         string Lastname, int Age, string Genre,
         int Phone, string Email,

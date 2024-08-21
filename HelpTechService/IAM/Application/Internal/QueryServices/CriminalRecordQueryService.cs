@@ -12,7 +12,7 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
         public async Task<CriminalRecord?> Handle
             (GetCriminalRecordByTechnicalIdQuery query) =>
             await criminalRecordRepository
-            .FindByTechnicalIdAsync
-            (query.TechnicalId);
+            .FindByTechnicalIdAsync(int.Parse
+                (query.TechnicalId.TrimStart('0')));
     }
 }

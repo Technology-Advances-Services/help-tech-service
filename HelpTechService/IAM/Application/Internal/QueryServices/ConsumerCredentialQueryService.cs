@@ -17,13 +17,20 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
         public async Task<dynamic?> Handle
             (GetConsumerCredentialByConsumerIdAndCodeQuery query)
         {
+            if (query.ConsumerId.Length < 8 ||
+                query.ConsumerId.Length > 8)
+                return null;
+
+            var consumerId = int.Parse(query
+                .ConsumerId.TrimStart('0'));
+
             var result = await consumerCredentialRepository
-                .FindByConsumerIdAsync(query.ConsumerId);
+                .FindByConsumerIdAsync(consumerId);
 
             if (string.IsNullOrEmpty(result) ||
                 await externalSubscriptionService
                 .CurrentContractByConsumerId
-                (query.ConsumerId) is false)
+                (consumerId) is false)
                 return null;
 
             if (!encryptionService.VerifyHash

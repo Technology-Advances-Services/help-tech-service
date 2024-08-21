@@ -12,6 +12,7 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
         public async Task<Consumer?> Handle
             (GetConsumerByIdQuery query) =>
             await consumerRepository
-            .FindByIdAsync(query.Id);
+            .FindByIdAsync(int.Parse(query
+                .Id.TrimStart('0')));
     }
 }

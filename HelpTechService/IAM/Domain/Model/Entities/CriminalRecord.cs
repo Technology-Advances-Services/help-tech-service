@@ -17,15 +17,17 @@ namespace HelpTechService.IAM.Domain.Model.Entities
             this.FileUrl = string.Empty;
         }
         public CriminalRecord
-            (int technicalId, string fileUrl)
+            (string technicalId, string fileUrl)
         {
-            this.TechnicalsId = technicalId;
+            this.TechnicalsId = int.Parse
+                (technicalId.TrimStart('0'));
             this.FileUrl = fileUrl;
         }
         public CriminalRecord
             (AddCriminalRecordToTechnicalCommand command)
         {
-            this.TechnicalsId = command.TechnicalId;
+            this.TechnicalsId = int.Parse
+                (command.TechnicalId.TrimStart('0'));
             this.FileUrl = command.FileUrl;
         }
     }
