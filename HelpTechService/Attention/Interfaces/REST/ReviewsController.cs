@@ -27,6 +27,9 @@ namespace HelpTechService.Attention.Interfaces.REST
                 .Handle(AddReviewToJobCommandFromResourceAssembler
                 .ToCommandFromResource(resource));
 
+            if (result is false)
+                return BadRequest();
+
             return Ok(result);
         }
 

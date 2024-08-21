@@ -28,6 +28,9 @@ namespace HelpTechService.Attention.Interfaces.REST
                 .Handle(RegisterRequestJobCommandFromResourceAssembler
                 .ToCommandFromResource(resource));
 
+            if (result is false)
+                return BadRequest();
+
             return Ok(result);
         }
 
@@ -40,6 +43,9 @@ namespace HelpTechService.Attention.Interfaces.REST
             var result = await jobCommandService
                 .Handle(AssignJobDetailCommandFromResourceAssembler
                 .ToCommandFromResource(resource));
+
+            if (result is false)
+                return BadRequest();
 
             return Ok(result);
         }
@@ -54,6 +60,9 @@ namespace HelpTechService.Attention.Interfaces.REST
                 .Handle(UpdateJobStateCommandFromResourceAssembler
                 .ToCommandFromResource(resource));
 
+            if (result is false)
+                return BadRequest();
+
             return Ok(result);
         }
 
@@ -67,7 +76,7 @@ namespace HelpTechService.Attention.Interfaces.REST
                 .Handle(new GetJobByIdQuery(id));
 
             if (job is null)
-                return BadRequest("");
+                return BadRequest();
 
             var jobResource = JobResourceFromEntityAssembler
                 .ToResourceFromEntity(job);
@@ -115,9 +124,13 @@ namespace HelpTechService.Attention.Interfaces.REST
         public async Task<IActionResult> GetJobsByTechnicalIdAndState
             ([FromQuery] int technicalId, [FromQuery] string state)
         {
+            if (!Enum.TryParse<EJobState>
+                (state, out var jobState))
+                return BadRequest();
+
             var jobs = await jobQueryService
                 .Handle(new GetJobsByTechnicalIdAndStateQuery
-                (technicalId, Enum.Parse<EJobState>(state)));
+                (technicalId, jobState));
 
             var jobsResource = jobs.Select
                 (JobResourceFromEntityAssembler
@@ -132,9 +145,13 @@ namespace HelpTechService.Attention.Interfaces.REST
         public async Task<IActionResult> GetJobsByConsumerIdAndState
             ([FromQuery] int consumerId, [FromQuery] string state)
         {
+            if (!Enum.TryParse<EJobState>
+                (state, out var jobState))
+                return BadRequest();
+
             var jobs = await jobQueryService
                 .Handle(new GetJobsByConsumerIdAndStateQuery
-                (consumerId, Enum.Parse<EJobState>(state)));
+                (consumerId, jobState));
 
             var jobsResource = jobs.Select
                 (JobResourceFromEntityAssembler

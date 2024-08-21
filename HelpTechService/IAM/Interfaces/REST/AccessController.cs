@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using HelpTechService.IAM.Domain.Model.Queries.ConsumerCredential;
-using HelpTechService.IAM.Domain.Model.Queries.Specialty;
 using HelpTechService.IAM.Domain.Model.Queries.Technical;
 using HelpTechService.IAM.Domain.Model.Queries.TechnicalCredential;
 using HelpTechService.IAM.Domain.Model.ValueObjects.Credential;
 using HelpTechService.IAM.Domain.Services.Consumer;
 using HelpTechService.IAM.Domain.Services.ConsumerCredential;
 using HelpTechService.IAM.Domain.Services.CriminalRecord;
-using HelpTechService.IAM.Domain.Services.Specialty;
 using HelpTechService.IAM.Domain.Services.Technical;
 using HelpTechService.IAM.Domain.Services.TechnicalCredential;
 using HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Attributes;
@@ -21,7 +19,6 @@ using HelpTechService.IAM.Interfaces.REST.Resources.User;
 using HelpTechService.IAM.Interfaces.REST.Transform.Consumer;
 using HelpTechService.IAM.Interfaces.REST.Transform.ConsumerCredential;
 using HelpTechService.IAM.Interfaces.REST.Transform.CriminalRecord;
-using HelpTechService.IAM.Interfaces.REST.Transform.Specialty;
 using HelpTechService.IAM.Interfaces.REST.Transform.Technical;
 using HelpTechService.IAM.Interfaces.REST.Transform.TechnicalCredential;
 
