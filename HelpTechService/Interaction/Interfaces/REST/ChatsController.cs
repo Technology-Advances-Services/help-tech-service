@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Attributes;
+using HelpTechService.Interaction.Domain.Model.Queries.Chat;
 using HelpTechService.Interaction.Domain.Services.Chat;
 using HelpTechService.Interaction.Interfaces.REST.Resources.Chat;
 using HelpTechService.Interaction.Interfaces.REST.Transform.Chat;
@@ -25,6 +26,9 @@ namespace HelpTechService.Interaction.Interfaces.REST
                 .Handle(SendMessageCommandFromResourceAssembler
                 .ToCommandFromResource(resource));
 
+            if (chat is false)
+                return BadRequest();
+
             return Ok(chat);
         }
 
@@ -34,7 +38,8 @@ namespace HelpTechService.Interaction.Interfaces.REST
             ([FromQuery] int chatRoomId)
         {
             var chats = await chatQueryService
-                .Handle(new Domain.Model.Queries.Chat.GetChatByChatRoomIdQuery(chatRoomId));
+                .Handle(new GetChatByChatRoomIdQuery
+                (chatRoomId));
 
             var chatsResource = chats.Select
                 (ChatResourceFromEntityAssembler
