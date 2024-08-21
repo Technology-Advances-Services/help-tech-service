@@ -32,8 +32,7 @@ namespace HelpTechService.IAM.Interfaces.REST
     [Produces(MediaTypeNames.Application.Json)]
     [Authorize]
     public class AccessController
-        (ISpecialtyQueryService specialtyQueryService,
-        ITechnicalQueryService technicalQueryService,
+        (ITechnicalQueryService technicalQueryService,
         ITechnicalCommandService technicalCommandService,
         ITechnicalCredentialCommandService technicalCredentialCommandService,
         ITechnicalCredentialQueryService technicalCredentialQueryService,
@@ -43,21 +42,6 @@ namespace HelpTechService.IAM.Interfaces.REST
         IConsumerCredentialQueryService consumerCredentialQueryService) :
         ControllerBase
     {
-        [Route("all-specialties")]
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetAllSpecialties()
-        {
-            var specialties = await specialtyQueryService
-                .Handle(new GetAllSpecialtiesQuery());
-
-            var specialtiesResources = specialties
-                .Select(SpecialtyResourceFromEntityAssembler
-                .ToResourceFromEntity);
-
-            return Ok(specialtiesResources);
-        }
-
         [Route("login")]
         [HttpPost]
         [AllowAnonymous]
