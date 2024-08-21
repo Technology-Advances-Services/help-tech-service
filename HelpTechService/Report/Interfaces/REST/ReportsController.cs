@@ -64,6 +64,9 @@ namespace HelpTechService.Report.Interfaces.REST
                 .Handle(RegisterComplaintCommandFromResourceAssembler
                 .ToCommandFromResource(resource));
 
+            if (result is false)
+                return BadRequest();
+
             return Ok(result);
         }
 
