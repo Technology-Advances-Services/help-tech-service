@@ -3,5 +3,5 @@
 namespace HelpTechService.Attention.Domain.Model.Queries.Job
 {
     public record GetJobsByTechnicalIdAndStateQuery
-        (int TechnicalId, EJobState JobState);
+        (string TechnicalId, EJobState JobState);
 }

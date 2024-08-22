@@ -26,12 +26,14 @@ namespace HelpTechService.Attention.Domain.Model.Entities
             this.State = string.Empty;
         }
         public Review
-            (int technicalId, int consumerId,
+            (string technicalId, string consumerId,
             int score, string opinion,
             EReviewState reviewState)
         {
-            this.TechnicalsId = technicalId;
-            this.ConsumersId = consumerId;
+            this.TechnicalsId = int.Parse
+                (technicalId.TrimStart('0'));
+            this.ConsumersId = int.Parse
+                (consumerId.TrimStart('0'));
             this.ShippingDate = DateTime.Now;
             this.Score = score;
             this.Opinion = opinion;
@@ -40,8 +42,10 @@ namespace HelpTechService.Attention.Domain.Model.Entities
         public Review
             (AddReviewToJobCommand command)
         {
-            this.TechnicalsId = command.TechnicalId;
-            this.ConsumersId = command.ConsumerId;
+            this.TechnicalsId = int.Parse
+                (command.TechnicalId.TrimStart('0'));
+            this.ConsumersId = int.Parse
+                (command.ConsumerId.TrimStart('0'));
             this.ShippingDate = DateTime.Now;
             this.Score = command.Score;
             this.Opinion = command.Opinion;

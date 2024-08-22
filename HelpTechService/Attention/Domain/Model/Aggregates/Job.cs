@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using HelpTechService.Attention.Domain.Model.Commands.Job;
+﻿using HelpTechService.Attention.Domain.Model.Commands.Job;
 using HelpTechService.Attention.Domain.Model.Entities;
 using HelpTechService.Attention.Domain.Model.ValueObjects.Job;
 using HelpTechService.IAM.Domain.Model.Aggregates;
@@ -44,7 +43,7 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.State = string.Empty;
         }
         public Job
-            (int agendasId, int consumersId,
+            (int agendasId, string consumersId,
             DateTime? answerDate, DateTime? workDate,
             string address, string description,
             decimal? time, decimal? laborBudget,
@@ -52,7 +51,8 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             EJobState jobState)
         {
             this.AgendasId = agendasId;
-            this.ConsumersId = consumersId;
+            this.ConsumersId = int.Parse
+                (consumersId.TrimStart('0'));
             this.RegistrationDate = DateTime.Now;
             this.AnswerDate = answerDate;
             this.WorkDate = workDate;
@@ -63,22 +63,20 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.MaterialBudget = materialBudget;
             this.AmountFinal = laborBudget +
                 materialBudget;
-            this.State = Regex.Replace(jobState
-                .ToString(), "([A-Z])", " $1")
-                .Trim();
+            this.State = jobState == EJobState.ENPROCESO ?
+                "EN PROCESO" : jobState.ToString();
         }
         public Job
             (RegisterRequestJobCommand command)
         {
             this.AgendasId = command.AgendaId;
-            this.ConsumersId = command.ConsumerId;
+            this.ConsumersId = int.Parse
+                (command.ConsumerId.TrimStart('0'));
             this.RegistrationDate = DateTime.Now;
             this.Address = command.Address;
             this.Description = command.Description;
-            this.State = Regex.Replace
-                (command.JobState
-                .ToString(), "([A-Z])", " $1")
-                .Trim();
+            this.State = command.JobState == EJobState.ENPROCESO ?
+                "EN PROCESO" : command.JobState.ToString();
         }
         public Job
             (AssignJobDetailCommand command)
@@ -95,10 +93,8 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             (UpdateJobStateCommand command)
         {
             this.Id = command.Id;
-            this.State = Regex.Replace
-                (command.JobState
-                .ToString(), "([A-Z])", " $1")
-                .Trim();
+            this.State = command.JobState == EJobState.ENPROCESO ?
+                "EN PROCESO" : command.JobState.ToString();
         }
     }
 }

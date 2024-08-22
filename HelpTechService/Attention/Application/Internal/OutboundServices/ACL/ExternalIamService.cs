@@ -6,11 +6,11 @@ namespace HelpTechService.Attention.Application.Internal.OutboundServices.ACL
         (IIamContextFacade iamContextFacade)
     {
         public async Task<bool> ExistsTechnicalById
-            (int id) => await iamContextFacade
+            (string id) => await iamContextFacade
             .ExistsTechnicalById(id);
 
         public async Task<bool> ExistsConsumerById
-            (int id) => await iamContextFacade
+            (string id) => await iamContextFacade
             .ExistsConsumerById(id);
     }
 }

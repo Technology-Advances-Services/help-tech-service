@@ -37,7 +37,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [HttpGet]
         [Authorize("TECNICO", "CONSUMIDOR")]
         public async Task<IActionResult> GetReviewsByTechnicalId
-            ([FromQuery] int technicalId)
+            ([FromQuery] string technicalId)
         {
             var reviews = await reviewQueryService
                 .Handle(new GetReviewsByTechnicalIdQuery

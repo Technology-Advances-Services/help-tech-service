@@ -3,7 +3,7 @@
 namespace HelpTechService.Attention.Domain.Model.Commands.Review
 {
     public record AddReviewToJobCommand
-        (int TechnicalId, int ConsumerId,
+        (string TechnicalId, string ConsumerId,
         int Score, string Opinion,
         EReviewState ReviewState);
 }

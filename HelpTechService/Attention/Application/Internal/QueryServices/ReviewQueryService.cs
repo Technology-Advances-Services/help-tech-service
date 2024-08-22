@@ -13,6 +13,7 @@ namespace HelpTechService.Attention.Application.Internal.QueryServices
             (GetReviewsByTechnicalIdQuery query) =>
             await reviewRepository
             .FindByTechnicalIdAsync
-            (query.TechnicalId);
+            (int.Parse(query.TechnicalId
+                .Trim('0')));
     }
 }

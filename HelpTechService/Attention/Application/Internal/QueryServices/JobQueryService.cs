@@ -18,24 +18,26 @@ namespace HelpTechService.Attention.Application.Internal.QueryServices
             (GetJobsByTechnicalIdQuery query) =>
             await jobRepository
             .FindByTechnicalIdAsync
-            (query.TechnicalId);
+            (int.Parse(query.TechnicalId.Trim('0')));
 
         public async Task<IEnumerable<Job>> Handle
             (GetJobsByConsumerIdQuery query) =>
             await jobRepository
             .FindByConsumerIdAsync
-            (query.ConsumerId);
+            (int.Parse(query.ConsumerId.Trim('0')));
 
         public async Task<IEnumerable<Job>> Handle
             (GetJobsByTechnicalIdAndStateQuery query) =>
             await jobRepository
             .FindByTechnicalIdAndStateAsync
-            (query.TechnicalId, query.JobState);
+            (int.Parse(query.TechnicalId.Trim('0')),
+                query.JobState);
 
         public async Task<IEnumerable<Job>> Handle
             (GetJobsByConsumerIdAndStateQuery query) =>
             await jobRepository
             .FindByConsumerIdAndStateAsync
-            (query.ConsumerId, query.JobState);
+            (int.Parse(query.ConsumerId.Trim('0')),
+                query.JobState);
     }
 }

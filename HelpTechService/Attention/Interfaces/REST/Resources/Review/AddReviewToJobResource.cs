@@ -1,6 +1,6 @@
 ﻿namespace HelpTechService.Attention.Interfaces.REST.Resources.Review
 {
     public record AddReviewToJobResource
-        (int TechnicalId, int ConsumerId,
+        (string TechnicalId, string ConsumerId,
         int Score, string Opinion);
 }

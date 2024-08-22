@@ -88,7 +88,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [HttpGet]
         [Authorize("TECNICO")]
         public async Task<IActionResult> GetJobsByTechnicalId
-            ([FromQuery] int technicalId)
+            ([FromQuery] string technicalId)
         {
             var jobs = await jobQueryService
                 .Handle(new GetJobsByTechnicalIdQuery
@@ -105,7 +105,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [HttpGet]
         [Authorize("CONSUMIDOR")]
         public async Task<IActionResult> GetJobsByConsumerId
-            ([FromQuery] int consumerId)
+            ([FromQuery] string consumerId)
         {
             var jobs = await jobQueryService
                 .Handle(new GetJobsByConsumerIdQuery
@@ -122,7 +122,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [HttpGet]
         [Authorize("TECNICO")]
         public async Task<IActionResult> GetJobsByTechnicalIdAndState
-            ([FromQuery] int technicalId, [FromQuery] string state)
+            ([FromQuery] string technicalId, [FromQuery] string state)
         {
             if (!Enum.TryParse<EJobState>
                 (state, out var jobState))
@@ -143,7 +143,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [HttpGet]
         [Authorize("CONSUMIDOR")]
         public async Task<IActionResult> GetJobsByConsumerIdAndState
-            ([FromQuery] int consumerId, [FromQuery] string state)
+            ([FromQuery] string consumerId, [FromQuery] string state)
         {
             if (!Enum.TryParse<EJobState>
                 (state, out var jobState))

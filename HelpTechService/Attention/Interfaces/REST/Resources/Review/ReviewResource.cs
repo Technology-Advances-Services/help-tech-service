@@ -1,7 +1,7 @@
 ﻿namespace HelpTechService.Attention.Interfaces.REST.Resources.Review
 {
     public record ReviewResource
-        (int TechnicalId, int ConsumerId,
+        (string TechnicalId, string ConsumerId,
         int Score, string Opinion,
         string ReviewState);
 }

@@ -3,7 +3,7 @@
 namespace HelpTechService.Attention.Domain.Model.Commands.Job
 {
     public record RegisterRequestJobCommand
-        (int AgendaId, int ConsumerId,
+        (int AgendaId, string ConsumerId,
         string Address, string Description,
         EJobState JobState);
 }
