@@ -27,13 +27,12 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
         public async Task<bool> UpdateJobStateAsync
             (int id, EJobState jobState)
         {
-            var newState = jobState.ToString() ==
-                "ENPROCESO" ? "EN PROCESO" :
-                jobState.ToString();
+            var newJobState = jobState == EJobState.ENPROCESO ?
+                "EN PROCESO" : jobState.ToString();
 
             return await Context.Set<Job>().Where(j => j.Id == id)
                 .ExecuteUpdateAsync(j => j
-                .SetProperty(u => u.State, newState)) > 0;
+                .SetProperty(u => u.State, newJobState)) > 0;
         }
 
         public async Task<IEnumerable<Job>> FindByTechnicalIdAsync
@@ -62,9 +61,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
         public async Task<IEnumerable<Job>> FindByTechnicalIdAndStateAsync
             (int technicalId, EJobState jobState)
         {
-            var newState = jobState.ToString() ==
-                "ENPROCESO" ? "EN PROCESO" :
-                jobState.ToString();
+            var newJobState = jobState == EJobState.ENPROCESO ?
+                "EN PROCESO" : jobState.ToString();
 
             Task<IEnumerable<Job>> queryAsync = new(() =>
             {
@@ -72,7 +70,7 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                 [.. (from jo in Context.Set<Job>()
                 join ag in Context.Set<Agenda>()
                 on jo.AgendasId equals ag.Id
-                where jo.State == newState &&
+                where jo.State == newJobState &&
                 ag.TechnicalsId == technicalId
                 select jo)];
             });
@@ -85,13 +83,12 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
         public async Task<IEnumerable<Job>> FindByConsumerIdAndStateAsync
             (int consumerId, EJobState jobState)
         {
-            var newState = jobState.ToString() ==
-                "ENPROCESO" ? "EN PROCESO" :
-                jobState.ToString();
+            var newJobState = jobState == EJobState.ENPROCESO ?
+                "EN PROCESO" : jobState.ToString();
 
             return await Context.Set<Job>()
                 .Where(j => j.ConsumersId == consumerId &&
-                j.State == newState).ToListAsync();
+                j.State == newJobState).ToListAsync();
         }
     }
 }
