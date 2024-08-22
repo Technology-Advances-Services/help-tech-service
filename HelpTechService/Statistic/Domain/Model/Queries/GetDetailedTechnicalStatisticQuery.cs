@@ -3,5 +3,5 @@
 namespace HelpTechService.Statistic.Domain.Model.Queries
 {
     public record GetDetailedTechnicalStatisticQuery
-        (int TechnicalId, ETypeStatistic TypeStatistic);
+        (string TechnicalId, ETypeStatistic TypeStatistic);
 }

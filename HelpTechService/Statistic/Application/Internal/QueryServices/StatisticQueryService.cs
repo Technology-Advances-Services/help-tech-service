@@ -12,18 +12,19 @@ namespace HelpTechService.Statistic.Application.Internal.QueryServices
             (GetGeneralTechnicalStatisticQuery query) =>
             await statisticRepository
             .GeneralTechnicalStatisticAsync
-            (query.TechnicalId);
+            (int.Parse(query.TechnicalId.TrimStart('0')));
 
         public async Task<dynamic?> Handle
             (GetDetailedTechnicalStatisticQuery query) =>
             await statisticRepository
             .DetailedTechnicalStatisticAsync
-            (query.TechnicalId, query.TypeStatistic);
+            (int.Parse(query.TechnicalId.TrimStart('0')),
+                query.TypeStatistic);
 
         public async Task<dynamic?> Handle
             (GetReviewStatisticQuery query) =>
             await statisticRepository
             .ReviewStatisticAsync
-            (query.TechnicalId);
+            (int.Parse(query.TechnicalId.TrimStart('0')));
     }
 }
