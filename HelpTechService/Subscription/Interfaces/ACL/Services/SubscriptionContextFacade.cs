@@ -8,13 +8,13 @@ namespace HelpTechService.Subscription.Interfaces.ACL.Services
         ISubscriptionContextFacade
     {
         public async Task<bool> CurrentContractByTechnicalId
-            (int technicalId) =>
+            (string technicalId) =>
             await contractQueryService.Handle
             (new GetContractByTechnicalIdQuery
                 (technicalId)) != null;
 
         public async Task<bool> CurrentContractByConsumerId
-            (int consumerId) =>
+            (string consumerId) =>
             await contractQueryService.Handle
             (new GetContractByConsumerIdQuery
                 (consumerId)) != null;

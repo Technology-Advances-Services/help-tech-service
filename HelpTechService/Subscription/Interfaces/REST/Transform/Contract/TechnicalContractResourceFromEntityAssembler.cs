@@ -6,8 +6,8 @@ namespace HelpTechService.Subscription.Interfaces.REST.Transform.Contract
     {
         public static TechnicalContractResource ToResourceFromEntity
             (Domain.Model.Aggregates.Contract entity) =>
-            new(entity.Id, entity.MembershipsId, Convert.ToInt32
-                (entity.TechnicalsId.ToString()),
+            new(entity.Id, entity.MembershipsId, 
+                entity.TechnicalsId.ToString() ?? string.Empty,
                 entity.StartDate, entity.FinalDate);
     }
 }

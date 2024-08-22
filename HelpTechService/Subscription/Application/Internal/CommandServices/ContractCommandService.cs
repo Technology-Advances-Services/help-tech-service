@@ -19,19 +19,17 @@ namespace HelpTechService.Subscription.Application.Internal.CommandServices
             {
                 bool result = false;
 
-                if (int.TryParse(command
-                    .TechnicalId.ToString(),
-                    out int technicalId))
+                if (!string.IsNullOrEmpty
+                    (command.TechnicalId))
                     result = await externalIamService
                         .ExistsTechnicalById
-                        (technicalId);
+                        (command.TechnicalId);
 
-                else if (int.TryParse(command
-                    .ConsumerId.ToString(),
-                    out int consumerId))
+                else if (!string.IsNullOrEmpty
+                    (command.ConsumerId))
                     result = await externalIamService
                         .ExistsConsumerById
-                        (consumerId);
+                        (command.ConsumerId);
 
                 if (result is false)
                     return false;

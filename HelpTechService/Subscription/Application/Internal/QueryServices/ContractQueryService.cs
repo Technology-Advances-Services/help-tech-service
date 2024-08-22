@@ -13,12 +13,14 @@ namespace HelpTechService.Subscription.Application.Internal.QueryServices
             (GetContractByTechnicalIdQuery query) =>
             await contractRepository
             .FindByTechnicalIdAsync
-            (query.TechnicalId);
+            (int.Parse(query.TechnicalId
+                .TrimStart('0')));
 
         public async Task<Contract?> Handle
             (GetContractByConsumerIdQuery query) =>
             await contractRepository
             .FindByConsumerIdAsync
-            (query.ConsumerId);
+            (int.Parse(query.ConsumerId
+                .TrimStart('0')));
     }
 }

@@ -3,9 +3,9 @@
     public interface ISubscriptionContextFacade
     {
         Task<bool> CurrentContractByTechnicalId
-            (int technicalId);
+            (string technicalId);
 
         Task<bool> CurrentContractByConsumerId
-            (int consumerId);
+            (string consumerId);
     }
 }

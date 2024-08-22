@@ -63,7 +63,7 @@ namespace HelpTechService.Subscription.Interfaces.REST
         [HttpGet]
         [Authorize("TECNICO")]
         public async Task<IActionResult> GetContractByTechnicalId
-            ([FromQuery] int technicalId)
+            ([FromQuery] string technicalId)
         {
             var contract = await contractQueryService
                 .Handle(new GetContractByTechnicalIdQuery
@@ -82,7 +82,7 @@ namespace HelpTechService.Subscription.Interfaces.REST
         [HttpGet]
         [Authorize("CONSUMIDOR")]
         public async Task<IActionResult> GetContractByConsumerId
-            ([FromQuery] int consumerId)
+            ([FromQuery] string consumerId)
         {
             var contract = await contractQueryService
                 .Handle(new GetContractByConsumerIdQuery

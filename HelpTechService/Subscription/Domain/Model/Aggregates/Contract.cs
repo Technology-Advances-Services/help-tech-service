@@ -25,12 +25,16 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.ConsumersId = null;
         }
         public Contract
-            (int membershipId, int? technicalId,
-            int? consumerId, EContractState contractState)
+            (int membershipId, string? technicalId,
+            string? consumerId, EContractState contractState)
         {
             this.MembershipsId = membershipId;
-            this.TechnicalsId = technicalId;
-            this.ConsumersId = consumerId;
+            this.TechnicalsId = int.TryParse
+                (technicalId, out int technicalsId) != false ?
+                int.Parse(technicalsId.ToString().TrimStart('0')) : null;
+            this.ConsumersId = int.TryParse
+                (consumerId, out int consumersId) != false ?
+                int.Parse(consumersId.ToString().TrimStart('0')) : null;
             this.StartDate = DateTime.UtcNow;
             this.FinalDate = DateTime.UtcNow.AddMonths(6);
             this.State = contractState.ToString();
@@ -39,8 +43,13 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             (CreateContractCommand command)
         {
             this.MembershipsId = command.MembershipId;
-            this.TechnicalsId = command.TechnicalId;
-            this.ConsumersId = command.ConsumerId;
+
+            this.TechnicalsId = int.TryParse
+                (command.TechnicalId, out int technicalsId) != false ?
+                int.Parse(technicalsId.ToString().TrimStart('0')) : null;
+            this.ConsumersId = int.TryParse
+                (command.ConsumerId, out int consumersId) != false ?
+                int.Parse(consumersId.ToString().TrimStart('0')) : null;
             this.StartDate = DateTime.UtcNow;
             this.FinalDate = DateTime.UtcNow.AddMonths(6);
             this.State = command.ContractState.ToString();
