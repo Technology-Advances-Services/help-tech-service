@@ -21,16 +21,14 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
                 query.ConsumerId.Length > 8)
                 return null;
 
-            var consumerId = int.Parse(query
-                .ConsumerId.TrimStart('0'));
-
             var result = await consumerCredentialRepository
-                .FindByConsumerIdAsync(consumerId);
+                .FindByConsumerIdAsync(int.Parse(query
+                .ConsumerId.TrimStart('0')));
 
             if (string.IsNullOrEmpty(result) ||
                 await externalSubscriptionService
                 .CurrentContractByConsumerId
-                (consumerId) is false)
+                (query.ConsumerId) is false)
                 return null;
 
             if (!encryptionService.VerifyHash

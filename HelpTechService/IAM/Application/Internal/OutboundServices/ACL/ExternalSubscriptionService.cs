@@ -6,13 +6,13 @@ namespace HelpTechService.IAM.Application.Internal.OutboundServices.ACL
         (ISubscriptionContextFacade subscriptionContextFacade)
     {
         public async Task<bool> CurrentContractByTechnicalId
-            (int technicalId) =>
+            (string technicalId) =>
             await subscriptionContextFacade
             .CurrentContractByTechnicalId
             (technicalId);
 
         public async Task<bool> CurrentContractByConsumerId
-            (int consumerId) =>
+            (string consumerId) =>
             await subscriptionContextFacade
             .CurrentContractByConsumerId
             (consumerId);

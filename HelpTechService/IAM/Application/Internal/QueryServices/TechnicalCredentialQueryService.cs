@@ -21,16 +21,14 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
                 query.TechnicalId.Length > 8)
                 return null;
 
-            var technicalId = int.Parse(query
-                .TechnicalId.TrimStart('0'));
-
             var result = await technicalCredentialRepository
-                .FindByTechnicalIdAsync(technicalId);
+                .FindByTechnicalIdAsync(int.Parse(query
+                .TechnicalId.TrimStart('0')));
 
             if (string.IsNullOrEmpty(result) ||
                 await externalSubscriptionService
                 .CurrentContractByTechnicalId
-                (technicalId) is false)
+                (query.TechnicalId) is false)
                 return null;
 
             if (!encryptionService.VerifyHash

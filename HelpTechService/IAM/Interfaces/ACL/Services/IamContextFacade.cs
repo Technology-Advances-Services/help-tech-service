@@ -11,12 +11,12 @@ namespace HelpTechService.IAM.Interfaces.ACL.Services
         IIamContextFacade
     {
         public async Task<bool> ExistsTechnicalById
-            (int id) =>
+            (string id) =>
             await technicalQueryService.Handle
             (new GetTechnicalByIdQuery(id)) != null;
 
         public async Task<bool> ExistsConsumerById
-            (int id) =>
+            (string id) =>
             await consumerQueryService.Handle
             (new GetConsumerByIdQuery(id)) != null;
     }

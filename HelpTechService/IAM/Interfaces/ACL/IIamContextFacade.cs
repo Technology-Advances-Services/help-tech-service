@@ -3,9 +3,9 @@
     public interface IIamContextFacade
     {
         Task<bool> ExistsTechnicalById
-            (int id);
+            (string id);
 
         Task<bool> ExistsConsumerById
-            (int id);
+            (string id);
     }
 }
