@@ -17,16 +17,21 @@ namespace HelpTechService.Interaction.Application.Internal.CommandServices
         {
             try
             {
-                if (await externalIamService
-                    .ExistsTechnicalById
-                    (Convert.ToInt32(command
-                    .TechnicalId.ToString()))
-                    is false &&
-                    await externalIamService
-                    .ExistsConsumerById
-                    (Convert.ToInt32(command
-                    .ConsumerId.ToString()))
-                    is false)
+                bool result = false;
+
+                if (!string.IsNullOrEmpty
+                    (command.TechnicalId))
+                    result = await externalIamService
+                        .ExistsTechnicalById
+                        (command.TechnicalId);
+
+                else if (!string.IsNullOrEmpty
+                    (command.ConsumerId))
+                    result = await externalIamService
+                        .ExistsConsumerById
+                        (command.ConsumerId);
+
+                if (result is false)
                     return false;
 
                 await chatRepository

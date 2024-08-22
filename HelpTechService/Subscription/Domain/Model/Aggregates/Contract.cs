@@ -43,7 +43,6 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             (CreateContractCommand command)
         {
             this.MembershipsId = command.MembershipId;
-
             this.TechnicalsId = int.TryParse
                 (command.TechnicalId, out int technicalsId) != false ?
                 int.Parse(technicalsId.ToString().TrimStart('0')) : null;

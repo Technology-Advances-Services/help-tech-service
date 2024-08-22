@@ -13,12 +13,14 @@ namespace HelpTechService.Interaction.Application.Internal.QueryServices
             (GetChatMembersByTechnicalIdQuery query) =>
             await chatMemberRepository
             .FindByTechnicalIdAsync
-            (query.TechnicalId);
+            (int.Parse(query.TechnicalId
+                .TrimStart('0')));
 
         public async Task<IEnumerable<ChatMember>> Handle
             (GetChatMembersByConsumerIdQuery query) =>
             await chatMemberRepository
             .FindByConsumerIdAsync
-            (query.ConsumerId);
+            (int.Parse(query.ConsumerId
+                .TrimStart('0')));
     }
 }

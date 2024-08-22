@@ -25,22 +25,30 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
             this.Message = string.Empty;
         }
         public Chat
-            (int chatRoomId, int? technicalId,
-            int? consumerId, string message)
+            (int chatRoomId, string? technicalId,
+            string? consumerId, string message)
         {
             this.ChatsRoomsId = chatRoomId;
-            this.TechnicalsId = technicalId;
-            this.ConsumersId = consumerId;
-            this.ShippingDate = DateTime.UtcNow;
+            this.TechnicalsId = int.TryParse
+                (technicalId, out int technicalsId) != false ?
+                int.Parse(technicalsId.ToString().TrimStart('0')) : null;
+            this.ConsumersId = int.TryParse
+                (consumerId, out int consumersId) != false ?
+                int.Parse(consumersId.ToString().TrimStart('0')) : null;
+            this.ShippingDate = DateTime.Now;
             this.Message = message;
         }
         public Chat
             (SendMessageCommand command)
         {
             this.ChatsRoomsId = command.ChatRoomId;
-            this.TechnicalsId = command.TechnicalId;
-            this.ConsumersId = command.ConsumerId;
-            this.ShippingDate = DateTime.UtcNow;
+            this.TechnicalsId = int.TryParse
+                (command.TechnicalId, out int technicalsId) != false ?
+                int.Parse(technicalsId.ToString().TrimStart('0')) : null;
+            this.ConsumersId = int.TryParse
+                (command.ConsumerId, out int consumersId) != false ?
+                int.Parse(consumersId.ToString().TrimStart('0')) : null;
+            this.ShippingDate = DateTime.Now;
             this.Message = command.Message;
         }
     }

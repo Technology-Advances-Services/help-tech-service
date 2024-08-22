@@ -1,7 +1,7 @@
 ﻿namespace HelpTechService.Interaction.Interfaces.REST.Resources.Chat
 {
     public record ChatResource
-        (int ChatRoomId, int? TechnicalId,
-        int? ConsumerId, DateTime ShippingDate,
+        (int ChatRoomId, string? TechnicalId,
+        string? ConsumerId, DateTime ShippingDate,
         string Message);
 }
