@@ -22,14 +22,14 @@ namespace HelpTechService.Interaction.Interfaces.REST
         public async Task<IActionResult> SendMessage
             ([FromBody] SendMessageResource resource)
         {
-            var chat = await chatCommandService
+            var result = await chatCommandService
                 .Handle(SendMessageCommandFromResourceAssembler
                 .ToCommandFromResource(resource));
 
-            if (chat is false)
+            if (result is false)
                 return BadRequest();
 
-            return Ok(chat);
+            return Ok(result);
         }
 
         [Route("chats-by-chat-room")]

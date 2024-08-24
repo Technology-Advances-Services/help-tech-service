@@ -8,6 +8,7 @@ namespace HelpTechService.IAM.Interfaces.REST.Transform.ConsumerCredential
             (Domain.Model.Entities.ConsumerCredential entity) =>
             new(entity.ConsumersId.ToString().Length == 8 ?
                 entity.ConsumersId.ToString() : "0" +
-                entity.ConsumersId.ToString(), entity.Code);
+                entity.ConsumersId.ToString(),
+                entity.Code);
     }
 }

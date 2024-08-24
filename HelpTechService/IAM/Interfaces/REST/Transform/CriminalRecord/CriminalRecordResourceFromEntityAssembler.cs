@@ -8,6 +8,7 @@ namespace HelpTechService.IAM.Interfaces.REST.Transform.CriminalRecord
             (Domain.Model.Entities.CriminalRecord entity) =>
             new(entity.TechnicalsId.ToString().Length == 8 ?
                 entity.TechnicalsId.ToString() : "0" +
-                entity.TechnicalsId.ToString(), entity.FileUrl);
+                entity.TechnicalsId.ToString(),
+                entity.FileUrl);
     }
 }

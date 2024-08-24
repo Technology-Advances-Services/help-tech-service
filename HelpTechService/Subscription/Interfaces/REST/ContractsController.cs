@@ -23,9 +23,11 @@ namespace HelpTechService.Subscription.Interfaces.REST
         public async Task<IActionResult> CreateTechnicalContract
             ([FromBody] CreateTechnicalContractResource resource)
         {
-            if (await contractQueryService
+            var contract = await contractQueryService
                 .Handle(new GetContractByTechnicalIdQuery
-                (resource.TechnicalId)) is not null)
+                (resource.TechnicalId));
+
+            if (contract is null)
                 return BadRequest();
 
             var result = await contractCommandService
@@ -44,9 +46,11 @@ namespace HelpTechService.Subscription.Interfaces.REST
         public async Task<IActionResult> CreateConsumerContract
             ([FromBody] CreateConsumerContractResource resource)
         {
-            if (await contractQueryService
-                .Handle(new GetContractByConsumerIdQuery
-                (resource.ConsumerId)) is not null)
+            var contract = await contractQueryService
+                .Handle(new GetContractByTechnicalIdQuery
+                (resource.ConsumerId));
+
+            if (contract is null)
                 return BadRequest();
 
             var result = await contractCommandService

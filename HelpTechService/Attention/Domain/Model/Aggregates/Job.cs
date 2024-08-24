@@ -43,7 +43,7 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.State = string.Empty;
         }
         public Job
-            (int agendasId, string consumersId,
+            (int agendasId, string consumerId,
             DateTime? answerDate, DateTime? workDate,
             string address, string description,
             decimal? time, decimal? laborBudget,
@@ -51,8 +51,9 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             EJobState jobState)
         {
             this.AgendasId = agendasId;
-            this.ConsumersId = int.Parse
-                (consumersId.TrimStart('0'));
+            this.ConsumersId = int.TryParse
+                (consumerId, out int consumersId) != false ?
+                int.Parse(consumersId.ToString().TrimStart('0')) : 0;
             this.RegistrationDate = DateTime.Now;
             this.AnswerDate = answerDate;
             this.WorkDate = workDate;
@@ -70,8 +71,9 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             (RegisterRequestJobCommand command)
         {
             this.AgendasId = command.AgendaId;
-            this.ConsumersId = int.Parse
-                (command.ConsumerId.TrimStart('0'));
+            this.ConsumersId = int.TryParse
+                (command.ConsumerId, out int consumersId) != false ?
+                int.Parse(consumersId.ToString().TrimStart('0')) : 0;
             this.RegistrationDate = DateTime.Now;
             this.Address = command.Address;
             this.Description = command.Description;

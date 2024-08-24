@@ -35,8 +35,8 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
-            this.StartDate = DateTime.UtcNow;
-            this.FinalDate = DateTime.UtcNow.AddMonths(6);
+            this.StartDate = DateTime.Now;
+            this.FinalDate = DateTime.Now.AddMonths(6);
             this.State = contractState.ToString();
         }
         public Contract
@@ -49,8 +49,8 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (command.ConsumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
-            this.StartDate = DateTime.UtcNow;
-            this.FinalDate = DateTime.UtcNow.AddMonths(6);
+            this.StartDate = DateTime.Now;
+            this.FinalDate = DateTime.Now.AddMonths(6);
             this.State = command.ContractState.ToString();
         }
     }

@@ -49,7 +49,9 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
             string genre, int phone, string email,
             EConsumerState consumerState)
         {
-            this.Id = int.Parse(id.TrimStart('0'));
+            this.Id = int.TryParse
+                (id, out int consumerId) != false ?
+                int.Parse(consumerId.ToString().TrimStart('0')) : 0;
             this.DistrictsId = districtId;
             this.ProfileUrl = profileUrl;
             this.Firstname = firstname.ToUpper();
@@ -64,8 +66,9 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
         public Consumer
             (RegisterConsumerCommand command)
         {
-            this.Id = int.Parse
-                (command.Id.TrimStart('0'));
+            this.Id = int.TryParse
+                (command.Id, out int consumerId) != false ?
+                int.Parse(consumerId.ToString().TrimStart('0')) : 0;
             this.DistrictsId = command.DistrictId;
             this.ProfileUrl = command.ProfileUrl;
             this.Firstname = command.Firstname.ToUpper();

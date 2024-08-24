@@ -7,7 +7,13 @@ namespace HelpTechService.Subscription.Interfaces.REST.Transform.Contract
         public static ConsumerContractResource ToResourceFromEntity
             (Domain.Model.Aggregates.Contract entity) =>
             new(entity.Id, entity.MembershipsId,
-                entity.ConsumersId.ToString() ?? string.Empty,
+
+                entity.ConsumersId.HasValue &&
+                entity.ConsumersId.Value.ToString().Length == 8 ?
+                entity.ConsumersId.Value.ToString() :
+                entity.ConsumersId.HasValue ? "0" +
+                entity.ConsumersId.Value.ToString() : string.Empty,
+
                 entity.StartDate, entity.FinalDate);
     }
 }

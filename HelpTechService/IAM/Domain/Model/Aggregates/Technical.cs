@@ -56,8 +56,9 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
             ETechnicalAvailability technicalAvailability,
             ETechnicalState technicalState)
         {
-            this.Id = int.Parse
-                (id.TrimStart('0'));
+            this.Id = int.TryParse
+                (id, out int technicalId) != false ?
+                int.Parse(technicalId.ToString().TrimStart('0')) : 0;
             this.SpecialtiesId = specialtyId;
             this.DistrictsId = districtId;
             this.ProfileUrl = profileUrl;
@@ -75,8 +76,9 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
         public Technical
             (RegisterTechnicalCommand command)
         {
-            this.Id = int.Parse
-                (command.Id.TrimStart('0'));
+            this.Id = int.TryParse
+                (command.Id, out int technicalId) != false ?
+                int.Parse(technicalId.ToString().TrimStart('0')) : 0;
             this.SpecialtiesId = command.SpecialtyId;
             this.DistrictsId = command.DistrictId;
             this.ProfileUrl = command.ProfileUrl;

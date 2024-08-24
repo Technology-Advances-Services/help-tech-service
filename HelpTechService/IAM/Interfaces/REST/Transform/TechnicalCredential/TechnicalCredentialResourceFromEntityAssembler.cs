@@ -8,6 +8,7 @@ namespace HelpTechService.IAM.Interfaces.REST.Transform.TechnicalCredential
             (Domain.Model.Entities.TechnicalCredential entity) =>
             new(entity.TechnicalsId.ToString().Length == 8 ?
                 entity.TechnicalsId.ToString() : "0" +
-                entity.TechnicalsId.ToString(), entity.Code);
+                entity.TechnicalsId.ToString(),
+                entity.Code);
     }
 }

@@ -96,11 +96,11 @@ namespace HelpTechService.IAM.Interfaces.REST
         public async Task<IActionResult> AddCriminalRecordToTechnical
             ([FromBody] AddCriminalRecordToTechnicalResource resource)
         {
-            var validation = await technicalQueryService
+            var technical = await technicalQueryService
                 .Handle(new GetTechnicalByIdQuery
                 (resource.TechnicalId));
 
-            if (validation is null)
+            if (technical is null)
                 return BadRequest();
 
             var result = await criminalRecordCommandService
