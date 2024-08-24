@@ -13,7 +13,7 @@ namespace HelpTechService.IAM.Interfaces.REST
     [Route("api/informations/")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
-    [Authorize]
+    [Authorize("TECNICO", "CONSUMIDOR")]
     public class InformationsController
         (ITechnicalQueryService technicalQueryService,
         IConsumerQueryService consumerQueryService) :
@@ -21,7 +21,6 @@ namespace HelpTechService.IAM.Interfaces.REST
     {
         [Route("technical-by-id")]
         [HttpGet]
-        [Authorize("TECNICO", "CONSUMIDOR")]
         public async Task<IActionResult> GetTechnicalById
             ([FromQuery] string id)
         {
@@ -39,7 +38,6 @@ namespace HelpTechService.IAM.Interfaces.REST
 
         [Route("consumer-by-id")]
         [HttpGet]
-        [Authorize("CONSUMIDOR")]
         public async Task<IActionResult> GetConsumerById
             ([FromQuery] string id)
         {
