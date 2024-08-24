@@ -23,6 +23,9 @@ namespace HelpTechService.Attention.Interfaces.REST
         public async Task<IActionResult> AddReviewToJob
             ([FromBody] AddReviewToJobResource resource)
         {
+            if (resource.Score < 0 || resource.Score > 5)
+                return BadRequest();
+
             var result = await reviewCommandService
                 .Handle(AddReviewToJobCommandFromResourceAssembler
                 .ToCommandFromResource(resource));
