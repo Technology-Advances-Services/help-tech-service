@@ -69,7 +69,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [Route("job-by-id")]
         [HttpGet]
         [Authorize("TECNICO", "CONSUMIDOR")]
-        public async Task<IActionResult> GetJobById
+        public async Task<IActionResult> JobById
             ([FromQuery] int id)
         {
             var job = await jobQueryService
@@ -87,7 +87,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [Route("jobs-by-technical")]
         [HttpGet]
         [Authorize("TECNICO")]
-        public async Task<IActionResult> GetJobsByTechnicalId
+        public async Task<IActionResult> JobsByTechnicalId
             ([FromQuery] string technicalId)
         {
             var jobs = await jobQueryService
@@ -104,7 +104,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [Route("jobs-by-consumer")]
         [HttpGet]
         [Authorize("CONSUMIDOR")]
-        public async Task<IActionResult> GetJobsByConsumerId
+        public async Task<IActionResult> JobsByConsumerId
             ([FromQuery] string consumerId)
         {
             var jobs = await jobQueryService
@@ -121,7 +121,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [Route("jobs-by-technical-and-state")]
         [HttpGet]
         [Authorize("TECNICO")]
-        public async Task<IActionResult> GetJobsByTechnicalIdAndState
+        public async Task<IActionResult> JobsByTechnicalIdAndState
             ([FromQuery] string technicalId, [FromQuery] string state)
         {
             if (!Enum.TryParse<EJobState>
@@ -142,7 +142,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [Route("jobs-by-consumer-and-state")]
         [HttpGet]
         [Authorize("CONSUMIDOR")]
-        public async Task<IActionResult> GetJobsByConsumerIdAndState
+        public async Task<IActionResult> JobsByConsumerIdAndState
             ([FromQuery] string consumerId, [FromQuery] string state)
         {
             if (!Enum.TryParse<EJobState>
