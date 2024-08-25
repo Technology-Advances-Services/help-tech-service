@@ -22,7 +22,7 @@ namespace HelpTechService.Location.Interfaces.REST
         [Route("all-departments")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllDepartments()
+        public async Task<IActionResult> AllDepartments()
         {
             var deparments = await departmentQueryService
                 .Handle(new GetAllDepartmentsQuery());
@@ -37,7 +37,7 @@ namespace HelpTechService.Location.Interfaces.REST
         [Route("department-by-id")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetDepartmentById
+        public async Task<IActionResult> DepartmentById
             ([FromQuery] int id)
         {
             var department = await departmentQueryService
@@ -55,7 +55,7 @@ namespace HelpTechService.Location.Interfaces.REST
         [Route("districts-by-department")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetDistrictsByDepartmentId
+        public async Task<IActionResult> DistrictsByDepartmentId
             ([FromQuery] int departmentId)
         {
             var districts = await districtQueryService

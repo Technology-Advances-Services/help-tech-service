@@ -17,7 +17,7 @@ namespace HelpTechService.Interaction.Interfaces.REST
     {
         [Route("chats-members-by-technical")]
         [HttpGet]
-        public async Task<IActionResult> GetChatsMembersByTechnicalId
+        public async Task<IActionResult> ChatsMembersByTechnicalId
             ([FromQuery] string technicalId)
         {
             var chatsMembers = await chatMemberQueryService
@@ -33,7 +33,7 @@ namespace HelpTechService.Interaction.Interfaces.REST
 
         [Route("chats-members-by-consumer")]
         [HttpGet]
-        public async Task<IActionResult> GetChatsMembersByConsumerId
+        public async Task<IActionResult> ChatsMembersByConsumerId
             ([FromQuery] string consumerId)
         {
             var chatsMembers = await chatMemberQueryService

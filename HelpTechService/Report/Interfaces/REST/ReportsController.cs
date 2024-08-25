@@ -25,7 +25,7 @@ namespace HelpTechService.Report.Interfaces.REST
         [Route("all-types-complaints")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllTypesComplaints()
+        public async Task<IActionResult> AllTypesComplaints()
         {
             var typesComplaints = await typeComplaintQueryService
                 .Handle(new GetAllTypesComplaintsQuery());
@@ -40,7 +40,7 @@ namespace HelpTechService.Report.Interfaces.REST
         [Route("type-complaint-by-id")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetTypeComplaintById
+        public async Task<IActionResult> TypeComplaintById
             ([FromQuery] int id)
         {
             var typeComplaint = await typeComplaintQueryService
@@ -72,7 +72,7 @@ namespace HelpTechService.Report.Interfaces.REST
 
         [Route("complaint-by-job-and-sender")]
         [HttpGet]
-        public async Task<IActionResult> GetComplaintByJobIdAndSender
+        public async Task<IActionResult> ComplaintByJobIdAndSender
             ([FromQuery] int jobId, [FromQuery] string sender)
         {
             var complaint = await complaintQueryService
@@ -90,7 +90,7 @@ namespace HelpTechService.Report.Interfaces.REST
 
         [Route("complaint-by-job-and-sender-and-state")]
         [HttpGet]
-        public async Task<IActionResult> GetComplaintByJobIdAndSenderAndState
+        public async Task<IActionResult> ComplaintByJobIdAndSenderAndState
             ([FromQuery] int jobId, [FromQuery] string sender,
             [FromQuery] string complaintState)
         {

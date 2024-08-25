@@ -17,7 +17,7 @@ namespace HelpTechService.Statistic.Interfaces.REST
     {
         [Route("general-technical-statistic")]
         [HttpGet]
-        public async Task<IActionResult> GetGeneralTechnicalStatistic
+        public async Task<IActionResult> GeneralTechnicalStatistic
             ([FromQuery] string technicalId)
         {
             var result = await statisticQueryService
@@ -29,7 +29,7 @@ namespace HelpTechService.Statistic.Interfaces.REST
 
         [Route("detailed-technical-statistic")]
         [HttpGet]
-        public async Task<IActionResult> GetDetailedTechnicalStatistic
+        public async Task<IActionResult> DetailedTechnicalStatistic
             ([FromQuery] string technicalId, [FromQuery] string typeStatistic)
         {
             var result = await statisticQueryService
@@ -42,7 +42,7 @@ namespace HelpTechService.Statistic.Interfaces.REST
 
         [Route("review-statistic")]
         [HttpGet]
-        public async Task<IActionResult> GetReviewStatistic
+        public async Task<IActionResult> ReviewStatistic
             ([FromQuery] string technicalId)
         {
             var result = await statisticQueryService

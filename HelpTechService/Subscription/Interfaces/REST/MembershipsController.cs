@@ -18,7 +18,7 @@ namespace HelpTechService.Subscription.Interfaces.REST
         [Route("all-memberships")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllMemberships()
+        public async Task<IActionResult> AllMemberships()
         {
             var memberships = await membershipQueryService
                 .Handle(new GetAllMembershipsQuery());
@@ -33,7 +33,7 @@ namespace HelpTechService.Subscription.Interfaces.REST
         [Route("membership-by-id")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetMembershipById
+        public async Task<IActionResult> MembershipById
             ([FromQuery] int id)
         {
             var membership = await membershipQueryService

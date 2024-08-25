@@ -18,7 +18,7 @@ namespace HelpTechService.IAM.Interfaces.REST
         [Route("all-specialties")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllSpecialties()
+        public async Task<IActionResult> AllSpecialties()
         {
             var specialties = await specialtyQueryService
                 .Handle(new GetAllSpecialtiesQuery());

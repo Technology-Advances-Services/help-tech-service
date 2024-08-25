@@ -42,10 +42,11 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             {
                 return
                 [.. (from jo in Context.Set<Job>()
-                join ag in Context.Set<Agenda>()
-                on jo.AgendasId equals ag.Id
-                where ag.TechnicalsId == technicalId
-                select jo)];
+                     join ag in Context.Set<Agenda>()
+                     on jo.AgendasId equals ag.Id
+                     where ag.TechnicalsId == technicalId
+                     select jo)
+                ];
             });
 
             queryAsync.Start();
@@ -68,11 +69,12 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             {
                 return
                 [.. (from jo in Context.Set<Job>()
-                join ag in Context.Set<Agenda>()
-                on jo.AgendasId equals ag.Id
-                where jo.State == newJobState &&
-                ag.TechnicalsId == technicalId
-                select jo)];
+                     join ag in Context.Set<Agenda>()
+                     on jo.AgendasId equals ag.Id
+                     where jo.State == newJobState &&
+                     ag.TechnicalsId == technicalId
+                     select jo)
+                ];
             });
 
             queryAsync.Start();

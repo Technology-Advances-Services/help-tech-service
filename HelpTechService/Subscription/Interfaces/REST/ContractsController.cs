@@ -66,7 +66,7 @@ namespace HelpTechService.Subscription.Interfaces.REST
         [Route("contract-by-technical")]
         [HttpGet]
         [Authorize("TECNICO")]
-        public async Task<IActionResult> GetContractByTechnicalId
+        public async Task<IActionResult> ContractByTechnicalId
             ([FromQuery] string technicalId)
         {
             var contract = await contractQueryService
@@ -85,7 +85,7 @@ namespace HelpTechService.Subscription.Interfaces.REST
         [Route("contract-by-consumer")]
         [HttpGet]
         [Authorize("CONSUMIDOR")]
-        public async Task<IActionResult> GetContractByConsumerId
+        public async Task<IActionResult> ContractByConsumerId
             ([FromQuery] string consumerId)
         {
             var contract = await contractQueryService

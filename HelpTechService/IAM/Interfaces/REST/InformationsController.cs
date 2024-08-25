@@ -21,7 +21,7 @@ namespace HelpTechService.IAM.Interfaces.REST
     {
         [Route("technical-by-id")]
         [HttpGet]
-        public async Task<IActionResult> GetTechnicalById
+        public async Task<IActionResult> TechnicalById
             ([FromQuery] string id)
         {
             var technical = await technicalQueryService
@@ -38,7 +38,7 @@ namespace HelpTechService.IAM.Interfaces.REST
 
         [Route("consumer-by-id")]
         [HttpGet]
-        public async Task<IActionResult> GetConsumerById
+        public async Task<IActionResult> ConsumerById
             ([FromQuery] string id)
         {
             var consumer = await consumerQueryService
