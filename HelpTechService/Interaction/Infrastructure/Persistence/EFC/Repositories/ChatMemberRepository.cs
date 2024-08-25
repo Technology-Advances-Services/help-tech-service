@@ -1,4 +1,5 @@
-﻿using HelpTechService.Interaction.Domain.Model.Aggregates;
+﻿using Microsoft.EntityFrameworkCore;
+using HelpTechService.Interaction.Domain.Model.Aggregates;
 using HelpTechService.Interaction.Domain.Model.Entities;
 using HelpTechService.Interaction.Domain.Model.ValueObjects;
 using HelpTechService.Interaction.Domain.Repositories;
@@ -12,6 +13,12 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
         BaseRepository<ChatMember>(context),
         IChatMemberRepository
     {
+        public async Task<ChatMember?> FindByChatRoomIdAsync
+            (int chatRoomId) => await Context.Set<ChatMember>()
+            .Where(c => c.ChatsRoomsId == chatRoomId)
+            .FirstOrDefaultAsync();
+
+
         public async Task<IEnumerable<ChatMember>> FindByTechnicalIdAsync
             (int technicalId)
         {

@@ -9,6 +9,12 @@ namespace HelpTechService.Interaction.Application.Internal.QueryServices
         (IChatMemberRepository chatMemberRepository) :
         IChatMemberQueryService
     {
+        public async Task<ChatMember?> Handle
+            (GetChatMemberByChatRoomIdQuery query) =>
+            await chatMemberRepository
+            .FindByChatRoomIdAsync
+            (query.ChatRoomId);
+
         public async Task<IEnumerable<ChatMember>> Handle
             (GetChatMembersByTechnicalIdQuery query) =>
             await chatMemberRepository

@@ -72,7 +72,7 @@ namespace HelpTechService.Report.Interfaces.REST
 
         [Route("complaint-by-job-and-sender")]
         [HttpGet]
-        public async Task<IActionResult> ComplaintByJobIdAndSender
+        public async Task<IActionResult> ComplaintByJobAndSender
             ([FromQuery] int jobId, [FromQuery] string sender)
         {
             var complaint = await complaintQueryService
@@ -90,7 +90,7 @@ namespace HelpTechService.Report.Interfaces.REST
 
         [Route("complaint-by-job-and-sender-and-state")]
         [HttpGet]
-        public async Task<IActionResult> ComplaintByJobIdAndSenderAndState
+        public async Task<IActionResult> ComplaintByJobAndSenderAndState
             ([FromQuery] int jobId, [FromQuery] string sender,
             [FromQuery] string complaintState)
         {

@@ -34,7 +34,7 @@ namespace HelpTechService.Interaction.Interfaces.REST
 
         [Route("chats-by-chat-room")]
         [HttpGet]
-        public async Task<IActionResult> ChatByChatRoomId
+        public async Task<IActionResult> ChatByChatRoom
             ([FromQuery] int chatRoomId)
         {
             var chats = await chatQueryService

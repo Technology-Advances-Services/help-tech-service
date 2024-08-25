@@ -55,7 +55,7 @@ namespace HelpTechService.Location.Interfaces.REST
         [Route("districts-by-department")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> DistrictsByDepartmentId
+        public async Task<IActionResult> DistrictsByDepartment
             ([FromQuery] int departmentId)
         {
             var districts = await districtQueryService

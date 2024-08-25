@@ -39,7 +39,7 @@ namespace HelpTechService.Attention.Interfaces.REST
         [Route("reviews-by-technical")]
         [HttpGet]
         [Authorize("TECNICO", "CONSUMIDOR")]
-        public async Task<IActionResult> ReviewsByTechnicalId
+        public async Task<IActionResult> ReviewsByTechnical
             ([FromQuery] string technicalId)
         {
             var reviews = await reviewQueryService

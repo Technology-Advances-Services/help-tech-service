@@ -15,9 +15,27 @@ namespace HelpTechService.Interaction.Interfaces.REST
         (IChatMemberQueryService chatMemberQueryService) :
         ControllerBase
     {
+        [Route("chat-member-by-chat-room")]
+        [HttpGet]
+        public async Task<IActionResult> ChatMemberByChatRoom
+            ([FromQuery] int chatRoomId)
+        {
+            var chatMember = await chatMemberQueryService
+                .Handle(new GetChatMemberByChatRoomIdQuery
+                (chatRoomId));
+
+            if (chatMember is null)
+                return BadRequest();
+
+            var chatMemberResource = ChatMemberResourceFromEntityAssembler
+                .ToResourceFromEntity(chatMember);
+
+            return Ok(chatMemberResource);
+        }
+
         [Route("chats-members-by-technical")]
         [HttpGet]
-        public async Task<IActionResult> ChatsMembersByTechnicalId
+        public async Task<IActionResult> ChatsMembersByTechnical
             ([FromQuery] string technicalId)
         {
             var chatsMembers = await chatMemberQueryService
@@ -33,7 +51,7 @@ namespace HelpTechService.Interaction.Interfaces.REST
 
         [Route("chats-members-by-consumer")]
         [HttpGet]
-        public async Task<IActionResult> ChatsMembersByConsumerId
+        public async Task<IActionResult> ChatsMembersByConsumer
             ([FromQuery] string consumerId)
         {
             var chatsMembers = await chatMemberQueryService
