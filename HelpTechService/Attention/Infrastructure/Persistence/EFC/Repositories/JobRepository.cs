@@ -18,10 +18,12 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             decimal laborBudget, decimal materialBudget) =>
             await Context.Set<Job>().Where(j => j.Id == id)
             .ExecuteUpdateAsync(j => j
+            .SetProperty(u => u.AnswerDate, DateTime.Now)
             .SetProperty(u => u.WorkDate, workDate)
             .SetProperty(u => u.Time, time)
             .SetProperty(u => u.LaborBudget, laborBudget)
-            .SetProperty(u => u.MaterialBudget, materialBudget))
+            .SetProperty(u => u.MaterialBudget, materialBudget)
+            .SetProperty(u => u.AmountFinal, laborBudget + materialBudget))
             > 0;
 
         public async Task<bool> UpdateJobStateAsync
