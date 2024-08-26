@@ -12,7 +12,7 @@ namespace HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Attributes
         public AuthorizeAttribute
             (params string[] roles)
         {
-            ListRoles = roles ?? Array.Empty<string>();
+            ListRoles = roles ?? [];
         }
 
         public void OnAuthorization

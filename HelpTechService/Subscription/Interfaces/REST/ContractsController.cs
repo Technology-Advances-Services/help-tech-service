@@ -27,7 +27,7 @@ namespace HelpTechService.Subscription.Interfaces.REST
                 .Handle(new GetContractByTechnicalIdQuery
                 (resource.TechnicalId));
 
-            if (contract is null)
+            if (contract is not null)
                 return BadRequest();
 
             var result = await contractCommandService
@@ -47,10 +47,10 @@ namespace HelpTechService.Subscription.Interfaces.REST
             ([FromBody] CreateConsumerContractResource resource)
         {
             var contract = await contractQueryService
-                .Handle(new GetContractByTechnicalIdQuery
+                .Handle(new GetContractByConsumerIdQuery
                 (resource.ConsumerId));
 
-            if (contract is null)
+            if (contract is not null)
                 return BadRequest();
 
             var result = await contractCommandService
