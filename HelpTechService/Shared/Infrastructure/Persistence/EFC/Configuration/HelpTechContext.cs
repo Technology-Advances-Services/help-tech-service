@@ -116,7 +116,11 @@ namespace HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration
             {
                 entity.HasKey(e => e.Id).HasName("pk_complaint_id");
 
-                entity.ToTable("complaints");
+                entity.ToTable("complaints", tb =>
+                {
+                    tb.HasTrigger("tg_update_consumer_state");
+                    tb.HasTrigger("tg_update_technical_state");
+                });
 
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Description)
@@ -299,7 +303,7 @@ namespace HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration
             {
                 entity.HasKey(e => e.Id).HasName("pk_job_id");
 
-                entity.ToTable("jobs");
+                entity.ToTable("jobs", tb => tb.HasTrigger("tg_register_data_chats_rooms"));
 
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Address)
@@ -417,7 +421,7 @@ namespace HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration
             {
                 entity.HasKey(e => e.Id).HasName("pk_technical_id");
 
-                entity.ToTable("technicals");
+                entity.ToTable("technicals", tb => tb.HasTrigger("tg_register_data_agendas"));
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
