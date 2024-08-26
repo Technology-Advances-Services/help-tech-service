@@ -10,13 +10,14 @@ namespace HelpTechService.Interaction.Interfaces.REST
     [Route("api/chatsmembers")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
-    [Authorize("TECNICO", "CONSUMIDOR")]
+    [Authorize]
     public class ChatsMembersController
         (IChatMemberQueryService chatMemberQueryService) :
         ControllerBase
     {
         [Route("chat-member-by-chat-room")]
         [HttpGet]
+        [Authorize("TECNICO", "CONSUMIDOR")]
         public async Task<IActionResult> ChatMemberByChatRoom
             ([FromQuery] int chatRoomId)
         {
@@ -35,6 +36,7 @@ namespace HelpTechService.Interaction.Interfaces.REST
 
         [Route("chats-members-by-technical")]
         [HttpGet]
+        [Authorize("TECNICO")]
         public async Task<IActionResult> ChatsMembersByTechnical
             ([FromQuery] string technicalId)
         {
@@ -51,6 +53,7 @@ namespace HelpTechService.Interaction.Interfaces.REST
 
         [Route("chats-members-by-consumer")]
         [HttpGet]
+        [Authorize("CONSUMIDOR")]
         public async Task<IActionResult> ChatsMembersByConsumer
             ([FromQuery] string consumerId)
         {
