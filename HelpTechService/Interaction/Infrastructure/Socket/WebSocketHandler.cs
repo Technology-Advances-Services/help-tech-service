@@ -7,7 +7,7 @@ namespace HelpTechService.Interaction.Infrastructure.Socket
     public class WebSocketHandler
     {
         private static readonly ConcurrentDictionary
-            <string, List<WebSocket>> Rooms = new();
+            <string, List<WebSocket>> _rooms = new();
 
         public async Task HandleWebSocketAsync
             (HttpContext context)
@@ -28,7 +28,7 @@ namespace HelpTechService.Interaction.Infrastructure.Socket
                     return;
                 }
 
-                Rooms.AddOrUpdate(room, [webSocket], (key, oldValue) =>
+                _rooms.AddOrUpdate(room, [webSocket], (key, oldValue) =>
                 {
                     oldValue.Add(webSocket);
 
@@ -37,7 +37,7 @@ namespace HelpTechService.Interaction.Infrastructure.Socket
 
                 await ReceiveMessages(webSocket, room);
 
-                Rooms[room].Remove(webSocket);
+                _rooms[room].Remove(webSocket);
 
                 await webSocket.CloseAsync(WebSocketCloseStatus
                     .NormalClosure, "Closed by the WebSocketHandler",
@@ -74,7 +74,7 @@ namespace HelpTechService.Interaction.Infrastructure.Socket
         {
             var messageBuffer = Encoding.UTF8.GetBytes(message);
 
-            if (Rooms.TryGetValue(room, out var sockets))
+            if (_rooms.TryGetValue(room, out var sockets))
                 foreach (var socket in sockets)
                     if (socket != senderWebSocket &&
                         socket.State == WebSocketState.Open)
