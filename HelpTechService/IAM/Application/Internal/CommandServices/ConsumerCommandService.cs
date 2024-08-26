@@ -19,6 +19,23 @@ namespace HelpTechService.IAM.Application.Internal.CommandServices
         {
             try
             {
+                if (command.Age < 18 ||
+                    command.Age > 70)
+                    return false;
+
+                if (command.Genre.Equals
+                    ("MASCULINO", StringComparison
+                    .CurrentCultureIgnoreCase) is false ||
+                    command.Genre.Equals
+                    ("FEMENINO", StringComparison
+                    .CurrentCultureIgnoreCase) is false)
+                    return false;
+
+                if (command.Phone.ToString()
+                    .Length < 9 || command.Phone
+                    .ToString().Length > 9)
+                    return false;
+
                 if (await externalLocationService
                     .ExistsDistrictById
                     (command.DistrictId)
