@@ -23,12 +23,12 @@ namespace HelpTechService.IAM.Application.Internal.CommandServices
                     command.Age > 70)
                     return false;
 
-                if (command.Genre.Equals
+                if (!command.Genre.Equals
                     ("MASCULINO", StringComparison
-                    .CurrentCultureIgnoreCase) is false ||
-                    command.Genre.Equals
+                    .CurrentCultureIgnoreCase) &&
+                    !command.Genre.Equals
                     ("FEMENINO", StringComparison
-                    .CurrentCultureIgnoreCase) is false)
+                    .CurrentCultureIgnoreCase))
                     return false;
 
                 if (command.Phone.ToString()
