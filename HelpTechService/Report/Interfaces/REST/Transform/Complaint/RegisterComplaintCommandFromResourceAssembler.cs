@@ -10,7 +10,6 @@ namespace HelpTechService.Report.Interfaces.REST.Transform.Complaint
             (RegisterComplaintResource resource) =>
             new(resource.TypeComplaintId, resource.JobId,
                 Enum.Parse<EComplaintSender>(resource.Sender),
-                resource.Description, Enum.Parse<EComplaintState>
-                (resource.ComplaintState));
+                resource.Description, EComplaintState.ENTREGADO);
     }
 }

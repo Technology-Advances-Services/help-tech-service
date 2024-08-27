@@ -2,6 +2,5 @@
 {
     public record RegisterComplaintResource
         (int TypeComplaintId, int JobId,
-        string Sender, string Description,
-        string ComplaintState);
+        string Sender, string Description);
 }

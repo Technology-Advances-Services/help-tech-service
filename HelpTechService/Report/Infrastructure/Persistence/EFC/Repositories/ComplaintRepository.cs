@@ -16,7 +16,7 @@ namespace HelpTechService.Report.Infrastructure.Persistence.EFC.Repositories
             (int jobId, EComplaintSender complaintSender) =>
             await Context.Set<Complaint>()
             .Where(c => c.JobsId == jobId &&
-            c.State == complaintSender.ToString())
+            c.Sender == complaintSender.ToString())
             .FirstOrDefaultAsync();
 
         public async Task<Complaint?> FindByJobIdAndSenderAndState
