@@ -18,45 +18,22 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
             .Where(c => c.ChatsRoomsId == chatRoomId)
             .FirstOrDefaultAsync();
 
-
         public async Task<IEnumerable<ChatMember>> FindByTechnicalIdAsync
-            (int technicalId)
-        {
-            Task<IEnumerable<ChatMember>> queryAsync = new(() =>
-            {
-                return
-                [.. (from cm in Context.Set<ChatMember>()
-                     join cr in Context.Set<ChatRoom>()
-                     on cm.ChatsRoomsId equals cr.Id
-                     where cm.TechnicalsId == technicalId &&
-                     cr.State == EChatRoomState.ACTIVO.ToString()
-                     select cm)
-                ];
-            });
-
-            queryAsync.Start();
-
-            return await queryAsync;
-        }
+            (int technicalId) =>
+            await (from cm in Context.Set<ChatMember>()
+                   join cr in Context.Set<ChatRoom>()
+                   on cm.ChatsRoomsId equals cr.Id
+                   where cm.TechnicalsId == technicalId &&
+                   cr.State == EChatRoomState.ACTIVO.ToString()
+                   select cm).ToListAsync();
 
         public async Task<IEnumerable<ChatMember>> FindByConsumerIdAsync
-            (int consumerId)
-        {
-            Task<IEnumerable<ChatMember>> queryAsync = new(() =>
-            {
-                return
-                [.. (from cm in Context.Set<ChatMember>()
-                     join cr in Context.Set<ChatRoom>()
-                     on cm.ChatsRoomsId equals cr.Id
-                     where cm.ConsumersId == consumerId &&
-                     cr.State == EChatRoomState.ACTIVO.ToString()
-                     select cm)
-                ];
-            });
-
-            queryAsync.Start();
-
-            return await queryAsync;
-        }
+            (int consumerId) =>
+            await (from cm in Context.Set<ChatMember>()
+                   join cr in Context.Set<ChatRoom>()
+                   on cm.ChatsRoomsId equals cr.Id
+                   where cm.ConsumersId == consumerId &&
+                   cr.State == EChatRoomState.ACTIVO.ToString()
+                   select cm).ToListAsync();
     }
 }
