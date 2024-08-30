@@ -38,23 +38,12 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
         }
 
         public async Task<IEnumerable<Job>> FindByTechnicalIdAsync
-            (int technicalId)
-        {
-            Task<IEnumerable<Job>> queryAsync = new(() =>
-            {
-                return
-                [.. (from jo in Context.Set<Job>()
-                     join ag in Context.Set<Agenda>()
-                     on jo.AgendasId equals ag.Id
-                     where ag.TechnicalsId == technicalId
-                     select jo)
-                ];
-            });
-
-            queryAsync.Start();
-
-            return await queryAsync;
-        }
+            (int technicalId) =>
+            await (from jo in Context.Set<Job>()
+                   join ag in Context.Set<Agenda>()
+                   on jo.AgendasId equals ag.Id
+                   where ag.TechnicalsId == technicalId
+                   select jo).ToListAsync();
 
         public async Task<IEnumerable<Job>> FindByConsumerIdAsync
             (int consumerId) => await Context.Set<Job>()
@@ -67,21 +56,15 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             var newJobState = jobState == EJobState.ENPROCESO ?
                 "EN PROCESO" : jobState.ToString();
 
-            Task<IEnumerable<Job>> queryAsync = new(() =>
-            {
-                return
-                [.. (from jo in Context.Set<Job>()
-                     join ag in Context.Set<Agenda>()
-                     on jo.AgendasId equals ag.Id
-                     where jo.State == newJobState &&
-                     ag.TechnicalsId == technicalId
-                     select jo)
-                ];
-            });
+            var result = await
+                (from jo in Context.Set<Job>()
+                 join ag in Context.Set<Agenda>()
+                 on jo.AgendasId equals ag.Id
+                 where jo.State == newJobState &&
+                 ag.TechnicalsId == technicalId
+                 select jo).ToListAsync();
 
-            queryAsync.Start();
-
-            return await queryAsync;
+            return result;
         }
 
         public async Task<IEnumerable<Job>> FindByConsumerIdAndStateAsync

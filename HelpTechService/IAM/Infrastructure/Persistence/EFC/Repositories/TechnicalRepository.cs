@@ -15,12 +15,12 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
     {
         public async Task<IEnumerable<Technical>> FindByAvailabilityAsync
             (ETechnicalAvailability technicalAvailability) =>
-                await (from te in Context.Set<Technical>()
-                       join co in Context.Set<Contract>()
-                       on te.Id equals co.TechnicalsId
-                       where te.Availability == technicalAvailability.ToString() &&
-                       te.State == "ACTIVO" &&
-                       co.State == "VIGENTE"
-                       select te).ToListAsync();
+            await (from te in Context.Set<Technical>()
+                   join co in Context.Set<Contract>()
+                   on te.Id equals co.TechnicalsId
+                   where te.Availability == technicalAvailability.ToString() &&
+                   te.State == "ACTIVO" &&
+                   co.State == "VIGENTE"
+                   select te).ToListAsync();
     }
 }
