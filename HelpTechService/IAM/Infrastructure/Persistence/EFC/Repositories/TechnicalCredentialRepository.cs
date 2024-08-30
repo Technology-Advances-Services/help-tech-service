@@ -1,4 +1,5 @@
-﻿using HelpTechService.IAM.Domain.Model.Aggregates;
+﻿using Microsoft.EntityFrameworkCore;
+using HelpTechService.IAM.Domain.Model.Aggregates;
 using HelpTechService.IAM.Domain.Model.Entities;
 using HelpTechService.IAM.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -14,24 +15,14 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
         public async Task<string?> FindByTechnicalIdAsync
             (int technicalId)
         {
-            Task<TechnicalCredential?> queryAsync = new(() =>
-            {
-                return
+            var result = await
                 (from tc in Context.Set<TechnicalCredential>()
                  join te in Context.Set<Technical>()
                  on tc.TechnicalsId equals technicalId
                  where te.State == "ACTIVO"
-                 select tc).FirstOrDefault();
-            });
+                 select tc).FirstOrDefaultAsync();
 
-            queryAsync.Start();
-
-            var result = await queryAsync;
-
-            if (result is null)
-                return null;
-
-            return result.Code;
+            return result?.Code;
         }
     }
 }
