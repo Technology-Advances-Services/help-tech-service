@@ -4,6 +4,7 @@ using HelpTechService.IAM.Domain.Model.Queries.Consumer;
 using HelpTechService.IAM.Domain.Model.Queries.Technical;
 using HelpTechService.IAM.Domain.Services.Consumer;
 using HelpTechService.IAM.Domain.Services.Technical;
+using HelpTechService.IAM.Domain.Model.ValueObjects.Technical;
 using HelpTechService.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using HelpTechService.IAM.Interfaces.REST.Transform.Technical;
 using HelpTechService.IAM.Interfaces.REST.Transform.Consumer;
@@ -24,7 +25,19 @@ namespace HelpTechService.IAM.Interfaces.REST
         public async Task<IActionResult> TechnicalsByAvailability
             (string availability)
         {
-            return Ok();
+            if (!Enum.TryParse<ETechnicalAvailability>
+                (availability, out var technicalAvailability))
+                return BadRequest();
+
+            var technicals = await technicalQueryService
+                .Handle(new GetTechnicalsByAvailabilityQuery
+                (technicalAvailability));
+
+            var technicalsResource = technicals.Select
+                (TechnicalResourceFromEntityAssembler
+                .ToResourceFromEntity);
+
+            return Ok(technicalsResource);
         }
 
         [Route("technical-by-id")]
