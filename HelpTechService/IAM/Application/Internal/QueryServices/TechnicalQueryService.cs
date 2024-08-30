@@ -14,5 +14,10 @@ namespace HelpTechService.IAM.Application.Internal.QueryServices
             await technicalRepository
             .FindByIdAsync(int.Parse(query
                 .Id.TrimStart('0')));
+
+        public async Task<IEnumerable<Technical>> Handle
+            (GetTechnicalsByAvailabilityQuery query) =>
+            await technicalRepository.FindByAvailabilityAsync
+            (query.TechnicalAvailability);
     }
 }

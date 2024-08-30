@@ -7,7 +7,7 @@ namespace HelpTechService.IAM.Domain.Repositories
     public interface ITechnicalRepository :
         IBaseRepository<Technical>
     {
-        Task<IEnumerable<Technical>> FindByAvailability
+        Task<IEnumerable<Technical>> FindByAvailabilityAsync
             (ETechnicalAvailability technicalAvailability);
     }
 }
