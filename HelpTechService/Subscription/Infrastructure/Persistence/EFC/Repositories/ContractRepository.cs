@@ -42,21 +42,14 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
             await UpdateAutomaticContractStateAsync
                 (technicalId, "TECNICO");
 
-            Task<Contract?> queryAsync = new(() =>
-            {
-                return
+            return await
                 (from co in Context.Set<Contract>()
                  join te in Context.Set<Technical>()
                  on co.TechnicalsId equals te.Id
                  where co.State == EContractState.VIGENTE.ToString() &&
                  te.Id == technicalId &&
                  te.State == "ACTIVO"
-                 select co).FirstOrDefault();
-            });
-
-            queryAsync.Start();
-
-            return await queryAsync;
+                 select co).FirstOrDefaultAsync();
         }
 
         public async Task<Contract?> FindByConsumerIdAsync
@@ -65,21 +58,14 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
             await UpdateAutomaticContractStateAsync
                 (consumerId, "CONSUMIDOR");
 
-            Task<Contract?> queryAsync = new(() =>
-            {
-                return
+            return await
                 (from ct in Context.Set<Contract>()
                  join cr in Context.Set<Consumer>()
                  on ct.ConsumersId equals cr.Id
                  where ct.State == EContractState.VIGENTE.ToString() &&
                  cr.Id == consumerId &&
                  cr.State == "ACTIVO"
-                 select ct).FirstOrDefault();
-            });
-
-            queryAsync.Start();
-
-            return await queryAsync;
+                 select ct).FirstOrDefaultAsync();
         }
     }
 }
