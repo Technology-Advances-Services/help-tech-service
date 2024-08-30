@@ -5,5 +5,6 @@
         DateTime? AnswerDate, DateTime? WorkDate,
         string Address, string Description,
         decimal? Time, decimal? LaborBudget,
-        decimal? MaterialBudget, string JobState);
+        decimal? MaterialBudget, decimal? AmountFinal,
+        string JobState);
 }

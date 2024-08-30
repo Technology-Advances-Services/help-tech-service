@@ -10,8 +10,10 @@ namespace HelpTechService.Attention.Interfaces.REST.Transform.Job
                 entity.ConsumersId.ToString().Length == 8 ?
                 entity.ConsumersId.ToString() : "0" +
                 entity.ConsumersId.ToString(),
-                entity.AnswerDate, entity.WorkDate, entity.Address,
-                entity.Description, entity.Time, entity.LaborBudget,
-                entity.MaterialBudget, entity.State);
+                entity.AnswerDate, entity.WorkDate,
+                entity.Address, entity.Description,
+                entity.Time, entity.LaborBudget,
+                entity.MaterialBudget, entity.AmountFinal,
+                entity.State);
     }
 }
