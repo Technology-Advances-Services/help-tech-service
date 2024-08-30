@@ -19,6 +19,14 @@ namespace HelpTechService.IAM.Interfaces.REST
         IConsumerQueryService consumerQueryService) :
         ControllerBase
     {
+        [Route("technicals-by-availability")]
+        [HttpGet]
+        public async Task<IActionResult> TechnicalsByAvailability
+            (string availability)
+        {
+            return Ok();
+        }
+
         [Route("technical-by-id")]
         [HttpGet]
         public async Task<IActionResult> TechnicalById

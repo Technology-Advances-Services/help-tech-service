@@ -6,5 +6,8 @@ namespace HelpTechService.IAM.Domain.Services.Technical
     {
         Task<Model.Aggregates.Technical?> Handle
             (GetTechnicalByIdQuery query);
+
+        Task<IEnumerable<Model.Aggregates.Technical>> Handle
+            (GetTechnicalsByAvailabilityQuery query);
     }
 }
