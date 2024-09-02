@@ -32,10 +32,13 @@ namespace HelpTechService.Statistic.Interfaces.REST
         public async Task<IActionResult> DetailedTechnicalStatistic
             ([FromQuery] string technicalId, [FromQuery] string typeStatistic)
         {
+            if (!Enum.TryParse<ETypeStatistic>
+                (typeStatistic, out var type))
+                return BadRequest();
+
             var result = await statisticQueryService
                 .Handle(new GetDetailedTechnicalStatisticQuery
-                (technicalId, Enum.Parse<ETypeStatistic>
-                (typeStatistic)));
+                (technicalId, type));
 
             return Ok(result);
         }
