@@ -21,6 +21,8 @@ using HelpTechService.IAM.Interfaces.REST.Transform.ConsumerCredential;
 using HelpTechService.IAM.Interfaces.REST.Transform.CriminalRecord;
 using HelpTechService.IAM.Interfaces.REST.Transform.Technical;
 using HelpTechService.IAM.Interfaces.REST.Transform.TechnicalCredential;
+using HelpTechService.IAM.Domain.Model.Commands.TechnicalCredential;
+using HelpTechService.IAM.Domain.Model.Commands.ConsumerCredential;
 
 namespace HelpTechService.IAM.Interfaces.REST
 {
@@ -51,15 +53,20 @@ namespace HelpTechService.IAM.Interfaces.REST
 
             dynamic? result;
 
-            if (role == ECredentialRole.TECNICO)
+            result = role switch
+            {
+                ECredentialRole.TECNICO =>
                 result = await technicalCredentialQueryService
-                    .Handle(new GetTechnicalCredentialByTechnicalIdAndCodeQuery
-                    (resource.Username, resource.Password));
+                .Handle(new GetTechnicalCredentialByTechnicalIdAndCodeQuery
+                (resource.Username, resource.Password)),
 
-            else if (role == ECredentialRole.CONSUMIDOR)
+                ECredentialRole.CONSUMIDOR =>
                 result = await consumerCredentialQueryService
-                    .Handle(new GetConsumerCredentialByConsumerIdAndCodeQuery
-                    (resource.Username, resource.Password));
+                .Handle(new GetConsumerCredentialByConsumerIdAndCodeQuery
+                (resource.Username, resource.Password)),
+
+                _ => null
+            };
 
             else return Unauthorized();
 
@@ -151,8 +158,16 @@ namespace HelpTechService.IAM.Interfaces.REST
 
             result = role switch
             {
-                ECredentialRole.TECNICO => "",
-                ECredentialRole.CONSUMIDOR => "",
+                ECredentialRole.TECNICO =>
+                await technicalCredentialCommandService
+                .Handle(new UpdateTechnicalCredentialCommand
+                (resource.Username,resource.Code)),
+
+                ECredentialRole.CONSUMIDOR =>
+                await consumerCredentialCommandService
+                .Handle(new UpdateConsumerCredentialCommand
+                (resource.Username, resource.Code)),
+
                 _ => null
             };
 
