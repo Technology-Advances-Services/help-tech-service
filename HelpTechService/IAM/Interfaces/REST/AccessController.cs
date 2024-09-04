@@ -21,8 +21,6 @@ using HelpTechService.IAM.Interfaces.REST.Transform.ConsumerCredential;
 using HelpTechService.IAM.Interfaces.REST.Transform.CriminalRecord;
 using HelpTechService.IAM.Interfaces.REST.Transform.Technical;
 using HelpTechService.IAM.Interfaces.REST.Transform.TechnicalCredential;
-using HelpTechService.IAM.Domain.Model.Commands.TechnicalCredential;
-using HelpTechService.IAM.Domain.Model.Commands.ConsumerCredential;
 
 namespace HelpTechService.IAM.Interfaces.REST
 {
@@ -56,19 +54,17 @@ namespace HelpTechService.IAM.Interfaces.REST
             result = role switch
             {
                 ECredentialRole.TECNICO =>
-                result = await technicalCredentialQueryService
+                await technicalCredentialQueryService
                 .Handle(new GetTechnicalCredentialByTechnicalIdAndCodeQuery
                 (resource.Username, resource.Password)),
 
                 ECredentialRole.CONSUMIDOR =>
-                result = await consumerCredentialQueryService
+                await consumerCredentialQueryService
                 .Handle(new GetConsumerCredentialByConsumerIdAndCodeQuery
                 (resource.Username, resource.Password)),
 
                 _ => null
             };
-
-            else return Unauthorized();
 
             if (result is null)
                 return BadRequest();
@@ -144,11 +140,11 @@ namespace HelpTechService.IAM.Interfaces.REST
             return Ok(result);
         }
 
-        [Route("recovery-password")]
+        [Route("update-credential")]
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> RecoveryPassword
-            ([FromBody] RecoveryPasswordResource resource)
+        public async Task<IActionResult> UpdateCredential
+            ([FromBody] UpdateCredentialResource resource)
         {
             if (!Enum.TryParse<ECredentialRole>
                 (resource.Role, out var role))
@@ -160,13 +156,13 @@ namespace HelpTechService.IAM.Interfaces.REST
             {
                 ECredentialRole.TECNICO =>
                 await technicalCredentialCommandService
-                .Handle(new UpdateTechnicalCredentialCommand
-                (resource.Username,resource.Code)),
+                .Handle(UpdateTechnicalCredentialCommandFromResourceAssembler
+                .ToCommandFromResource(resource)),
 
                 ECredentialRole.CONSUMIDOR =>
                 await consumerCredentialCommandService
-                .Handle(new UpdateConsumerCredentialCommand
-                (resource.Username, resource.Code)),
+                .Handle(UpdateConsumerCredentialCommandFromResourceAssembler
+                .ToCommandFromResource(resource)),
 
                 _ => null
             };
