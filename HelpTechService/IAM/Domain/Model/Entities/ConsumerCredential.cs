@@ -29,5 +29,13 @@ namespace HelpTechService.IAM.Domain.Model.Entities
                 (command.ConsumerId.TrimStart('0'));
             this.Code = command.Code;
         }
+
+        public ConsumerCredential
+            (UpdateConsumerCredentialCommand command)
+        {
+            this.ConsumersId = int.Parse
+                (command.ConsumerId.TrimStart('0'));
+            this.Code = command.Code;
+        }
     }
 }

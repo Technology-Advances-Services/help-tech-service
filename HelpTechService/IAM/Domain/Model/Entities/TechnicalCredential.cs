@@ -29,5 +29,13 @@ namespace HelpTechService.IAM.Domain.Model.Entities
                 (command.TechnicalId.TrimStart('0'));
             this.Code = command.Code;
         }
+
+        public TechnicalCredential
+            (UpdateTechnicalCredentialCommand command)
+        {
+            this.TechnicalsId = int.Parse
+                (command.TechnicalId.TrimStart('0'));
+            this.Code = command.Code;
+        }
     }
 }

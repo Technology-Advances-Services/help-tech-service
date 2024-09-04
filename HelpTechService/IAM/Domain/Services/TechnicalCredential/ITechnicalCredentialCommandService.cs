@@ -6,5 +6,8 @@ namespace HelpTechService.IAM.Domain.Services.TechnicalCredential
     {
         Task<bool> Handle
             (AddTechnicalCredentialCommand command);
+
+        Task<bool> Handle
+            (UpdateTechnicalCredentialCommand command);
     }
 }
