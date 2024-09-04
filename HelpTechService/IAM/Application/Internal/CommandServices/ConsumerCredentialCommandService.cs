@@ -40,8 +40,16 @@ namespace HelpTechService.IAM.Application.Internal.CommandServices
         {
             try
             {
+                var salt = encryptionService
+                    .CreateSalt();
+
+                var code = encryptionService
+                    .HashCode(command.Code, salt);
+
                 consumerCredentialRepository
-                    .Update(new(command));
+                    .Update(new(command
+                    .ConsumerId, string.Concat
+                    (salt, code)));
 
                 await unitOfWork.CompleteAsync();
 
