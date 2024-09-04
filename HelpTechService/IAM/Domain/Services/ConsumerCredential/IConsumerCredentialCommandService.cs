@@ -6,5 +6,8 @@ namespace HelpTechService.IAM.Domain.Services.ConsumerCredential
     {
         Task<bool> Handle
             (AddConsumerCredentialCommand command);
+
+        Task<bool> Handle
+            (UpdateConsumerCredentialCommand command);
     }
 }
