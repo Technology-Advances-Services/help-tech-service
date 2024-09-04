@@ -46,12 +46,12 @@ namespace HelpTechService.IAM.Interfaces.REST
             ([FromBody] UserResource resource)
         {
             if (!Enum.TryParse<ECredentialRole>
-                (resource.Role, out var role))
+                (resource.Role, out var credentialRole))
                 return Unauthorized();
 
             dynamic? result;
 
-            result = role switch
+            result = credentialRole switch
             {
                 ECredentialRole.TECNICO =>
                 await technicalCredentialQueryService
@@ -147,12 +147,12 @@ namespace HelpTechService.IAM.Interfaces.REST
             ([FromBody] UpdateCredentialResource resource)
         {
             if (!Enum.TryParse<ECredentialRole>
-                (resource.Role, out var role))
+                (resource.Role, out var credentialRole))
                 return Unauthorized();
 
             dynamic? result;
 
-            result = role switch
+            result = credentialRole switch
             {
                 ECredentialRole.TECNICO =>
                 await technicalCredentialCommandService
