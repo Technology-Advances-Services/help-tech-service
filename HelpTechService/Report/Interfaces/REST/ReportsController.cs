@@ -75,9 +75,13 @@ namespace HelpTechService.Report.Interfaces.REST
         public async Task<IActionResult> ComplaintByJobAndSender
             ([FromQuery] int jobId, [FromQuery] string sender)
         {
+            if(!Enum.TryParse<EComplaintSender>
+                (sender, out var complaintSender))
+                return BadRequest();
+
             var complaint = await complaintQueryService
                 .Handle(new GetComplaintsByJobIdAndSenderQuery
-                (jobId, Enum.Parse<EComplaintSender>(sender)));
+                (jobId, complaintSender));
 
             if (complaint is null)
                 return BadRequest();
@@ -92,12 +96,17 @@ namespace HelpTechService.Report.Interfaces.REST
         [HttpGet]
         public async Task<IActionResult> ComplaintByJobAndSenderAndState
             ([FromQuery] int jobId, [FromQuery] string sender,
-            [FromQuery] string complaintState)
+            [FromQuery] string state)
         {
+            if (!Enum.TryParse<EComplaintSender>
+                (sender, out var complaintSender) ||
+                !Enum.TryParse<EComplaintState>
+                (state, out var complaintState))
+                return BadRequest();
+
             var complaint = await complaintQueryService
                 .Handle(new GetComplaintsByJobIdAndSenderAndStateQuery
-                (jobId, Enum.Parse<EComplaintSender>(sender),
-                Enum.Parse<EComplaintState>(complaintState)));
+                (jobId, complaintSender, complaintState));
 
             if (complaint is null)
                 return BadRequest();
