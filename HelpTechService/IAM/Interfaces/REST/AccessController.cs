@@ -136,5 +136,30 @@ namespace HelpTechService.IAM.Interfaces.REST
 
             return Ok(result);
         }
+
+        [Route("recovery-password")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> RecoveryPassword
+            ([FromBody] RecoveryPasswordResource resource)
+        {
+            if (!Enum.TryParse<ECredentialRole>
+                (resource.Role, out var role))
+                return Unauthorized();
+
+            dynamic? result;
+
+            result = role switch
+            {
+                ECredentialRole.TECNICO => "",
+                ECredentialRole.CONSUMIDOR => "",
+                _ => null
+            };
+
+            if (result is null)
+                return BadRequest();
+
+            return Ok(result);
+        }
     }
 }

@@ -40,7 +40,8 @@ namespace HelpTechService.IAM.Application.Internal.CommandServices
         {
             try
             {
-                consumerCredentialRepository.Update(new(command));
+                consumerCredentialRepository
+                    .Update(new(command));
 
                 await unitOfWork.CompleteAsync();
 

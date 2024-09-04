@@ -34,5 +34,20 @@ namespace HelpTechService.IAM.Application.Internal.CommandServices
             }
             catch (Exception) { return false; }
         }
+
+        public async Task<bool> Handle
+            (UpdateTechnicalCredentialCommand command)
+        {
+            try
+            {
+                technicalCredentialRepository
+                    .Update(new(command));
+
+                await unitOfWork.CompleteAsync();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
     }
 }
