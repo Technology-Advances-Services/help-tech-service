@@ -299,11 +299,8 @@ app.UseCors(
     c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
 );
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseRequestAuthorization();
 
