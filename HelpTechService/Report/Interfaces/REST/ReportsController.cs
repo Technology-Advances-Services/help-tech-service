@@ -22,6 +22,21 @@ namespace HelpTechService.Report.Interfaces.REST
         IComplaintQueryService complaintQueryService) :
         ControllerBase
     {
+        [Route("register-complaint")]
+        [HttpPost]
+        public async Task<IActionResult> RegisterComplaint
+            ([FromBody] RegisterComplaintResource resource)
+        {
+            var result = await complaintCommandService
+                .Handle(RegisterComplaintCommandFromResourceAssembler
+                .ToCommandFromResource(resource));
+
+            if (result is false)
+                return BadRequest();
+
+            return Ok(result);
+        }
+
         [Route("all-types-complaints")]
         [HttpGet]
         [AllowAnonymous]
@@ -53,21 +68,6 @@ namespace HelpTechService.Report.Interfaces.REST
                 .ToResourceFromEntity(typeComplaint);
 
             return Ok(typeComplaintResource);
-        }
-
-        [Route("register-complaint")]
-        [HttpPost]
-        public async Task<IActionResult> RegisterComplaint
-            ([FromBody] RegisterComplaintResource resource)
-        {
-            var result = await complaintCommandService
-                .Handle(RegisterComplaintCommandFromResourceAssembler
-                .ToCommandFromResource(resource));
-
-            if (result is false)
-                return BadRequest();
-
-            return Ok(result);
         }
 
         [Route("complaint-by-job-and-sender")]
