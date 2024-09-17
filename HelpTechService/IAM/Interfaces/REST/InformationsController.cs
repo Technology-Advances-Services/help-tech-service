@@ -20,26 +20,6 @@ namespace HelpTechService.IAM.Interfaces.REST
         IConsumerQueryService consumerQueryService) :
         ControllerBase
     {
-        [Route("technicals-by-availability")]
-        [HttpGet]
-        public async Task<IActionResult> TechnicalsByAvailability
-            (string availability)
-        {
-            if (!Enum.TryParse<ETechnicalAvailability>
-                (availability, out var technicalAvailability))
-                return BadRequest();
-
-            var technicals = await technicalQueryService
-                .Handle(new GetTechnicalsByAvailabilityQuery
-                (technicalAvailability));
-
-            var technicalsResource = technicals.Select
-                (TechnicalResourceFromEntityAssembler
-                .ToResourceFromEntity);
-
-            return Ok(technicalsResource);
-        }
-
         [Route("technical-by-id")]
         [HttpGet]
         public async Task<IActionResult> TechnicalById
@@ -72,6 +52,26 @@ namespace HelpTechService.IAM.Interfaces.REST
                 .ToResourceFromEntity(consumer);
 
             return Ok(consumerResource);
+        }
+
+        [Route("technicals-by-availability")]
+        [HttpGet]
+        public async Task<IActionResult> TechnicalsByAvailability
+            (string availability)
+        {
+            if (!Enum.TryParse<ETechnicalAvailability>
+                (availability, out var technicalAvailability))
+                return BadRequest();
+
+            var technicals = await technicalQueryService
+                .Handle(new GetTechnicalsByAvailabilityQuery
+                (technicalAvailability));
+
+            var technicalsResource = technicals.Select
+                (TechnicalResourceFromEntityAssembler
+                .ToResourceFromEntity);
+
+            return Ok(technicalsResource);
         }
     }
 }
