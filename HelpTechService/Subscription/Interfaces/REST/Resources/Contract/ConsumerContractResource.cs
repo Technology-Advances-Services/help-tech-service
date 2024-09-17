@@ -2,5 +2,6 @@
 {
     public record ConsumerContractResource
         (int Id, int MembershipId, string ConsumerId,
+        string Name, decimal Price, string Policies,
         DateTime StartDate, DateTime FinalDate);
 }

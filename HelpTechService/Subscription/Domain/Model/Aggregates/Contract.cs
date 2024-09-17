@@ -10,6 +10,9 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
         public int MembershipsId { get; private set; }
         public int? TechnicalsId { get; private set; }
         public int? ConsumersId { get; private set; }
+        public string Name { get; private set; }
+        public decimal Price { get; private set; }
+        public string Policies { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime FinalDate { get; private set; }
         public string State { get; private set; } = null!;
@@ -23,10 +26,14 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.MembershipsId = 0;
             this.TechnicalsId = null;
             this.ConsumersId = null;
+            this.Name = string.Empty;
+            this.Policies = string.Empty;
         }
         public Contract
             (int membershipId, string? technicalId,
-            string? consumerId, EContractState contractState)
+            string? consumerId, string name,
+            decimal price, string policies,
+            EContractState contractState)
         {
             this.MembershipsId = membershipId;
             this.TechnicalsId = int.TryParse
@@ -35,6 +42,9 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
+            this.Name = name;
+            this.Price = price;
+            this.Policies = policies;
             this.StartDate = DateTime.Now;
             this.FinalDate = DateTime.Now.AddMonths(6);
             this.State = contractState.ToString();
@@ -49,6 +59,9 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (command.ConsumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
+            this.Name = command.Name;
+            this.Price = command.Price;
+            this.Policies = command.Policies;
             this.StartDate = DateTime.Now;
             this.FinalDate = DateTime.Now.AddMonths(6);
             this.State = command.ContractState.ToString();

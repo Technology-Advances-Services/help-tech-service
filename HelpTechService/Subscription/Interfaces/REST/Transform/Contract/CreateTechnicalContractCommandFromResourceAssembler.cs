@@ -9,6 +9,7 @@ namespace HelpTechService.Subscription.Interfaces.REST.Transform.Contract
         public static CreateContractCommand ToCommandFromResource
             (CreateTechnicalContractResource resource) =>
             new(resource.MembershipId, resource.TechnicalId,
-                null, EContractState.VIGENTE);
+                null, resource.Name, resource.Price, resource.Policies,
+                EContractState.VIGENTE);
     }
 }

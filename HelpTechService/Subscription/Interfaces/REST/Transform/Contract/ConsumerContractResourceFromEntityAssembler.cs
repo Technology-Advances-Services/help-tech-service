@@ -14,6 +14,7 @@ namespace HelpTechService.Subscription.Interfaces.REST.Transform.Contract
                 entity.ConsumersId.HasValue ? "0" +
                 entity.ConsumersId.Value.ToString() : string.Empty,
 
+                entity.Name, entity.Price, entity.Policies,
                 entity.StartDate, entity.FinalDate);
     }
 }

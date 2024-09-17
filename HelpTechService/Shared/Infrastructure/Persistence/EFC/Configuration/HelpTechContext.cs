@@ -226,6 +226,17 @@ namespace HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration
                     .HasColumnType("datetime")
                     .HasColumnName("final_date");
                 entity.Property(e => e.MembershipsId).HasColumnName("memberships_id");
+                entity.Property(e => e.Name)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("name");
+                entity.Property(e => e.Policies)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("policies");
+                entity.Property(e => e.Price)
+                    .HasColumnType("decimal(10, 2)")
+                    .HasColumnName("price");
                 entity.Property(e => e.StartDate)
                     .HasColumnType("datetime")
                     .HasColumnName("start_date");

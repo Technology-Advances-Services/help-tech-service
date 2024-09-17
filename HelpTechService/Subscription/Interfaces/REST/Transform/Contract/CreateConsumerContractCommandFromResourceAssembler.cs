@@ -8,8 +8,8 @@ namespace HelpTechService.Subscription.Interfaces.REST.Transform.Contract
     {
         public static CreateContractCommand ToCommandFromResource
             (CreateConsumerContractResource resource) =>
-            new(resource.MembershipId, null,
-                resource.ConsumerId,
+            new(resource.MembershipId, null, resource.ConsumerId,
+                resource.Name, resource.Price, resource.Policies,
                 EContractState.VIGENTE);
     }
 }

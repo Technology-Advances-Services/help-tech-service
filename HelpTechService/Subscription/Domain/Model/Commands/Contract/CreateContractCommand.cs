@@ -4,5 +4,6 @@ namespace HelpTechService.Subscription.Domain.Model.Commands.Contract
 {
     public record CreateContractCommand
         (int MembershipId, string? TechnicalId,
-        string? ConsumerId, EContractState ContractState);
+        string? ConsumerId, string Name, decimal Price,
+        string Policies, EContractState ContractState);
 }
