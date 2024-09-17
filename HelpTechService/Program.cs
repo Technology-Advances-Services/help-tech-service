@@ -9,6 +9,7 @@ using System.Text;
 using HelpTechService.Attention.Application.Internal.CommandServices;
 using HelpTechService.Attention.Application.Internal.QueryServices;
 using HelpTechService.Attention.Domain.Repositories;
+using HelpTechService.Attention.Domain.Services.Agenda;
 using HelpTechService.Attention.Domain.Services.Job;
 using HelpTechService.Attention.Domain.Services.Review;
 using HelpTechService.Attention.Interfaces.ACL;
@@ -176,6 +177,9 @@ builder.Services.AddDbContext<HelpTechContext>(options =>
 #region Dependencies Injections
 
 #region Attention Context
+
+builder.Services.AddScoped<IAgendaRepository, AgendaRepository>();
+builder.Services.AddScoped<IAgendaQueryService, AgendaQueryService>();
 
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IJobCommandService, JobCommandService>();
