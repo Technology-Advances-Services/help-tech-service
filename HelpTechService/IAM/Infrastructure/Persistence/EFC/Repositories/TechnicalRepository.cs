@@ -21,6 +21,7 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
                    where te.Availability == technicalAvailability.ToString() &&
                    te.State == "ACTIVO" &&
                    co.State == "VIGENTE"
-                   select te).ToListAsync();
+                   select te).AsNoTracking()
+            .ToListAsync();
     }
 }
