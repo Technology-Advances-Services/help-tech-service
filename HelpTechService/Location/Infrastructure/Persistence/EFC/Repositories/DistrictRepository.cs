@@ -14,6 +14,6 @@ namespace HelpTechService.Location.Infrastructure.Persistence.EFC.Repositories
         public async Task<IEnumerable<District>> FindByDepartmentIdAsync
             (int departmentId) => await Context.Set<District>()
             .Where(d => d.DepartmentsId == departmentId)
-            .ToListAsync();
+            .AsNoTracking().ToListAsync();
     }
 }
