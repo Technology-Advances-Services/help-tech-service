@@ -16,7 +16,7 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
         public async Task<ChatMember?> FindByChatRoomIdAsync
             (int chatRoomId) => await Context.Set<ChatMember>()
             .Where(c => c.ChatsRoomsId == chatRoomId)
-            .FirstOrDefaultAsync();
+            .AsNoTracking().FirstOrDefaultAsync();
 
         public async Task<IEnumerable<ChatMember>> FindByTechnicalIdAsync
             (int technicalId) =>
@@ -25,7 +25,7 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
                    on cm.ChatsRoomsId equals cr.Id
                    where cm.TechnicalsId == technicalId &&
                    cr.State == EChatRoomState.ACTIVO.ToString()
-                   select cm).ToListAsync();
+                   select cm).AsNoTracking().ToListAsync();
 
         public async Task<IEnumerable<ChatMember>> FindByConsumerIdAsync
             (int consumerId) =>
@@ -34,6 +34,6 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
                    on cm.ChatsRoomsId equals cr.Id
                    where cm.ConsumersId == consumerId &&
                    cr.State == EChatRoomState.ACTIVO.ToString()
-                   select cm).ToListAsync();
+                   select cm).AsNoTracking().ToListAsync();
     }
 }
