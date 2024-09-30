@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Data;
 using System.Text;
+using System.Threading.RateLimiting;
 
 using HelpTechService.Attention.Application.Internal.CommandServices;
 using HelpTechService.Attention.Application.Internal.QueryServices;
@@ -74,6 +75,7 @@ using HelpTechService.Subscription.Domain.Services.Membership;
 using HelpTechService.Subscription.Interfaces.ACL;
 using HelpTechService.Subscription.Interfaces.ACL.Services;
 using HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -170,6 +172,26 @@ builder.Services.AddDbContext<HelpTechContext>(options =>
 {
     options.UseSqlServer(builder.Configuration
         .GetConnectionString("HelpTech"));
+});
+
+#endregion
+
+#region Rate Limiter Configuration
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter
+        .Create<HttpContext, string>(context =>
+            RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: context.Connection
+                    .RemoteIpAddress?.ToString() ?? "anonymus",
+                factory: partition => new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 10,
+                    Window = TimeSpan.FromMinutes(1),
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 2
+                }));
 });
 
 #endregion
@@ -305,6 +327,8 @@ app.UseCors(
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseRateLimiter();
 
 app.UseRequestAuthorization();
 
