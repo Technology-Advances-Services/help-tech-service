@@ -15,6 +15,6 @@ namespace HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositori
         public new async Task<IEnumerable<Membership>> ListAsync() =>
             await Context.Set<Membership>()
             .Where(m => m.State == EMembershipState.VIGENTE.ToString())
-            .ToListAsync();
+            .AsNoTracking().ToListAsync();
     }
 }
