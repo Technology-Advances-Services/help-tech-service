@@ -20,7 +20,8 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
                  join co in Context.Set<Consumer>()
                  on cc.ConsumersId equals consumerId
                  where co.State == "ACTIVO"
-                 select cc).AsNoTracking()
+                 select cc)
+                 .AsNoTrackingWithIdentityResolution()
                  .FirstOrDefaultAsync();
 
             return result?.Code;

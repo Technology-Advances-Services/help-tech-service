@@ -18,7 +18,8 @@ namespace HelpTechService.IAM.Infrastructure.Persistence.EFC.Repositories
                    join te in Context.Set<Technical>()
                    on cr.TechnicalsId equals technicalId
                    where te.State == "ACTIVO"
-                   select cr).AsNoTracking()
+                   select cr)
+            .AsNoTrackingWithIdentityResolution()
             .FirstOrDefaultAsync();
     }
 }
