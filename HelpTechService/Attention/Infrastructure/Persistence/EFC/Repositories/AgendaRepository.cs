@@ -6,7 +6,7 @@ using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
 {
-    public class AgendaRepository
+    internal class AgendaRepository
         (HelpTechContext context) :
         BaseRepository<Agenda>(context),
         IAgendaRepository
@@ -14,7 +14,7 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
         public async Task<Agenda?> FindByTechnicalIdAsync
             (int technicalId) => await Context.Set<Agenda>()
             .Where(a => a.TechnicalsId == technicalId)
-            .AsNoTracking()
+            .AsNoTrackingWithIdentityResolution()
             .FirstOrDefaultAsync();
     }
 }

@@ -16,6 +16,7 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             (int technicalId) => await Context.Set<Review>()
             .Where(r => r.TechnicalsId == technicalId &&
             r.State == EReviewState.PUBLICADO.ToString())
-            .AsNoTracking().ToListAsync();
+            .AsNoTrackingWithIdentityResolution()
+            .ToListAsync();
     }
 }

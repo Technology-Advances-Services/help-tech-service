@@ -43,12 +43,15 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                    join ag in Context.Set<Agenda>()
                    on jo.AgendasId equals ag.Id
                    where ag.TechnicalsId == technicalId
-                   select jo).AsNoTracking().ToListAsync();
+                   select jo)
+            .AsNoTrackingWithIdentityResolution()
+            .ToListAsync();
 
         public async Task<IEnumerable<Job>> FindByConsumerIdAsync
             (int consumerId) => await Context.Set<Job>()
             .Where(j => j.ConsumersId == consumerId)
-            .AsNoTracking().ToListAsync();
+            .AsNoTrackingWithIdentityResolution()
+            .ToListAsync();
 
         public async Task<IEnumerable<Job>> FindByTechnicalIdAndStateAsync
             (int technicalId, EJobState jobState)
@@ -62,7 +65,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                  on jo.AgendasId equals ag.Id
                  where jo.State == newJobState &&
                  ag.TechnicalsId == technicalId
-                 select jo).AsNoTracking()
+                 select jo)
+                 .AsNoTrackingWithIdentityResolution()
                  .ToListAsync();
 
             return result;
@@ -76,7 +80,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
 
             return await Context.Set<Job>()
                 .Where(j => j.ConsumersId == consumerId &&
-                j.State == newJobState).AsNoTracking()
+                j.State == newJobState)
+                .AsNoTrackingWithIdentityResolution()
                 .ToListAsync();
         }
     }
