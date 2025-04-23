@@ -332,6 +332,8 @@ app.UseRateLimiter();
 
 app.UseRequestAuthorization();
 
+app.UseDeveloperExceptionPage(); //ERRORES
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
