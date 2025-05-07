@@ -76,7 +76,6 @@ using HelpTechService.Subscription.Interfaces.ACL;
 using HelpTechService.Subscription.Interfaces.ACL.Services;
 using HelpTechService.Subscription.Infrastructure.Persistence.EFC.Repositories;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
