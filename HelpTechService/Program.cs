@@ -320,6 +320,8 @@ builder.Services.AddTransient<HelpTechService.Subscription.Application.Internal.
 
 var app = builder.Build();
 
+app.UseDeveloperExceptionPage();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
