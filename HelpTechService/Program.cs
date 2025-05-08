@@ -320,23 +320,20 @@ builder.Services.AddTransient<HelpTechService.Subscription.Application.Internal.
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseHttpsRedirection();
+
 app.UseCors(
     c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
 );
 
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.UseRateLimiter();
-
-app.UseRequestAuthorization();
-
-app.UseDeveloperExceptionPage(); //ERRORES
-
-app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseRateLimiter();
+app.UseRequestAuthorization();
 
 app.MapControllers();
 
