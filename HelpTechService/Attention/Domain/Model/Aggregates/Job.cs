@@ -43,13 +43,15 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.State = string.Empty;
         }
         public Job
-            (int agendasId, string consumerId,
+            (int id, int agendasId, string consumerId,
             DateTime? answerDate, DateTime? workDate,
             string address, string description,
             decimal? time, decimal? laborBudget,
             decimal? materialBudget,
-            EJobState jobState)
+            EJobState jobState, Agenda agenda,
+            Consumer consumer)
         {
+            this.Id = id;
             this.AgendasId = agendasId;
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
@@ -66,6 +68,8 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
                 materialBudget;
             this.State = jobState == EJobState.ENPROCESO ?
                 "EN PROCESO" : jobState.ToString();
+            this.Agenda = agenda;
+            this.Consumer = consumer;
         }
         public Job
             (RegisterRequestJobCommand command)
