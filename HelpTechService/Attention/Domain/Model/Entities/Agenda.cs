@@ -12,5 +12,11 @@ namespace HelpTechService.Attention.Domain.Model.Entities
         public virtual Technical Technical { get; } = null!;
 
         public virtual ICollection<Job> Jobs { get; } = [];
+
+        public Agenda() { }
+        public Agenda(Technical technical)
+        {
+            this.Technical = technical;
+        }
     }
 }

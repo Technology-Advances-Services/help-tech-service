@@ -6,5 +6,5 @@
         DateTime? WorkDate, string Address, string Description,
         decimal? Time, decimal? LaborBudget,
         decimal? MaterialBudget, decimal? AmountFinal,
-        string JobState);
+        string JobState, dynamic Technical, dynamic Consumer);
 }

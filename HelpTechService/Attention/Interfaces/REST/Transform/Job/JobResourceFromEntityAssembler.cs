@@ -1,4 +1,6 @@
 ﻿using HelpTechService.Attention.Interfaces.REST.Resources.Job;
+using HelpTechService.IAM.Interfaces.REST.Transform.Consumer;
+using HelpTechService.IAM.Interfaces.REST.Transform.Technical;
 
 namespace HelpTechService.Attention.Interfaces.REST.Transform.Job
 {
@@ -15,6 +17,9 @@ namespace HelpTechService.Attention.Interfaces.REST.Transform.Job
                 entity.Address, entity.Description,
                 entity.Time, entity.LaborBudget,
                 entity.MaterialBudget, entity.AmountFinal,
-                entity.State);
+                entity.State, TechnicalResourceFromEntityAssembler
+                .ToResourceFromEntity(entity.Agenda.Technical ?? new()),
+                ConsumerResourceFromEntityAssembler
+                .ToResourceFromEntity(entity.Consumer ?? new()));
     }
 }
