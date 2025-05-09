@@ -12,5 +12,17 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
         public virtual ChatRoom ChatRoom { get; } = null!;
         public virtual Consumer? Consumer { get; }
         public virtual Technical? Technical { get; }
+
+        public ChatMember() { }
+        public ChatMember
+            (int chatRoomId, int? technicalId, int? consumerId,
+            Technical? technical, Consumer? consumer)
+        {
+            this.ChatsRoomsId = chatRoomId;
+            this.TechnicalsId = technicalId;
+            this.ConsumersId = consumerId;
+            this.Technical = technical;
+            this.Consumer = consumer;
+        }
     }
 }

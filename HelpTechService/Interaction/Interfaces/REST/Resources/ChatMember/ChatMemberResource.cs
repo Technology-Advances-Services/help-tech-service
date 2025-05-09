@@ -2,5 +2,5 @@
 {
     public record ChatMemberResource
         (int ChatRoomId, string? TechnicalId,
-        string? ConsumerId);
+        string? ConsumerId, dynamic Technical, dynamic Consumer);
 }

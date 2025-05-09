@@ -25,9 +25,11 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
             this.Message = string.Empty;
         }
         public Chat
-            (int chatRoomId, string? technicalId,
-            string? consumerId, string message)
+            (int id, int chatRoomId, string? technicalId,
+            string? consumerId, string message,
+            Technical? technical, Consumer? consumer)
         {
+            this.Id = id;
             this.ChatsRoomsId = chatRoomId;
             this.TechnicalsId = int.TryParse
                 (technicalId, out int technicalsId) != false ?
@@ -37,6 +39,8 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
             this.ShippingDate = DateTime.Now;
             this.Message = message;
+            this.Technical = technical;
+            this.Consumer = consumer;
         }
         public Chat
             (SendMessageCommand command)

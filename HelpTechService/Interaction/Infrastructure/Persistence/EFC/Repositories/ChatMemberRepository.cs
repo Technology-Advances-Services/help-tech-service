@@ -14,9 +14,20 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
         IChatMemberRepository
     {
         public async Task<ChatMember?> FindByChatRoomIdAsync
-            (int chatRoomId) => await Context.Set<ChatMember>()
-            .Where(c => c.ChatsRoomsId == chatRoomId)
-            .AsNoTrackingWithIdentityResolution()
+            (int chatRoomId) =>
+            await (from cm in Context.Set<ChatMember>()
+                   join cr in Context.Set<ChatRoom>()
+                   on cm.ChatsRoomsId equals cr.Id
+                   where cm.ChatsRoomsId == chatRoomId &&
+                   cr.State == EChatRoomState.ACTIVO.ToString()
+                   select new ChatMember
+                   (
+                      cm.ChatsRoomsId,
+                      cm.TechnicalsId,
+                      cm.ConsumersId,
+                      cm.Technical,
+                      cm.Consumer
+                   )).AsNoTrackingWithIdentityResolution()
             .FirstOrDefaultAsync();
 
         public async Task<IEnumerable<ChatMember>> FindByTechnicalIdAsync
@@ -26,8 +37,14 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
                    on cm.ChatsRoomsId equals cr.Id
                    where cm.TechnicalsId == technicalId &&
                    cr.State == EChatRoomState.ACTIVO.ToString()
-                   select cm)
-            .AsNoTrackingWithIdentityResolution()
+                   select new ChatMember
+                   (
+                      cm.ChatsRoomsId,
+                      cm.TechnicalsId,
+                      cm.ConsumersId,
+                      cm.Technical,
+                      cm.Consumer
+                   )).AsNoTrackingWithIdentityResolution()
             .ToListAsync();
 
         public async Task<IEnumerable<ChatMember>> FindByConsumerIdAsync
@@ -37,8 +54,14 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
                    on cm.ChatsRoomsId equals cr.Id
                    where cm.ConsumersId == consumerId &&
                    cr.State == EChatRoomState.ACTIVO.ToString()
-                   select cm)
-            .AsNoTrackingWithIdentityResolution()
+                   select new ChatMember
+                   (
+                      cm.ChatsRoomsId,
+                      cm.TechnicalsId,
+                      cm.ConsumersId,
+                      cm.Technical,
+                      cm.Consumer
+                   )).AsNoTrackingWithIdentityResolution()
             .ToListAsync();
     }
 }

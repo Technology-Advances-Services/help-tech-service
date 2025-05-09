@@ -20,8 +20,15 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
                    on ch.ChatsRoomsId equals cr.Id
                    where cr.Id == chatRoomId &&
                    cr.State == EChatRoomState.ACTIVO.ToString()
-                   select ch)
-            .AsNoTrackingWithIdentityResolution()
+                   select new Chat(
+                       ch.Id,
+                       ch.ChatsRoomsId,
+                       ch.TechnicalsId.ToString(),
+                       ch.ConsumersId.ToString(),
+                       ch.Message,
+                       ch.TechnicalsId == null ? null : ch.Technical,
+                       ch.ConsumersId == null ? null : ch.Consumer
+                   )).AsNoTrackingWithIdentityResolution()
             .ToListAsync();
     }
 }

@@ -1,4 +1,6 @@
-﻿using HelpTechService.Interaction.Interfaces.REST.Resources.ChatMember;
+﻿using HelpTechService.IAM.Interfaces.REST.Transform.Consumer;
+using HelpTechService.IAM.Interfaces.REST.Transform.Technical;
+using HelpTechService.Interaction.Interfaces.REST.Resources.ChatMember;
 
 namespace HelpTechService.Interaction.Interfaces.REST.Transform.ChatMember
 {
@@ -18,6 +20,11 @@ namespace HelpTechService.Interaction.Interfaces.REST.Transform.ChatMember
                 entity.ConsumersId.Value.ToString().Length == 8 ?
                 entity.ConsumersId.Value.ToString() :
                 entity.ConsumersId.HasValue ? "0" +
-                entity.ConsumersId.Value.ToString() : null);
+                entity.ConsumersId.Value.ToString() : null,
+
+                TechnicalResourceFromEntityAssembler
+                .ToResourceFromEntity(entity.Technical ?? new()),
+                ConsumerResourceFromEntityAssembler
+                .ToResourceFromEntity(entity.Consumer ?? new()));
     }
 }

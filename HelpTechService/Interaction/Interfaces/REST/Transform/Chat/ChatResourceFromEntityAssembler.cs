@@ -1,4 +1,6 @@
-﻿using HelpTechService.Interaction.Interfaces.REST.Resources.Chat;
+﻿using HelpTechService.IAM.Interfaces.REST.Transform.Consumer;
+using HelpTechService.IAM.Interfaces.REST.Transform.Technical;
+using HelpTechService.Interaction.Interfaces.REST.Resources.Chat;
 
 namespace HelpTechService.Interaction.Interfaces.REST.Transform.Chat
 {
@@ -21,6 +23,11 @@ namespace HelpTechService.Interaction.Interfaces.REST.Transform.Chat
                 entity.ConsumersId.Value.ToString() : null,
 
                 entity.ShippingDate,
-                entity.Message);
+                entity.Message,
+
+                TechnicalResourceFromEntityAssembler
+                .ToResourceFromEntity(entity.Technical ?? new()),
+                ConsumerResourceFromEntityAssembler
+                .ToResourceFromEntity(entity.Consumer ?? new()));
     }
 }

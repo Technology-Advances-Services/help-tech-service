@@ -3,5 +3,5 @@
     public record ChatResource
         (int ChatRoomId, string? TechnicalId,
         string? ConsumerId, DateTime ShippingDate,
-        string Message);
+        string Message, dynamic Technical, dynamic Consumer);
 }
