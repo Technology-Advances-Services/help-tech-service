@@ -44,19 +44,17 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
         }
         public Job
             (int id, int agendasId, string consumerId,
-            DateTime? answerDate, DateTime? workDate,
-            string address, string description,
-            decimal? time, decimal? laborBudget,
-            decimal? materialBudget,
-            EJobState jobState, Agenda agenda,
-            Consumer consumer)
+            DateTime registrationDate, DateTime? answerDate,
+            DateTime? workDate, string address, string description,
+            decimal? time, decimal? laborBudget, decimal? materialBudget,
+            EJobState jobState, Agenda agenda, Consumer consumer)
         {
             this.Id = id;
             this.AgendasId = agendasId;
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : 0;
-            this.RegistrationDate = DateTime.Now;
+            this.RegistrationDate = registrationDate;
             this.AnswerDate = answerDate;
             this.WorkDate = workDate;
             this.Address = address;
