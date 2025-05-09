@@ -60,7 +60,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                       Enum.Parse<EJobState>(jo.State.Replace(" ", "")),
                       new(ag.Technical),
                       co
-                   )).AsNoTrackingWithIdentityResolution().FirstOrDefaultAsync();
+                   )).AsNoTrackingWithIdentityResolution()
+            .FirstOrDefaultAsync();
 
         public async Task<IEnumerable<Job>> FindByTechnicalIdAsync
             (int technicalId) =>
@@ -85,7 +86,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                       Enum.Parse<EJobState>(jo.State.Replace(" ", "")),
                       new(ag.Technical),
                       co
-                   )).AsNoTrackingWithIdentityResolution().ToListAsync();
+                   )).AsNoTrackingWithIdentityResolution()
+            .ToListAsync();
 
         public async Task<IEnumerable<Job>> FindByConsumerIdAsync
             (int consumerId) =>
@@ -110,7 +112,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                       Enum.Parse<EJobState>(jo.State.Replace(" ", "")),
                       new(ag.Technical),
                       co
-                   )).AsNoTrackingWithIdentityResolution().ToListAsync();
+                   )).AsNoTrackingWithIdentityResolution()
+            .ToListAsync();
 
         public async Task<IEnumerable<Job>> FindByTechnicalIdAndStateAsync
             (int technicalId, EJobState jobState)
@@ -140,7 +143,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                              Enum.Parse<EJobState>(jo.State.Replace(" ", "")),
                              new(ag.Technical),
                              co
-                          )).AsNoTrackingWithIdentityResolution().ToListAsync();
+                          )).AsNoTrackingWithIdentityResolution()
+                          .ToListAsync();
         }
 
         public async Task<IEnumerable<Job>> FindByConsumerIdAndStateAsync
@@ -171,7 +175,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                              Enum.Parse<EJobState>(jo.State.Replace(" ", "")),
                              new(ag.Technical),
                              co
-                          )).AsNoTrackingWithIdentityResolution().ToListAsync();
+                          )).AsNoTrackingWithIdentityResolution()
+                          .ToListAsync();
         }
     }
 }
