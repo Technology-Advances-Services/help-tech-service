@@ -25,6 +25,7 @@ namespace HelpTechService.Interaction.Infrastructure.Persistence.EFC.Repositorie
                        ch.ChatsRoomsId,
                        ch.TechnicalsId.ToString(),
                        ch.ConsumersId.ToString(),
+                       ch.ShippingDate,
                        ch.Message,
                        ch.TechnicalsId == null ? null : ch.Technical,
                        ch.ConsumersId == null ? null : ch.Consumer

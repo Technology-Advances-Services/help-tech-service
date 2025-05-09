@@ -26,7 +26,7 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
         }
         public Chat
             (int id, int chatRoomId, string? technicalId,
-            string? consumerId, string message,
+            string? consumerId, DateTime shippingDate, string message,
             Technical? technical, Consumer? consumer)
         {
             this.Id = id;
@@ -37,7 +37,7 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
-            this.ShippingDate = DateTime.Now;
+            this.ShippingDate = shippingDate;
             this.Message = message;
             this.Technical = technical;
             this.Consumer = consumer;
