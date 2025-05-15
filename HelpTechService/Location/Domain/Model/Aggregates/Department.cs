@@ -6,5 +6,12 @@
         public string Name { get; private set; } = null!;
 
         public virtual ICollection<District> Districts { get; } = [];
+
+        public Department() { }
+        public Department(int id, string name)
+        {
+            this.Id = id;
+            this.Name = name;
+        }
     }
 }

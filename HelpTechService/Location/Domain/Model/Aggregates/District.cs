@@ -12,5 +12,18 @@ namespace HelpTechService.Location.Domain.Model.Aggregates
 
         public virtual ICollection<Consumer> Consumers { get; } = [];
         public virtual ICollection<Technical> Technicals { get; } = [];
+
+        public District()
+        {
+            this.Id = 0;
+            this.Name = string.Empty;
+        }
+        public District(int id,
+            int departmentId, string name)
+        {
+            this.Id = id;
+            this.DepartmentsId = departmentId;
+            this.Name = name;
+        }
     }
 }

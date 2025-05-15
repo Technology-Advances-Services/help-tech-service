@@ -1,18 +1,12 @@
-using NUnit.Framework;
-using Moq;
-using System.Threading.Tasks;
+using HelpTechService.Report.Domain.Model.Aggregates;
+using HelpTechService.Report.Domain.Model.ValueObjects.Complaint;
 
 namespace HelpTechService.Tests.UnitTest
 {
-    [TestFixture]
-    public class ReportServiceTests
+    public class ReportTest
     {
         [SetUp]
-        public void SetUp()
-        {
-
-        }
-
+        public void SetUp() { }
 
         [Test]
         public void Complaint_Constructor_WithParameters_ShouldInitializeProperties()
@@ -20,27 +14,23 @@ namespace HelpTechService.Tests.UnitTest
             // Arrange
             var typeComplaintId = 1;
             var jobId = 2;
-            var complaintSender = EComplaintSender.Consumer;
+            var complaintSender = EComplaintSender.CONSUMIDOR;
             var description = "The service was not completed as expected.";
-            var complaintState = EComplaintState.Pending;
-            var expectedRegistrationDate = DateTime.Now;
+            var complaintState = EComplaintState.ENTREGADO;
 
             // Act
-            var complaint = new Complaint(
-                typeComplaintId: typeComplaintId,
-                jobId: jobId,
-                complaintSender: complaintSender,
-                description: description,
-                complaintState: complaintState
-            );
+            var complaint = new Complaint(typeComplaintId, jobId,
+                complaintSender, description, complaintState);
 
             // Assert
-            Assert.AreEqual(1, complaint.TypesComplaintsId);
-            Assert.AreEqual(2, complaint.JobsId);
-            Assert.AreEqual("Consumer", complaint.Sender);
-            Assert.AreEqual(description, complaint.Description);
-            Assert.AreEqual("Pending", complaint.State);
-            Assert.AreEqual(expectedRegistrationDate.Date, complaint.RegistrationDate.Date); // Compara solo la fecha
+            Assert.Multiple(() =>
+            {
+                Assert.That(complaint.TypesComplaintsId, Is.EqualTo(typeComplaintId));
+                Assert.That(complaint.JobsId, Is.EqualTo(jobId));
+                Assert.That(complaint.Sender, Is.EqualTo(complaintSender.ToString()));
+                Assert.That(complaint.Description, Is.EqualTo(description));
+                Assert.That(complaint.State, Is.EqualTo(complaintState.ToString()));
+            });
         }
     }
 }

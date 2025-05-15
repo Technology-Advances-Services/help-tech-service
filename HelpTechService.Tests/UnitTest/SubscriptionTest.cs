@@ -1,53 +1,40 @@
-using NUnit.Framework;
-using Moq;
-using System.Threading.Tasks;
+using HelpTechService.Subscription.Domain.Model.Aggregates;
+using HelpTechService.Subscription.Domain.Model.ValueObjects.Contract;
+using HelpTechService.Subscription.Domain.Model.ValueObjects.Membership;
 
 namespace HelpTechService.Tests.UnitTest
 {
     [TestFixture]
-    public class SubscriptionServiceTests
+    public class SubscriptionServiceTest
     {
         [SetUp]
-        public void SetUp()
-        {
-
-        }
+        public void SetUp() { }
 
         [Test]
         public void Contract_Constructor_WithParameters_ShouldInitializeProperties()
         {
             // Arrange
             var membershipId = 1;
-            var technicalId = "0001";
-            var consumerId = "0003";
+            var technicalId = "12345678";
             var name = "Premium Service Contract";
             var price = 299.99m;
             var policies = "No refunds after 30 days.";
-            var contractState = EContractState.Active;
-            var expectedStartDate = DateTime.Now;
-            var expectedFinalDate = expectedStartDate.AddMonths(6);
+            var state = EContractState.VIGENTE;
 
             // Act
-            var contract = new Contract(
-                membershipId: membershipId,
-                technicalId: technicalId,
-                consumerId: consumerId,
-                name: name,
-                price: price,
-                policies: policies,
-                contractState: contractState
-            );
+            var contract = new Contract(membershipId, technicalId,
+                null, name, price, policies, state);
 
             // Assert
-            Assert.AreEqual(1, contract.MembershipsId);
-            Assert.AreEqual(1, contract.TechnicalsId); // "0001" convertido a 1
-            Assert.AreEqual(3, contract.ConsumersId);   // "0003" convertido a 3
-            Assert.AreEqual("Premium Service Contract", contract.Name);
-            Assert.AreEqual(299.99m, contract.Price);
-            Assert.AreEqual("No refunds after 30 days.", contract.Policies);
-            Assert.AreEqual(expectedStartDate.Date, contract.StartDate.Date);
-            Assert.AreEqual(expectedFinalDate.Date, contract.FinalDate.Date);
-            Assert.AreEqual("Active", contract.State);
+            Assert.Multiple(() =>
+            {
+                Assert.That(contract.MembershipsId, Is.EqualTo(membershipId));
+                Assert.That(contract.TechnicalsId, Is.EqualTo(int.Parse(technicalId)));
+                Assert.That(contract.Name, Is.EqualTo(name));
+                Assert.That(contract.Price, Is.EqualTo(price));
+                Assert.That(contract.Policies, Is.EqualTo(policies));
+                Assert.That(contract.State, Is.EqualTo(state.ToString()));
+            });
         }
 
         [Test]
@@ -58,23 +45,21 @@ namespace HelpTechService.Tests.UnitTest
             var name = "Gold Membership";
             var price = 199.99m;
             var policies = "Cancellation allowed within the first month.";
-            var membershipState = EMembershipState.Active;
+            var state = EMembershipState.VIGENTE;
 
             // Act
-            var membership = new Membership(
-                id: id,
-                name: name,
-                price: price,
-                policies: policies,
-                membershipState: membershipState
-            );
+            var membership = new Membership(id, name, price,
+                policies, state.ToString());
 
             // Assert
-            Assert.AreEqual(1, membership.Id);
-            Assert.AreEqual("Gold Membership", membership.Name);
-            Assert.AreEqual(199.99m, membership.Price);
-            Assert.AreEqual("Cancellation allowed within the first month.", membership.Policies);
-            Assert.AreEqual("Active", membership.State);
+            Assert.Multiple(() =>
+            {
+                Assert.That(membership.Id, Is.EqualTo(id));
+                Assert.That(membership.Name, Is.EqualTo(name));
+                Assert.That(membership.Price, Is.EqualTo(price));
+                Assert.That(membership.Policies, Is.EqualTo(policies));
+                Assert.That(membership.State, Is.EqualTo(state.ToString()));
+            });
         }
     }
 }

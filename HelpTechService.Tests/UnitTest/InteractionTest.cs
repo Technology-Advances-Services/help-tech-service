@@ -1,80 +1,71 @@
-using NUnit.Framework;
-using Moq;
-using System.Threading.Tasks;
+using HelpTechService.IAM.Domain.Model.Aggregates;
+using HelpTechService.IAM.Domain.Model.ValueObjects.Consumer;
+using HelpTechService.IAM.Domain.Model.ValueObjects.Technical;
+using HelpTechService.Interaction.Domain.Model.Aggregates;
 
 namespace HelpTechService.Tests.UnitTest
 {
-    [TestFixture]
-    public class InteractionServiceTests
+    public class InteractionServiceTest
     {
         [SetUp]
-        public void SetUp()
-        {
-
-        }
-
+        public void SetUp() { }
 
         [Test]
-        public async Task Chat_Constructor_WithParameters_ShouldInitializeProperties()
+        public void Chat_Constructor_WithParameters_ShouldInitializeProperties()
         {
             // Arrange
-            var id = 1;
-            var chatRoomId = 2;
-            var technicalId = "0001";
-            var consumerId = "0003";
-            var shippingDate = new DateTime(2025, 5, 14);
-            var message = "Hello, I need assistance with my service.";
-
             var technical = new Technical(
-                id: "0001",
+                id: "12345678",
                 specialtyId: 3,
                 districtId: 2,
-                profileUrl: "https://example.com/technical.jpg",
-                firstname: "Jane",
-                lastname: "Smith",
+                profileUrl: "https://cdn-icons-png.flaticon.com/512/6073/6073873.png",
+                firstname: "MARLON",
+                lastname: "ROJAS",
                 age: 28,
-                genre: "Female",
+                genre: "FEMENINO",
                 phone: 987654321,
-                email: "jane.smith@example.com",
-                technicalAvailability: ETechnicalAvailability.Available,
-                technicalState: ETechnicalState.Active
+                email: "mar.roj@gmail.com",
+                technicalAvailability: ETechnicalAvailability.DISPONIBLE,
+                technicalState: ETechnicalState.ACTIVO
             );
 
             var consumer = new Consumer(
-                id: "0003",
+                id: "87654321",
                 districtId: 5,
-                profileUrl: "https://example.com/profile.jpg",
-                firstname: "John",
-                lastname: "Doe",
+                profileUrl: "https://cdn-icons-png.flaticon.com/512/6073/6073873.png",
+                firstname: "LUANA",
+                lastname: "PEREZ",
                 age: 30,
-                genre: "Male",
-                phone: 123456789,
-                email: "john.doe@example.com",
-                consumerState: EConsumerState.Active
+                genre: "FEMENINO",
+                phone: 944587415,
+                email: "lu.pe@gmail.com",
+                consumerState: EConsumerState.ACTIVO
             );
 
             // Act
             var chat = new Chat(
-                id: id,
-                chatRoomId: chatRoomId,
-                technicalId: technicalId,
-                consumerId: consumerId,
-                shippingDate: shippingDate,
-                message: message,
+                id: 1,
+                chatRoomId: 1,
+                technicalId: "12345678",
+                consumerId: "87654321",
+                shippingDate: new DateTime(2025, 5, 14),
+                message: "Hello, I need assistance with my service.",
                 technical: technical,
                 consumer: consumer
             );
 
             // Assert
-            Assert.AreEqual(1, chat.Id);
-            Assert.AreEqual(2, chat.ChatsRoomsId);
-            Assert.AreEqual(1, chat.TechnicalsId); // "0001" convertido a 1
-            Assert.AreEqual(3, chat.ConsumersId); // "0003" convertido a 3
-            Assert.AreEqual(new DateTime(2025, 5, 14), chat.ShippingDate);
-            Assert.AreEqual("Hello, I need assistance with my service.", chat.Message);
-            Assert.AreEqual(technical, chat.Technical);
-            Assert.AreEqual(consumer, chat.Consumer);
+            Assert.Multiple(() =>
+            {
+                Assert.That(chat.Id, Is.EqualTo(1));
+                Assert.That(chat.ChatsRoomsId, Is.EqualTo(1));
+                Assert.That(chat.TechnicalsId, Is.EqualTo(technical.Id));
+                Assert.That(chat.ConsumersId, Is.EqualTo(consumer.Id));
+                Assert.That(chat.ShippingDate, Is.EqualTo(new DateTime(2025, 5, 14)));
+                Assert.That(chat.Message, Is.EqualTo("Hello, I need assistance with my service."));
+                Assert.That(chat.Technical, Is.EqualTo(technical));
+                Assert.That(chat.Consumer, Is.EqualTo(consumer));
+            });
         }
-    }
     }
 }

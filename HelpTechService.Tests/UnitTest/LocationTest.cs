@@ -1,31 +1,28 @@
-using NUnit.Framework;
-using Moq;
-using System.Threading.Tasks;
+using HelpTechService.Location.Domain.Model.Aggregates;
 
 namespace HelpTechService.Tests.UnitTest
 {
-    [TestFixture]
-    public class LocationServiceTests
+    public class LocationTest
     {
         [SetUp]
-        public void SetUp()
-        {
-
-        }
+        public void SetUp() { }
 
         [Test]
         public void Department_Constructor_WithParameters_ShouldInitializeProperties()
         {
             // Arrange
             var id = 1;
-            var name = "Human Resources";
+            var name = "LIMA";
 
             // Act
             var department = new Department(id, name);
 
             // Assert
-            Assert.AreEqual(1, department.Id);
-            Assert.AreEqual("Human Resources", department.Name);
+            Assert.Multiple(() =>
+            {
+                Assert.That(department.Id, Is.EqualTo(id));
+                Assert.That(department.Name, Is.EqualTo(name));
+            });
         }
 
         [Test]
@@ -33,16 +30,19 @@ namespace HelpTechService.Tests.UnitTest
         {
             // Arrange
             var id = 1;
-            var departmentsId = 2;
-            var name = "Central District";
+            var departmentId = 2;
+            var name = "LA VICTORIA";
 
             // Act
-            var district = new District(id, departmentsId, name);
+            var district = new District(id, departmentId, name);
 
             // Assert
-            Assert.AreEqual(1, district.Id);
-            Assert.AreEqual(2, district.DepartmentsId);
-            Assert.AreEqual("Central District", district.Name);
+            Assert.Multiple(() =>
+            {
+                Assert.That(district.Id, Is.EqualTo(id));
+                Assert.That(district.DepartmentsId, Is.EqualTo(departmentId));
+                Assert.That(district.Name, Is.EqualTo(name));
+            });
         }
     }
 }
