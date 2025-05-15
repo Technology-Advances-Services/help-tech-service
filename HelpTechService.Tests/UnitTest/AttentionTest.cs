@@ -40,27 +40,29 @@ namespace HelpTechService.Tests.UnitTest
 				answerDate, workDate, address, description, time,
 				laborBudget, materialBudget, jobState, agenda, consumer);
 
-			// Assert
-			Assert.That(job.Id, Is.EqualTo(id));
-			Assert.That(job.AgendasId, Is.EqualTo(agendaId));
-			Assert.That(job.ConsumersId, Is.EqualTo(int.Parse(consumerId)));
-			Assert.That(job.RegistrationDate, Is.EqualTo(registrationDate));
-			Assert.That(job.AnswerDate, Is.EqualTo(answerDate));
-			Assert.That(job.WorkDate, Is.EqualTo(workDate));
-			Assert.That(job.Address, Is.EqualTo(address));
-			Assert.That(job.Description, Is.EqualTo(description));
-			Assert.That(job.Time, Is.EqualTo(time));
-			Assert.That(job.LaborBudget, Is.EqualTo(laborBudget));
-			Assert.That(job.MaterialBudget, Is.EqualTo(materialBudget));
-			Assert.That(job.AmountFinal, Is.EqualTo(laborBudget + materialBudget));
-			Assert.That(job.Agenda, Is.EqualTo(agenda));
-			Assert.That(job.Consumer, Is.EqualTo(consumer));
-		}
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(job.Id, Is.EqualTo(id));
+                Assert.That(job.AgendasId, Is.EqualTo(agendaId));
+                Assert.That(job.ConsumersId, Is.EqualTo(int.Parse(consumerId)));
+                Assert.That(job.RegistrationDate, Is.EqualTo(registrationDate));
+                Assert.That(job.AnswerDate, Is.EqualTo(answerDate));
+                Assert.That(job.WorkDate, Is.EqualTo(workDate));
+                Assert.That(job.Address, Is.EqualTo(address));
+                Assert.That(job.Description, Is.EqualTo(description));
+                Assert.That(job.Time, Is.EqualTo(time));
+                Assert.That(job.LaborBudget, Is.EqualTo(laborBudget));
+                Assert.That(job.MaterialBudget, Is.EqualTo(materialBudget));
+                Assert.That(job.AmountFinal, Is.EqualTo(laborBudget + materialBudget));
+                Assert.That(job.Agenda, Is.EqualTo(agenda));
+                Assert.That(job.Consumer, Is.EqualTo(consumer));
+            });
+        }
 
 		[Test]
 		public void AddReview_Constructor_WithCommand_ShouldInitializeProperties()
 		{
-
 			// Arrange
 			var jobCommand = new AddReviewToJobCommand
 				("12345678", "87654321", 4, "Buen trabajo",
@@ -69,12 +71,15 @@ namespace HelpTechService.Tests.UnitTest
 			// Act
 			var review = new Review(jobCommand);
 
-			// Assert
-			Assert.That(review.TechnicalsId, Is.EqualTo(int.Parse(jobCommand.TechnicalId)));
-			Assert.That(review.ConsumersId, Is.EqualTo(int.Parse(jobCommand.ConsumerId)));
-            Assert.That(review.Score, Is.EqualTo(jobCommand.Score));
-			Assert.That(review.Opinion, Is.EqualTo(jobCommand.Opinion));
-			Assert.That(review.State, Is.EqualTo(jobCommand.ReviewState.ToString()));
-		}
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(review.TechnicalsId, Is.EqualTo(int.Parse(jobCommand.TechnicalId)));
+                Assert.That(review.ConsumersId, Is.EqualTo(int.Parse(jobCommand.ConsumerId)));
+                Assert.That(review.Score, Is.EqualTo(jobCommand.Score));
+                Assert.That(review.Opinion, Is.EqualTo(jobCommand.Opinion));
+                Assert.That(review.State, Is.EqualTo(jobCommand.ReviewState.ToString()));
+            });
+        }
 	}
 }

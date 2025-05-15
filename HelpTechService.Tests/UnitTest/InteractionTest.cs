@@ -14,45 +14,20 @@ namespace HelpTechService.Tests.UnitTest
         public void Chat_Constructor_WithParameters_ShouldInitializeProperties()
         {
             // Arrange
-            var technical = new Technical(
-                id: "12345678",
-                specialtyId: 3,
-                districtId: 2,
-                profileUrl: "https://cdn-icons-png.flaticon.com/512/6073/6073873.png",
-                firstname: "MARLON",
-                lastname: "ROJAS",
-                age: 28,
-                genre: "FEMENINO",
-                phone: 987654321,
-                email: "mar.roj@gmail.com",
-                technicalAvailability: ETechnicalAvailability.DISPONIBLE,
-                technicalState: ETechnicalState.ACTIVO
-            );
+            var technical = new Technical("12345678", 3, 2,
+                "https://cdn-icons-png.flaticon.com/512/6073/6073873.png",
+                "MARLON", "ROJAS", 28, "FEMENINO", 987654321, "mar.roj@gmail.com",
+                ETechnicalAvailability.DISPONIBLE, ETechnicalState.ACTIVO);
 
-            var consumer = new Consumer(
-                id: "87654321",
-                districtId: 5,
-                profileUrl: "https://cdn-icons-png.flaticon.com/512/6073/6073873.png",
-                firstname: "LUANA",
-                lastname: "PEREZ",
-                age: 30,
-                genre: "FEMENINO",
-                phone: 944587415,
-                email: "lu.pe@gmail.com",
-                consumerState: EConsumerState.ACTIVO
-            );
+            var consumer = new Consumer("87654321", 5,
+                "https://cdn-icons-png.flaticon.com/512/6073/6073873.png",
+                "LUANA", "PEREZ", 30, "FEMENINO", 944587415,
+                "lu.pe@gmail.com", EConsumerState.ACTIVO);
 
             // Act
-            var chat = new Chat(
-                id: 1,
-                chatRoomId: 1,
-                technicalId: "12345678",
-                consumerId: "87654321",
-                shippingDate: new DateTime(2025, 5, 14),
-                message: "Hello, I need assistance with my service.",
-                technical: technical,
-                consumer: consumer
-            );
+            var chat = new Chat(1, 1, "12345678", "87654321",
+                new DateTime(2025, 5, 14), "Hello, I need assistance with my service.",
+                technical, consumer);
 
             // Assert
             Assert.Multiple(() =>
