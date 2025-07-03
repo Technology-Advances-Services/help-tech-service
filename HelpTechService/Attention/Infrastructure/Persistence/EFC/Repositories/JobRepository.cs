@@ -288,6 +288,8 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                                     <p><strong>Cliente:</strong> {job.Consumer.Firstname} {job.Consumer.Lastname}</p>
                                     <p><strong>Dirección:</strong> {job.Address}</p>
                                     <p><strong>Descripción del Servicio:</strong> {job.Description}</p>
+                                    <p><strong>Mano de Obra:</strong> S/. {job.LaborBudget}</p>
+                                    <p><strong>Materiales:</strong> S/. {job.MaterialBudget}</p>
                                     <p><strong>Monto Total:</strong> S/. {job.AmountFinal:F2}</p>
                                 </div>
                                 
@@ -349,11 +351,11 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             y += 25;
 
             gfx.DrawString("Técnico:", headerFont, XBrushes.Black, 40, y);
-            gfx.DrawString("job.TechnicalName", textFont, XBrushes.Black, 160, y);
+            gfx.DrawString(job.Agenda.Technical.Firstname + " " + job.Agenda.Technical.Lastname, textFont, XBrushes.Black, 160, y);
             y += 25;
 
             gfx.DrawString("Cliente:", headerFont, XBrushes.Black, 40, y);
-            gfx.DrawString("job.ConsumerName", textFont, XBrushes.Black, 160, y);
+            gfx.DrawString(job.Consumer.Firstname + " " + job.Consumer.Lastname, textFont, XBrushes.Black, 160, y);
             y += 25;
 
             gfx.DrawString("Dirección:", headerFont, XBrushes.Black, 40, y);
@@ -361,8 +363,16 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             y += 25;
 
             gfx.DrawString("Descripción:", headerFont, XBrushes.Black, 40, y);
-            gfx.DrawString(job.Description, textFont, XBrushes.Black, 160, y, new XStringFormat { Alignment = XStringAlignment.Near });
-            y += 50;
+            gfx.DrawString(job.Description, textFont, XBrushes.Black, 160, y);
+            y += 25;
+
+            gfx.DrawString("Mano de Obra:", headerFont, XBrushes.Black, 40, y);
+            gfx.DrawString($"S/ {job.LaborBudget}", textFont, XBrushes.Black, 160, y);
+            y += 25;
+
+            gfx.DrawString("Materiales:", headerFont, XBrushes.Black, 40, y);
+            gfx.DrawString($"S/ {job.MaterialBudget}", textFont, XBrushes.Black, 160, y);
+            y += 25;
 
             gfx.DrawLine(XPens.LightGray, 40, y, page.Width - 40, y);
             y += 20;
