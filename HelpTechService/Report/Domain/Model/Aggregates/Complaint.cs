@@ -33,7 +33,7 @@ namespace HelpTechService.Report.Domain.Model.Aggregates
             this.TypesComplaintsId = typeComplaintId;
             this.JobsId = jobId;
             this.Sender = complaintSender.ToString();
-            this.RegistrationDate = DateTime.Now;
+            this.RegistrationDate = ConvertDateTimeToLimaPeru(DateTime.Now);
             this.Description = description;
             this.State = complaintState.ToString();
         }
@@ -43,9 +43,18 @@ namespace HelpTechService.Report.Domain.Model.Aggregates
             this.TypesComplaintsId = command.TypeComplaintId;
             this.JobsId = command.JobId;
             this.Sender = command.ComplaintSender.ToString();
-            this.RegistrationDate = DateTime.Now;
+            this.RegistrationDate = ConvertDateTimeToLimaPeru(DateTime.Now);
             this.Description = command.Description;
             this.State = command.ComplaintState.ToString();
+        }
+
+        private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
+        {
+            TimeZoneInfo limaTimeZone = TimeZoneInfo
+                .FindSystemTimeZoneById("SA Pacific Standard Time");
+
+            return TimeZoneInfo.ConvertTime
+                (localTime, TimeZoneInfo.Local, limaTimeZone);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
         {
             this.AgendasId = 0;
             this.ConsumersId = 0;
-            this.RegistrationDate = DateTime.Now;
+            this.RegistrationDate = ConvertDateTimeToLimaPeru(DateTime.Now);
             this.AnswerDate = null;
             this.WorkDate = null;
             this.Address = string.Empty;
@@ -54,7 +54,7 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : 0;
-            this.RegistrationDate = registrationDate;
+            this.RegistrationDate = ConvertDateTimeToLimaPeru(registrationDate);
             this.AnswerDate = answerDate;
             this.WorkDate = workDate;
             this.Address = address;
@@ -76,7 +76,7 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (command.ConsumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : 0;
-            this.RegistrationDate = DateTime.Now;
+            this.RegistrationDate = ConvertDateTimeToLimaPeru(DateTime.Now);
             this.Address = command.Address;
             this.Description = command.Description;
             this.State = command.JobState == EJobState.ENPROCESO ?
@@ -99,6 +99,15 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.Id = command.Id;
             this.State = command.JobState == EJobState.ENPROCESO ?
                 "EN PROCESO" : command.JobState.ToString();
+        }
+
+        private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
+        {
+            TimeZoneInfo limaTimeZone = TimeZoneInfo
+                .FindSystemTimeZoneById("SA Pacific Standard Time");
+
+            return TimeZoneInfo.ConvertTime
+                (localTime, TimeZoneInfo.Local, limaTimeZone);
         }
     }
 }

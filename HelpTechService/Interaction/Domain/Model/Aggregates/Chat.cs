@@ -37,7 +37,7 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
-            this.ShippingDate = shippingDate;
+            this.ShippingDate = ConvertDateTimeToLimaPeru(shippingDate);
             this.Message = message;
             this.Technical = technical;
             this.Consumer = consumer;
@@ -52,8 +52,17 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (command.ConsumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
-            this.ShippingDate = DateTime.Now;
+            this.ShippingDate = ConvertDateTimeToLimaPeru(DateTime.Now);
             this.Message = command.Message;
+        }
+
+        private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
+        {
+            TimeZoneInfo limaTimeZone = TimeZoneInfo
+                .FindSystemTimeZoneById("SA Pacific Standard Time");
+
+            return TimeZoneInfo.ConvertTime
+                (localTime, TimeZoneInfo.Local, limaTimeZone);
         }
     }
 }

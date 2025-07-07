@@ -45,8 +45,8 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.Name = name;
             this.Price = price;
             this.Policies = policies;
-            this.StartDate = DateTime.Now;
-            this.FinalDate = DateTime.Now.AddMonths(6);
+            this.StartDate = ConvertDateTimeToLimaPeru(DateTime.Now);
+            this.FinalDate = ConvertDateTimeToLimaPeru(DateTime.Now.AddMonths(6));
             this.State = contractState.ToString();
         }
         public Contract
@@ -62,9 +62,18 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.Name = command.Name;
             this.Price = command.Price;
             this.Policies = command.Policies;
-            this.StartDate = DateTime.Now;
-            this.FinalDate = DateTime.Now.AddMonths(6);
+            this.StartDate = ConvertDateTimeToLimaPeru(DateTime.Now);
+            this.FinalDate = ConvertDateTimeToLimaPeru(DateTime.Now.AddMonths(6));
             this.State = command.ContractState.ToString();
+        }
+
+        private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
+        {
+            TimeZoneInfo limaTimeZone = TimeZoneInfo
+                .FindSystemTimeZoneById("SA Pacific Standard Time");
+
+            return TimeZoneInfo.ConvertTime
+                (localTime, TimeZoneInfo.Local, limaTimeZone);
         }
     }
 }
