@@ -34,7 +34,7 @@ namespace HelpTechService.Report.Domain.Model.Aggregates
             this.TypesComplaintsId = typeComplaintId;
             this.JobsId = jobId;
             this.Sender = complaintSender.ToString();
-            this.RegistrationDate = ConvertDateTimeToLimaPeru(DateTime.Now);
+            this.RegistrationDate = GetLimaNow();
             this.Description = description;
             this.State = complaintState.ToString();
         }
@@ -44,24 +44,18 @@ namespace HelpTechService.Report.Domain.Model.Aggregates
             this.TypesComplaintsId = command.TypeComplaintId;
             this.JobsId = command.JobId;
             this.Sender = command.ComplaintSender.ToString();
-            this.RegistrationDate = ConvertDateTimeToLimaPeru(DateTime.Now);
+            this.RegistrationDate = GetLimaNow();
             this.Description = command.Description;
             this.State = command.ComplaintState.ToString();
         }
 
-        private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
+        public static DateTime GetLimaNow()
         {
-            DateTime utcTime = localTime.Kind switch
-            {
-                DateTimeKind.Utc => localTime,
-                DateTimeKind.Local => localTime.ToUniversalTime(),
-                DateTimeKind.Unspecified => DateTime.SpecifyKind(localTime, DateTimeKind.Utc),
-                _ => throw new NotImplementedException()
-            };
+            DateTime utcNow = DateTime.UtcNow;
 
-            TimeZoneInfo limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
+            var limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
 
-            return TimeZoneInfo.ConvertTimeFromUtc(utcTime, limaZone);
+            return TimeZoneInfo.ConvertTimeFromUtc(utcNow, limaZone);
         }
     }
 }

@@ -3,6 +3,7 @@ using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
 using System.Net;
 using System.Net.Mail;
+using TimeZoneConverter;
 using HelpTechService.Attention.Domain.Model.Aggregates;
 using HelpTechService.Attention.Domain.Model.Entities;
 using HelpTechService.Attention.Domain.Model.ValueObjects.Job;
@@ -23,7 +24,7 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
             decimal laborBudget, decimal materialBudget) =>
             await Context.Set<Job>().Where(j => j.Id == id)
             .ExecuteUpdateAsync(j => j
-            .SetProperty(u => u.AnswerDate, DateTime.Now)
+            .SetProperty(u => u.AnswerDate, GetLimaNow())
             .SetProperty(u => u.WorkDate, workDate)
             .SetProperty(u => u.Time, time)
             .SetProperty(u => u.LaborBudget, laborBudget)
@@ -218,6 +219,15 @@ namespace HelpTechService.Attention.Infrastructure.Persistence.EFC.Repositories
                              co
                           )).AsNoTrackingWithIdentityResolution()
                           .ToListAsync();
+        }
+
+        public static DateTime GetLimaNow()
+        {
+            DateTime utcNow = DateTime.UtcNow;
+
+            var limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
+
+            return TimeZoneInfo.ConvertTimeFromUtc(utcNow, limaZone);
         }
 
         #region Email

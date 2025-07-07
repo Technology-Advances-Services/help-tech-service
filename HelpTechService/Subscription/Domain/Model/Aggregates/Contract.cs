@@ -46,8 +46,8 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.Name = name;
             this.Price = price;
             this.Policies = policies;
-            this.StartDate = ConvertDateTimeToLimaPeru(DateTime.Now);
-            this.FinalDate = ConvertDateTimeToLimaPeru(DateTime.Now.AddMonths(6));
+            this.StartDate = GetLimaNow();
+            this.FinalDate = this.StartDate.AddMonths(6);
             this.State = contractState.ToString();
         }
         public Contract
@@ -63,24 +63,18 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
             this.Name = command.Name;
             this.Price = command.Price;
             this.Policies = command.Policies;
-            this.StartDate = ConvertDateTimeToLimaPeru(DateTime.Now);
-            this.FinalDate = ConvertDateTimeToLimaPeru(DateTime.Now.AddMonths(6));
+            this.StartDate = GetLimaNow();
+            this.FinalDate = this.StartDate.AddMonths(6);
             this.State = command.ContractState.ToString();
         }
 
-        private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
+        public static DateTime GetLimaNow()
         {
-            DateTime utcTime = localTime.Kind switch
-            {
-                DateTimeKind.Utc => localTime,
-                DateTimeKind.Local => localTime.ToUniversalTime(),
-                DateTimeKind.Unspecified => DateTime.SpecifyKind(localTime, DateTimeKind.Utc),
-                _ => throw new NotImplementedException()
-            };
+            DateTime utcNow = DateTime.UtcNow;
 
-            TimeZoneInfo limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
+            var limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
 
-            return TimeZoneInfo.ConvertTimeFromUtc(utcTime, limaZone);
+            return TimeZoneInfo.ConvertTimeFromUtc(utcNow, limaZone);
         }
     }
 }

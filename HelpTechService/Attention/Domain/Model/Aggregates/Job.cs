@@ -32,7 +32,7 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
         {
             this.AgendasId = 0;
             this.ConsumersId = 0;
-            this.RegistrationDate = ConvertDateTimeToLimaPeru(DateTime.Now);
+            this.RegistrationDate = GetLimaNow();
             this.AnswerDate = null;
             this.WorkDate = null;
             this.Address = string.Empty;
@@ -55,7 +55,7 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : 0;
-            this.RegistrationDate = ConvertDateTimeToLimaPeru(registrationDate);
+            this.RegistrationDate = registrationDate;
             this.AnswerDate = answerDate;
             this.WorkDate = workDate;
             this.Address = address;
@@ -77,7 +77,7 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (command.ConsumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : 0;
-            this.RegistrationDate = ConvertDateTimeToLimaPeru(DateTime.Now);
+            this.RegistrationDate = GetLimaNow();
             this.Address = command.Address;
             this.Description = command.Description;
             this.State = command.JobState == EJobState.ENPROCESO ?
@@ -102,19 +102,13 @@ namespace HelpTechService.Attention.Domain.Model.Aggregates
                 "EN PROCESO" : command.JobState.ToString();
         }
 
-        private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
+        public static DateTime GetLimaNow()
         {
-            DateTime utcTime = localTime.Kind switch
-            {
-                DateTimeKind.Utc => localTime,
-                DateTimeKind.Local => localTime.ToUniversalTime(),
-                DateTimeKind.Unspecified => DateTime.SpecifyKind(localTime, DateTimeKind.Utc),
-                _ => throw new NotImplementedException()
-            };
+            DateTime utcNow = DateTime.UtcNow;
 
-            TimeZoneInfo limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
+            var limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
 
-            return TimeZoneInfo.ConvertTimeFromUtc(utcTime, limaZone);
+            return TimeZoneInfo.ConvertTimeFromUtc(utcNow, limaZone);
         }
     }
 }

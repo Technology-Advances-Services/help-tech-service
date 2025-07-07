@@ -38,7 +38,7 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (consumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
-            this.ShippingDate = ConvertDateTimeToLimaPeru(shippingDate);
+            this.ShippingDate = shippingDate;
             this.Message = message;
             this.Technical = technical;
             this.Consumer = consumer;
@@ -53,23 +53,17 @@ namespace HelpTechService.Interaction.Domain.Model.Aggregates
             this.ConsumersId = int.TryParse
                 (command.ConsumerId, out int consumersId) != false ?
                 int.Parse(consumersId.ToString().TrimStart('0')) : null;
-            this.ShippingDate = ConvertDateTimeToLimaPeru(DateTime.Now);
+            this.ShippingDate = GetLimaNow();
             this.Message = command.Message;
         }
 
-        private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
+        public static DateTime GetLimaNow()
         {
-            DateTime utcTime = localTime.Kind switch
-            {
-                DateTimeKind.Utc => localTime,
-                DateTimeKind.Local => localTime.ToUniversalTime(),
-                DateTimeKind.Unspecified => DateTime.SpecifyKind(localTime, DateTimeKind.Utc),
-                _ => throw new NotImplementedException()
-            };
+            DateTime utcNow = DateTime.UtcNow;
 
-            TimeZoneInfo limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
+            var limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
 
-            return TimeZoneInfo.ConvertTimeFromUtc(utcTime, limaZone);
+            return TimeZoneInfo.ConvertTimeFromUtc(utcNow, limaZone);
         }
     }
 }
