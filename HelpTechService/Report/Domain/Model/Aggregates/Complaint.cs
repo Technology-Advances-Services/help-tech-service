@@ -1,4 +1,5 @@
-﻿using HelpTechService.Attention.Domain.Model.Aggregates;
+﻿using TimeZoneConverter;
+using HelpTechService.Attention.Domain.Model.Aggregates;
 using HelpTechService.Report.Domain.Model.Commands.Complaint;
 using HelpTechService.Report.Domain.Model.Entities;
 using HelpTechService.Report.Domain.Model.ValueObjects.Complaint;
@@ -50,11 +51,9 @@ namespace HelpTechService.Report.Domain.Model.Aggregates
 
         private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
         {
-            TimeZoneInfo limaTimeZone = TimeZoneInfo
-                .FindSystemTimeZoneById("SA Pacific Standard Time");
+            TimeZoneInfo limaTimeZone = TZConvert.GetTimeZoneInfo("America/Lima");
 
-            return TimeZoneInfo.ConvertTime
-                (localTime, TimeZoneInfo.Local, limaTimeZone);
+            return TimeZoneInfo.ConvertTimeFromUtc(localTime, limaTimeZone);
         }
     }
 }
