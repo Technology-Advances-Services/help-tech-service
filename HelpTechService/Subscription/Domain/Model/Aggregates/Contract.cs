@@ -70,9 +70,17 @@ namespace HelpTechService.Subscription.Domain.Model.Aggregates
 
         private static DateTime ConvertDateTimeToLimaPeru(DateTime localTime)
         {
-            TimeZoneInfo limaTimeZone = TZConvert.GetTimeZoneInfo("America/Lima");
+            DateTime utcTime = localTime.Kind switch
+            {
+                DateTimeKind.Utc => localTime,
+                DateTimeKind.Local => localTime.ToUniversalTime(),
+                DateTimeKind.Unspecified => DateTime.SpecifyKind(localTime, DateTimeKind.Utc),
+                _ => throw new NotImplementedException()
+            };
 
-            return TimeZoneInfo.ConvertTimeFromUtc(localTime, limaTimeZone);
+            TimeZoneInfo limaZone = TZConvert.GetTimeZoneInfo("America/Lima");
+
+            return TimeZoneInfo.ConvertTimeFromUtc(utcTime, limaZone);
         }
     }
 }
