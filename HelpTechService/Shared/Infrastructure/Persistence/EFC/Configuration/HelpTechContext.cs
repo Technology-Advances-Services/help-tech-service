@@ -400,10 +400,10 @@ namespace HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("state");
-                entity.Property(e => e.TechnicalId).HasColumnName("technicals_id");
+                entity.Property(e => e.TechnicalsId).HasColumnName("technicals_id");
 
                 entity.HasOne(d => d.Technical).WithMany(p => p.QrTechnicals)
-                    .HasForeignKey(d => d.TechnicalId)
+                    .HasForeignKey(d => d.TechnicalsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_qr_technicals_technicals_id");
             });
