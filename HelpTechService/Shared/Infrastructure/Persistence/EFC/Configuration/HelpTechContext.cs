@@ -387,7 +387,7 @@ namespace HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration
             {
                 entity.HasKey(e => e.Id).HasName("pk_qr_technical_id");
 
-                entity.ToTable("qr_technicals");
+                entity.ToTable("qr_technicals", tb => tb.HasTrigger("tg_update_qr_technical_state"));
 
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.QrUrl)
