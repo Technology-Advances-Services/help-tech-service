@@ -1,9 +1,10 @@
 ﻿using HelpTechService.Attention.Domain.Model.Entities;
-using HelpTechService.IAM.Domain.Model.Entities;
 using HelpTechService.IAM.Domain.Model.Commands.Technical;
+using HelpTechService.IAM.Domain.Model.Entities;
 using HelpTechService.IAM.Domain.Model.ValueObjects.Technical;
 using HelpTechService.Interaction.Domain.Model.Aggregates;
 using HelpTechService.Location.Domain.Model.Aggregates;
+using HelpTechService.Payment.Domain.Model.Aggregates;
 using HelpTechService.Subscription.Domain.Model.Aggregates;
 
 namespace HelpTechService.IAM.Domain.Model.Aggregates
@@ -31,6 +32,7 @@ namespace HelpTechService.IAM.Domain.Model.Aggregates
         public virtual ICollection<Contract> Contracts { get; } = [];
         public virtual ICollection<Chat> Chats { get; } = [];
         public virtual ICollection<CriminalRecord> CriminalsRecords { get; } = [];
+        public virtual ICollection<QrTechnical> QrTechnicals { get; } = [];
         public virtual ICollection<Review> Reviews { get; } = [];
 
         public Technical()

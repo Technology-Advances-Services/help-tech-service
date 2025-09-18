@@ -33,6 +33,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Payment\Application\Internal\CommandServices\" />
+    <Folder Include="Payment\Application\Internal\QueryServices\" />
+    <Folder Include="Payment\Domain\Model\Commands\" />
+    <Folder Include="Payment\Domain\Model\ValueObjects\" />
+    <Folder Include="Payment\Domain\Model\Queries\" />
+    <Folder Include="Payment\Domain\Services\" />
+    <Folder Include="Payment\Domain\Repositories\" />
+    <Folder Include="Payment\Infrastructure\Persistence\EFC\Repositories\" />
+    <Folder Include="Payment\Interfaces\REST\Transform\" />
+    <Folder Include="Payment\Interfaces\REST\Resources\" />
     <Folder Include="Report\Domain\Model\Aggregates\" />
   </ItemGroup>
 
