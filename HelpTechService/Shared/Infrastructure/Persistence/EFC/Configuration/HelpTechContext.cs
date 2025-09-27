@@ -96,6 +96,31 @@ namespace HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration
                     .HasForeignKey(d => d.TechnicalsId)
                     .HasConstraintName("fk_chats_members_technicals_id");
             });
+            
+            modelBuilder.Entity<QrTechnical>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("pk_qr_technical_id");
+
+                entity.ToTable("qr_technicals", tb => tb.HasTrigger("tg_update_qr_technical_state"));
+
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.QrUrl)
+                    .IsUnicode(false)
+                    .HasColumnName("qr_url");
+                entity.Property(e => e.RegistrationDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("registration_date");
+                entity.Property(e => e.State)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("state");
+                entity.Property(e => e.TechnicalsId).HasColumnName("technicals_id");
+
+                entity.HasOne(d => d.Technical).WithMany(p => p.QrTechnicals)
+                    .HasForeignKey(d => d.TechnicalsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_qr_technicals_technicals_id");
+            });
 
             modelBuilder.Entity<ChatRoom>(entity =>
             {
