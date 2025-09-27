@@ -58,6 +58,12 @@ using HelpTechService.Report.Domain.Services.Complaint;
 using HelpTechService.Report.Domain.Services.TypeComplaint;
 using HelpTechService.Report.Infrastructure.Persistence.EFC.Repositories;
 
+using HelpTechService.Payment.Application.Internal.CommandServices;
+using HelpTechService.Payment.Application.Internal.QueryServices;
+using HelpTechService.Payment.Domain.Repositories;
+using HelpTechService.Payment.Domain.Services.QrTechnical;
+using HelpTechService.Payment.Infrastructure.Persistence.EFC.Repositories;
+
 using HelpTechService.Shared.Domain.Repositories;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using HelpTechService.Shared.Infrastructure.Persistence.EFC.Repositories;
@@ -272,6 +278,14 @@ builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 builder.Services.AddScoped<IDistrictQueryService, DistrictQueryService>();
 
 builder.Services.AddScoped<ILocationContextFacade, LocationContextFacade>();
+
+#endregion
+
+#region Payment Context
+
+builder.Services.AddScoped<IQrTechnicalRepository, QrTechnicalRepository>();
+builder.Services.AddScoped<IQrTechnicalCommandService, QrTechnicalCommandService>();
+builder.Services.AddScoped<IQrTechnicalQueryService, QrTechnicalQueryService>();
 
 #endregion
 
